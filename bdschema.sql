@@ -21,6 +21,7 @@
 -- PK: numéro
 -- FK: filmId REFERENCES Film(id)
 
+<<<<<<< HEAD
 -- personne(id, nom, age sexe, nationalité)
 -- PK: id
 
@@ -33,14 +34,35 @@
 -- Role(personneId, nom, salaire)
 -- PK: personneId
 -- FK: personneId REFERENCES personne(id)
+=======
+-- Personnage(id, nom, age sexe, nationalité)
+-- PK: id
+
+-- PersonnageDuFilm(personnageId, filmId)
+-- PK: (personnageId, filmId)
+-- FK: personnageId REFERENCES Personnage(id)
+-- FK: filmId REFERENCES Film(numéro)
+
+-- --discutable ce qui est fait/
+-- Role(personnageId, nom, salaire)
+-- PK: personnageId
+-- FK: personnageId REFERENCES Personnage(id)
+>>>>>>> master
 
 -- Oscar(oscarId, catégorie, lieu, date, maitreCérémonie)
 -- PK: oscarId
 
+<<<<<<< HEAD
 -- NominationOscar(oscarId, personneId, catégorie)
 -- PK: (oscarId, personneId)
 -- FK: oscarId REFERENCES Oscar(oscarId)
 -- FK: personneId REFERENCES personne(id)
+=======
+-- NominationOscar(oscarId, personnageId, catégorie)
+-- PK: (oscarId, personnageId)
+-- FK: oscarId REFERENCES Oscar(oscarId)
+-- FK: personnageId REFERENCES Personnage(id)
+>>>>>>> master
 
 -- CommandeFilm(adresseMembre, numéroFilm, dateVisionnement, duréVisionnement)
 -- PK: (adresseMembre, numéroFilm)
@@ -69,7 +91,11 @@ CREATE DOMAIN sexType AS CHAR
 SET search_path TO schema_films;
 
 CREATE TABLE IF NOT EXISTS Membre(
+<<<<<<< HEAD
     adresseCourriel VARCHAR (20) UNIQUE,
+=======
+    adresseCourriel VARCHAR (20),
+>>>>>>> master
     motDePasse VARCHAR (20) NOT NULL, --ENCRYPTED check function or type
     nom VARCHAR (20),
     adressePostal zip_code NOT NULL,
@@ -113,16 +139,26 @@ CREATE TABLE IF NOT EXISTS Film(
 CREATE TABLE IF NOT EXISTS DVD( 
     numero VARCHAR (20),
     filmNo VARCHAR (20),
+<<<<<<< HEAD
     PRIMARY KEY (numero),
     FOREIGN KEY (filmNo) REFERENCES Film(numero)
 );
 
 CREATE TABLE IF NOT EXISTS personne(
     personneId VARCHAR (20),
+=======
+    PRIMARY KEY (numero, filmId),
+    FOREIGN KEY filmNo REFERENCES Film(numero)
+);
+
+CREATE TABLE IF NOT EXISTS Personnage(
+    personnageId VARCHAR (20),
+>>>>>>> master
     nom VARCHAR (20) NOT NULL,
     age INTEGER,
     sexe sexType,
     nationalite VARCHAR (20),
+<<<<<<< HEAD
     PRIMARY KEY (personneId)
 );
 
@@ -133,6 +169,18 @@ CREATE TABLE IF NOT EXISTS Rolepersonne(
     salaire DECIMAL(6,2),
     PRIMARY KEY (roleId),
     FOREIGN KEY (personneId) REFERENCES personne(personneId)
+=======
+    PRIMARY KEY (personnageId)
+);
+
+CREATE TABLE IF NOT EXISTS RolePersonnage(
+    roleId VARCHAR (20),
+    personnageId VARCHAR (20) NOT NULL,
+    nom VARCHAR (20) NOT NULL,
+    salaire DECIMAL(6,2),
+    PRIMARY KEY (roleId),
+    FOREIGN KEY personnageId REFERENCES Personnage(personnageId)
+>>>>>>> master
 );
 
 CREATE TABLE IF NOT EXISTS Oscar(
@@ -143,6 +191,7 @@ CREATE TABLE IF NOT EXISTS Oscar(
     PRIMARY KEY (oscarId)
 );
 
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS NominationCategorieOscar(
     oscarId VARCHAR (20),
     filmId VARCHAR (20),
@@ -159,6 +208,16 @@ CREATE TABLE IF NOT EXISTS GagnantsCategorieOscar(
     PRIMARY KEY (oscarId, filmId),
     FOREIGN KEY (oscarId) REFERENCES Oscar(oscarId),
     FOREIGN KEY (filmId) REFERENCES Film(numero)
+=======
+CREATE TABLE IF NOT EXISTS NominationOscar(
+    oscarId VARCHAR (20),
+    filmId VARCHAR (20),
+    categorie VARCHAR (20) NOT NULL,
+    aGagne BOOLEAN,
+    PRIMARY KEY (oscarId, filmId),
+    FOREIGN KEY oscarId REFERENCES Oscar(oscarId),
+    FOREIGN KEY filmId REFERENCES Film(numero)
+>>>>>>> master
 );
 
 CREATE TABLE IF NOT EXISTS CommandeFilm(
@@ -179,7 +238,11 @@ CREATE TABLE IF NOT EXISTS AchatDVD(
     dateEnvoi DATE,
     PRIMARY KEY (adresseMembre, DVDNo),
     FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel),
+<<<<<<< HEAD
     FOREIGN KEY (DVDNo) REFERENCES DVD(numero) 
+=======
+    FOREIGN KEY (DVDNo) REFERENCES DVD(numero) -- to check as dvd has composed pks 
+>>>>>>> master
 );
 
 
