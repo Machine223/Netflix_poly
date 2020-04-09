@@ -143,14 +143,22 @@ CREATE TABLE IF NOT EXISTS Oscar(
     PRIMARY KEY (oscarId)
 );
 
-CREATE TABLE IF NOT EXISTS NominationOscar(
+CREATE TABLE IF NOT EXISTS NominationCategorieOscar(
     oscarId VARCHAR (20),
     filmId VARCHAR (20),
     categorie VARCHAR (20) NOT NULL,
-    aGagne BOOLEAN,
     PRIMARY KEY (oscarId, filmId),
-    FOREIGN KEY oscarId REFERENCES Oscar(oscarId),
-    FOREIGN KEY filmId REFERENCES Film(numero)
+    FOREIGN KEY (oscarId) REFERENCES Oscar(oscarId),
+    FOREIGN KEY (filmId) REFERENCES Film(numero)
+);
+
+CREATE TABLE IF NOT EXISTS GagnantsCategorieOscar(
+    oscarId VARCHAR (20),
+    filmId VARCHAR (20),
+    categorie VARCHAR (20) NOT NULL,
+    PRIMARY KEY (oscarId, filmId),
+    FOREIGN KEY (oscarId) REFERENCES Oscar(oscarId),
+    FOREIGN KEY (filmId) REFERENCES Film(numero)
 );
 
 CREATE TABLE IF NOT EXISTS CommandeFilm( --TODO: devrait on faire une cle et ne pas combiner?
