@@ -1,190 +1,109 @@
--- TODO
---SET search_path to xxxxxxx
---INSERT INTO
+-- DATA insertion
 
--- CREATE TABLE IF NOT EXISTS Membre(
---     adresseCourriel VARCHAR (20),
---     motDePasse VARCHAR (20) NOT NULL, --ENCRYPTED check function or type
---     nom VARCHAR (20),
---     adressePostal zip_code NOT NULL,
---     PRIMARY KEY (adresseCourriel)
--- );
-
--- CREATE TABLE IF NOT EXISTS MembreMensuel(
---     adresseMembre VARCHAR (20),
---     prixAbonnement NUMERIC (6, 2) NOT NULL,
---     dateEcheance DATE NOT NULL,
---     PRIMARY KEY (adresseMembre),
---     FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel)
--- );
-
--- CREATE TABLE IF NOT EXISTS MembreVue(
---     adresseMembre VARCHAR (20),
---     film_payperview NUMERIC(6, 2) NOT NULL,
---     PRIMARY KEY (adresseMembre),
---     FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel)
--- );
-
--- CREATE TABLE IF NOT EXISTS CarteCredit(
---     numero INTEGER,
---     titulaire VARCHAR (20) NOT NULL,
---     dateExpiration DATE NOT NULL,
---     CCV INTEGER NOT NULL,
---     adresseMembre VARCHAR (20) NOT NULL,
---     PRIMARY KEY (numero),
---     FOREIGN KEY (adresseMembre) REFERENCES Membre (adresseCourriel)
--- );
-
--- CREATE TABLE IF NOT EXISTS Film(
---     numero VARCHAR (20),
---     titre VARCHAR (30) NOT NULL,
---     genre VARCHAR (20) NOT NULL,
---     dateProduction DATE,
---     dureeTotal INTEGER,
---     PRIMARY KEY (numero)
--- );
-
--- CREATE TABLE IF NOT EXISTS DVD( 
---     numero VARCHAR (20),
---     filmNo VARCHAR (20),
---     PRIMARY KEY (numero, filmId),
---     FOREIGN KEY filmNo REFERENCES Film(numero)
--- );
-
--- CREATE TABLE IF NOT EXISTS Personnage(
---     personnageId VARCHAR (20),
---     nom VARCHAR (20) NOT NULL,
---     age INTEGER,
---     sexe sexType,
---     nationalite VARCHAR (20),
---     PRIMARY KEY (personnageId)
--- );
-
--- CREATE TABLE IF NOT EXISTS RolePersonnage(
---     roleId VARCHAR (20),
---     personnageId VARCHAR (20) NOT NULL,
---     nom VARCHAR (20) NOT NULL,
---     salaire DECIMAL(6,2),
---     PRIMARY KEY (roleId),
---     FOREIGN KEY personnageId REFERENCES Personnage(personnageId)
--- );
-
--- CREATE TABLE IF NOT EXISTS Oscar(
---     oscarId VARCHAR (20),
---     lieu VARCHAR (20) NOT NULL,
---     dateOscar DATE NOT NULL,
---     maitreCeremonie VARCHAR (20) NOT NULL,
---     PRIMARY KEY (oscarId)
--- );
-
--- CREATE TABLE IF NOT EXISTS NominationOscar(
---     oscarId VARCHAR (20),
---     filmId VARCHAR (20),
---     categorie VARCHAR (20) NOT NULL,
---     aGagne BOOLEAN,
---     PRIMARY KEY (oscarId, filmId),
---     FOREIGN KEY oscarId REFERENCES Oscar(oscarId),
---     FOREIGN KEY filmId REFERENCES Film(numero)
--- );
-
--- CREATE TABLE IF NOT EXISTS CommandeFilm(
---     adresseMembre VARCHAR (20),
---     filmNo VARCHAR (20),
---     dateVisionnement DATE,
---     dureeVisionnement INTEGER,
---     PRIMARY KEY (adresseMembre, filmNo),
---     FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel),
---     FOREIGN KEY (filmNo) REFERENCES Film(numero)
--- );
-
--- CREATE TABLE IF NOT EXISTS AchatDVD(
---     adresseMembre VARCHAR (20),
---     DVDNo VARCHAR (20),
---     cout INTEGER NOT NULL,
---     distance NUMERIC(6,3) NOT NULL,
---     dateEnvoi DATE,
---     PRIMARY KEY (adresseMembre, DVDNo),
---     FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel),
---     FOREIGN KEY (DVDNo) REFERENCES DVD(numero) -- to check as dvd has composed pks 
--- );
-
-INSERT INTO Membre(adresseCourriel, motDePasse, nom, adressePostal)
+INSERT INTO Membre(membreId, motDePasse, nom, adressePostal)
 VALUES
-('alexander@gmail.com', 'alex1234', 'alex', '123street'),
-('ismael@gmail.com', 'ismae345', 'ismael', '456street'),
-('alexa@gmail.com', 'alexahi', 'alexa', '226 adress'),
-('laura@gmail.com', 'laura28', 'lolo4049', '220 lorence street'),
-('letmebd@outlook.com', 'xahi', 'coolPass', '333 adress'),
-('lemma@gmail.com', 'lemmama', 'lele', '123 flower street'),
+('alexander@gmail.com', 'alex1234', 'ALEX GIBBS', 'H4A1E1'),
+('ismael@gmail.com', 'ismae345', 'ISMAEL FABER', 'H2L2G2'),
+('alexa@gmail.com', 'alexa32', 'ALEXA REYNOLDS', 'H1W1A3'),
+('laura@gmail.com', 'laura28', 'LAURA DONOVAN', 'H1Y1X6'),
+('xavi@outlook.com', 'xavi243', 'XAVI GIBBS', 'H2A3M4'),
+('leo@gmail.com', 'leomama23', 'LEO CHARLSON', 'H4L2H4');
 
-INSERT INTO MembreMensuel(adresseCourriel, prixAbonnement, dateEcheance)
+INSERT INTO MembreMensuel(membreId, prixAbonnement, dateEcheance)
 VALUES
-('alexa@gmail.com', 100, DATE(05-05-2020)),
-('laura@gmail.com', 3.99, DATE(10-05-2021)),
+('alexa@gmail.com', 15, DATE(10-08-2020)),
+('laura@gmail.com', 15, DATE(10-05-2021)),
+('xavi@gmail.com', 15, DATE(10-06-2021)),
+('leo@gmail.com', 15, DATE(10-07-2021));
 
-INSERT INTO MembreVue (adresseCourriel, film_payperview)
+INSERT INTO MembreVue (membreId, film_payperview)
 VALUES
-('alexander@gmail.com', 100),
-('ismael@gmail.com', 5.99),
+('alexander@gmail.com', 5),
+('ismael@gmail.com', 5);
 
-INSERT INTO CarteCredit(numero, titulaire, dateExpiration, CCV, adresseCourriel)
+INSERT INTO CarteCredit(numero, titulaire, dateExpiration, CCV, membreId)
 VALUES
-(5336995555,  DATE(05-05-2020), 100, 'alexander@gmail.com'),
-(5336995540,  DATE(08-05-2020), 203, 'alexander@gmail.com'),
-(5336995556,  DATE(05-05-2020), 131, 'ismael@gmail.com'),
-(1233524341,  DATE(05-07-2020), 141, 'alexa@gmail.com'),
+(4539711103420778,  DATE(01-05-2021), 100, 'alexander@gmail.com'),
+(4024007188923493,  DATE(01-07-2022), 203, 'ismael@gmail.com'),
+(4485999614309226,  DATE(01-04-2023), 445, 'alexa@gmail.com'),
+(4485889214195010,  DATE(01-02-2024), 141, 'laura@gmail.com'),
+(4916698435434648,  DATE(01-03-2021), 607, 'xavi@gmail.com'),
+(4556168915226323,  DATE(01-09-2022), 174, 'leo@gmail.com');
 
 INSERT INTO Film(numero, titre, genre, dateProduction, dureeTotalMinutes)
 VALUES
-(00000000001, 'Nemo1', 'comedie', DATE(01-01-2000), 120),
-(00000000002, 'Nemo2', 'comedie', DATE(01-01-2004), 132),
-(00000000003, 'Nemo3', 'comedie', DATE(01-01-2010), 140),
-(00000000004, 'man in black', 'action', DATE(01-01-2008), 132),
-(00000000005, 'man in black 2', 'action', DATE(01-01-2012), 110),
-(00000000006, 'lovely love', 'romance', DATE(01-01-2008), 132),
-(00000000007, 'lovely love 2', 'romance', DATE(01-01-2012), 110)
+(1, 'Jurassic World', 'action', DATE(01-01-2015), 120),
+(2, 'E.T. the Extra-Terrestrial ', 'action', DATE(01-01-1982), 132),
+(3, 'Indiana Jones and the Temple of Doom', 'action', DATE(01-01-1984), 140),
+(4, 'man in black 3', 'comedie', DATE(01-01-2008), 132),
+(5, 'Empire of the Sun', 'action', DATE(25-11-1987), 153),
+(6, 'JOKER', 'drame', DATE(01-01-2019), 143),
+(7, 'Parasite', 'romance', DATE(01-01-2012), 150);
 
--- INSERT INTO DVD(numero, filmNo)
--- VALUES
--- ()
---TODO!!!
-
-INSERT INTO Personnage(personnageId, nom, age, sexe, nationalite)
+INSERT INTO DVD(numero, filmNo)
 VALUES
-('0000000000001', 'Alex', 21, 'M', 'Canada'),
-('0000000000002', 'Alexandra', 26, 'F', 'Canada'),
-('0000000000003', 'ismael', 42, 'M', 'Canada'),
-('0000000000004', 'Issam', 50, 'M', 'Italie'),
-('0000000000005', 'Laura', 41, 'F', 'Canada'),
-('0000000000006', 'Yana', 20, 'F', 'Russie'),
+(601,1),
+(602,1),
+(603,4),
+(604,5),
+(605,6);
 
-INSERT INTO RolePersonnage(roleId, personnageId, nom, salaire)
+
+
+INSERT INTO Personne(personnageId, nom, age, sexe, nationalite)
 VALUES
-('000000000001'. '0000000000001', 'artiste', 500),
-('000000000002'. '0000000000002', 'artisteSecondaire', 100),
-('000000000003'. '0000000000003', 'artiste', 500),
-('000000000004'. '0000000000004', 'artiste', 500),
-('000000000005'. '0000000000005', 'producer', 1000),
-('000000000006'. '0000000000006', 'producer', 500),
+( 1, 'Chris Pratt', 21, 'M', 'USA'),
+( 2, 'Henry Thomas', 14, 'M', 'USA'),
+( 3, 'Harrison Ford', 38, 'M', 'USA'),
+( 4, 'Will Smith', 35, 'M', 'USA'),
+( 5, 'Steven Spielberg', 41, 'M', 'Canada'),
+( 6, 'Mark Bridges', 20, 'M', 'Russie'),
+( 7, 'Joaquin Phoenix', 20, 'M', ' Puerto Rico');
+( 8, 'Bong Joon', 49, 'M', ' Puerto Rico');
 
-INSERT INTO Oscar(oscarId, lieu, dateOscar, maitreCeremonie)
+INSERT INTO Participation(personneId, filmId, typeRole, salaire)
 VALUES
-('0000000000001', 'Montreal', DATE(01-01-2000), 'Kevin Heart'),
-('0000000000002', 'Dubai', DATE(01-01-2004), 'Angelina Joly')
-('0000000000003', 'Montreal', DATE(01-01-2010), 'Leonard De Caprio'),
-('0000000000004', 'Dubai', DATE(01-01-2016), 'Hong Kong')
+( 1, 1, 'acteur', 500),
+( 2, 2, 'acteur', 100),
+( 3, 3, 'acteur', 500),
+( 4, 4, 'acteur', 500),
+( 5, 5, 'producteur', 1000),
+( 6, 6, 'costume design', 400),
+( 7, 6, 'acteur', 900);
+( 8, 7, 'réalisateur', 900);
 
--- INSERT INTO CommandeFilm(adresseCourriel, filmNo, dateVisionnement, dureeVisionnement)
--- VALUES
--- ('alexander@gmail.com', )
---TODO!!
+INSERT INTO CeremonieOscars(oscarId, lieu, dateOscar, maitreCeremonie)
+VALUES
+( 56, 'California', DATE(01-02-2000), 'Leonard De Caprio'),
+( 57, 'California', DATE(01-02-2006), 'Angelina Joly'),
+( 58, 'California', DATE(01-02-2017), 'Kevin Heart'),
+( 59, 'California', DATE(01-02-2018), 'Brad Pit');
 
--- INSERT INTO OscarNomine(numero, filmNo)
--- VALUES
--- ()
---TODO!!!
+INSERT INTO NominationOscars(oscarId, filmId, categorie)
+VALUES
+( 56, 5,'Meilleur producteur'),
+( 57, 6,'Meilleur acteur'),
+( 58, 7,'costume design' ),
+( 59, 8,'Meilleur acteur' );
 
--- INSERT INTO achatDVD(numero, filmNo)
--- VALUES
--- ()
---TODO!!! (DVD)
+INSERT INTO GagnantOscars(oscarId, filmId, categorie)
+VALUES
+( 56, 5,'Meilleur producteur'),
+( 57, 6,'Meilleur acteur'),
+( 58, 7,'costume design'),
+( 59, 8,'Meilleur acteur' );
+
+INSERT INTO VisionnementFilm(membreId, filmNo, dateVisionnement, dureeVisionnement)
+VALUES
+('alexander@gmail.com', 4, DATE(01-03-2019), 132 ),
+('ismael@gmail.com', 5, DATE(01-06-2019), 153 ),
+('alexa@gmail.com', 6, DATE(01-09-2019), 143 ),
+('laura@gmail.com',7, DATE(01-11-2019), 70 );
+
+
+INSERT INTO AchatDVD(membreId, DVDNo, distance, dateEnvoi)
+VALUES
+('alexander@gmail.com', 602, 10, DATE(01-04-2019) ),
+('ismael@gmail.com', 602, 8, DATE(01-07-2019) ),
+('alexa@gmail.com', 603, 12, DATE(01-10-2019) ),
+('laura@gmail.com',604, 6, DATE(01-09-2019) );
