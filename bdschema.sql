@@ -21,26 +21,26 @@
 -- PK: numéro
 -- FK: filmId REFERENCES Film(id)
 
--- Personnage(id, nom, age sexe, nationalité)
+-- Personne(id, nom, age sexe, nationalité)
 -- PK: id
 
--- PersonnageDuFilm(personnageId, filmId)
--- PK: (personnageId, filmId)
--- FK: personnageId REFERENCES Personnage(id)
+-- PersonneDuFilm(personneId, filmId)
+-- PK: (personneId, filmId)
+-- FK: personneId REFERENCES Personne(id)
 -- FK: filmId REFERENCES Film(numéro)
 
 -- --discutable ce qui est fait/
--- Role(personnageId, nom, salaire)
--- PK: personnageId
--- FK: personnageId REFERENCES Personnage(id)
+-- Role(personneId, nom, salaire)
+-- PK: personneId
+-- FK: personneId REFERENCES Personne(id)
 
 -- Oscar(oscarId, catégorie, lieu, date, maitreCérémonie)
 -- PK: oscarId
 
--- NominationOscar(oscarId, personnageId, catégorie)
--- PK: (oscarId, personnageId)
+-- NominationOscar(oscarId, personneId, catégorie)
+-- PK: (oscarId, personneId)
 -- FK: oscarId REFERENCES Oscar(oscarId)
--- FK: personnageId REFERENCES Personnage(id)
+-- FK: personneId REFERENCES Personne(id)
 
 -- CommandeFilm(adresseMembre, numéroFilm, dateVisionnement, duréVisionnement)
 -- PK: (adresseMembre, numéroFilm)
@@ -117,22 +117,22 @@ CREATE TABLE IF NOT EXISTS DVD(
     FOREIGN KEY filmNo REFERENCES Film(numero)
 );
 
-CREATE TABLE IF NOT EXISTS Personnage(
-    personnageId VARCHAR (20), --TODO: devrait on garder varchar?
+CREATE TABLE IF NOT EXISTS Personne(
+    personneId VARCHAR (20), --TODO: devrait on garder varchar?
     nom VARCHAR (20) NOT NULL,
     age INTEGER,
     sexe sexType,
     nationalite VARCHAR (20),
-    PRIMARY KEY (personnageId)
+    PRIMARY KEY (personneId)
 );
 
-CREATE TABLE IF NOT EXISTS RolePersonnage(
+CREATE TABLE IF NOT EXISTS RolePersonne(
     roleId VARCHAR (20),
-    personnageId VARCHAR (20) NOT NULL,
+    personneId VARCHAR (20) NOT NULL,
     nom VARCHAR (21) NOT NULL,  
     salaire DECIMAL(6,2), --TODO: en quoi?
     PRIMARY KEY (roleId),
-    FOREIGN KEY personnageId REFERENCES Personnage(personnageId)
+    FOREIGN KEY (personneId) REFERENCES Personne(personneId)
 );
 
 CREATE TABLE IF NOT EXISTS Oscar(
