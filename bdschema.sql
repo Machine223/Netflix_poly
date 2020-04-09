@@ -66,6 +66,8 @@ CREATE DOMAIN zip_code varchar(6)
 CREATE DOMAIN sexType AS CHAR
 	CHECK (VALUE IN ('M', 'F'));
 
+
+-- Schema Tables
 SET search_path TO schema_films;
 
 CREATE TABLE IF NOT EXISTS Membre(
@@ -113,8 +115,8 @@ CREATE TABLE IF NOT EXISTS Film(
 CREATE TABLE IF NOT EXISTS DVD( 
     numero VARCHAR (20),
     filmNo VARCHAR (20),
-    PRIMARY KEY (numero, filmId),
-    FOREIGN KEY filmNo REFERENCES Film(numero)
+    PRIMARY KEY (numero),
+    FOREIGN KEY (filmNo) REFERENCES Film(numero)
 );
 
 CREATE TABLE IF NOT EXISTS Personne(
