@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS DVD(
 );
 
 CREATE TABLE IF NOT EXISTS Personnage(
-    personnageId VARCHAR (20),
+    personnageId VARCHAR (20), --TODO: devrait on garder varchar?
     nom VARCHAR (20) NOT NULL,
     age INTEGER,
     sexe sexType,
@@ -129,8 +129,8 @@ CREATE TABLE IF NOT EXISTS Personnage(
 CREATE TABLE IF NOT EXISTS RolePersonnage(
     roleId VARCHAR (20),
     personnageId VARCHAR (20) NOT NULL,
-    nom VARCHAR (20) NOT NULL,
-    salaire DECIMAL(6,2),
+    nom VARCHAR (21) NOT NULL,  
+    salaire DECIMAL(6,2), --TODO: en quoi?
     PRIMARY KEY (roleId),
     FOREIGN KEY personnageId REFERENCES Personnage(personnageId)
 );
@@ -153,24 +153,24 @@ CREATE TABLE IF NOT EXISTS NominationOscar(
     FOREIGN KEY filmId REFERENCES Film(numero)
 );
 
-CREATE TABLE IF NOT EXISTS CommandeFilm(
-    adresseMembre VARCHAR (20),
+CREATE TABLE IF NOT EXISTS CommandeFilm( --TODO: devrait on faire une cle et ne pas combiner?
+    adresseCourriel VARCHAR (20),
     filmNo VARCHAR (20),
     dateVisionnement DATE,
     dureeVisionnement INTEGER,
-    PRIMARY KEY (adresseMembre, filmNo),
-    FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel),
+    PRIMARY KEY (adresseCourriel, filmNo),
+    FOREIGN KEY (adresseCourriel) REFERENCES Membre(adresseCourriel),
     FOREIGN KEY (filmNo) REFERENCES Film(numero)
 );
 
 CREATE TABLE IF NOT EXISTS AchatDVD(
-    adresseMembre VARCHAR (20),
+    adresseCourriel VARCHAR (20),
     DVDNo VARCHAR (20),
     cout INTEGER NOT NULL,
     distance NUMERIC(6,3) NOT NULL,
     dateEnvoi DATE,
-    PRIMARY KEY (adresseMembre, DVDNo),
-    FOREIGN KEY (adresseMembre) REFERENCES Membre(adresseCourriel),
+    PRIMARY KEY (adresseCourriel, DVDNo),
+    FOREIGN KEY (adresseCourriel) REFERENCES Membre(adresseCourriel),
     FOREIGN KEY (DVDNo) REFERENCES DVD(numero) -- to check as dvd has composed pks 
 );
 

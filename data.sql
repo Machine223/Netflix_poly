@@ -136,15 +136,55 @@ VALUES
 
 INSERT INTO Film(numero, titre, genre, dateProduction, dureeTotalMinutes)
 VALUES
-(00000000001, 'Nemo1', 'comedie', DATE(01-01-2000), 120)
-(00000000002, 'Nemo2', 'comedie', DATE(01-01-2004), 132)
-(00000000003, 'Nemo3', 'comedie', DATE(01-01-2010), 140)
-(00000000004, 'man in black', 'action', DATE(01-01-2008), 132)
-(00000000005, 'man in black 2', 'action', DATE(01-01-2012), 110)
-(00000000006, 'lovely love', 'romance', DATE(01-01-2008), 132)
+(00000000001, 'Nemo1', 'comedie', DATE(01-01-2000), 120),
+(00000000002, 'Nemo2', 'comedie', DATE(01-01-2004), 132),
+(00000000003, 'Nemo3', 'comedie', DATE(01-01-2010), 140),
+(00000000004, 'man in black', 'action', DATE(01-01-2008), 132),
+(00000000005, 'man in black 2', 'action', DATE(01-01-2012), 110),
+(00000000006, 'lovely love', 'romance', DATE(01-01-2008), 132),
 (00000000007, 'lovely love 2', 'romance', DATE(01-01-2012), 110)
 
-INSERT INTO DVD(numero, filmNo)
-VALUES
-()
+-- INSERT INTO DVD(numero, filmNo)
+-- VALUES
+-- ()
+--TODO!!!
 
+INSERT INTO Personnage(personnageId, nom, age, sexe, nationalite)
+VALUES
+('0000000000001', 'Alex', 21, 'M', 'Canada'),
+('0000000000002', 'Alexandra', 26, 'F', 'Canada'),
+('0000000000003', 'ismael', 42, 'M', 'Canada'),
+('0000000000004', 'Issam', 50, 'M', 'Italie'),
+('0000000000005', 'Laura', 41, 'F', 'Canada'),
+('0000000000006', 'Yana', 20, 'F', 'Russie'),
+
+INSERT INTO RolePersonnage(roleId, personnageId, nom, salaire)
+VALUES
+('000000000001'. '0000000000001', 'artiste', 500),
+('000000000002'. '0000000000002', 'artisteSecondaire', 100),
+('000000000003'. '0000000000003', 'artiste', 500),
+('000000000004'. '0000000000004', 'artiste', 500),
+('000000000005'. '0000000000005', 'producer', 1000),
+('000000000006'. '0000000000006', 'producer', 500),
+
+INSERT INTO Oscar(oscarId, lieu, dateOscar, maitreCeremonie)
+VALUES
+('0000000000001', 'Montreal', DATE(01-01-2000), 'Kevin Heart'),
+('0000000000002', 'Dubai', DATE(01-01-2004), 'Angelina Joly')
+('0000000000003', 'Montreal', DATE(01-01-2010), 'Leonard De Caprio'),
+('0000000000004', 'Dubai', DATE(01-01-2016), 'Hong Kong')
+
+-- INSERT INTO CommandeFilm(adresseCourriel, filmNo, dateVisionnement, dureeVisionnement)
+-- VALUES
+-- ('alexander@gmail.com', )
+--TODO!!
+
+-- INSERT INTO OscarNomine(numero, filmNo)
+-- VALUES
+-- ()
+--TODO!!!
+
+-- INSERT INTO achatDVD(numero, filmNo)
+-- VALUES
+-- ()
+--TODO!!! (DVD)
