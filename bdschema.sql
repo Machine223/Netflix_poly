@@ -70,7 +70,7 @@ CREATE DOMAIN sexType AS CHAR
 SET search_path TO schema_films;
 
 CREATE TABLE IF NOT EXISTS Membre(
-    membreId VARCHAR (20),
+    membreId VARCHAR (40),
     motDePasse VARCHAR (20) NOT NULL, --ENCRYPTED check function or type
     nom VARCHAR (20),
     adressePostal zip_code NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS Membre(
 );
 
 CREATE TABLE IF NOT EXISTS MembreMensuel(
-    membreId VARCHAR (20),
+    membreId VARCHAR (40),
     prixAbonnement NUMERIC (6, 2) NOT NULL,
     dateEcheance DATE NOT NULL,
     PRIMARY KEY (membreId),
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS MembreMensuel(
 );
 
 CREATE TABLE IF NOT EXISTS MembreVue(
-    membreId VARCHAR (20),
+    membreId VARCHAR (40),
     film_payperview NUMERIC(6, 2) NOT NULL,
     PRIMARY KEY (membreId),
     FOREIGN KEY (membreId) REFERENCES Membre(membreId)
@@ -97,14 +97,14 @@ CREATE TABLE IF NOT EXISTS CarteCredit(
     titulaire VARCHAR (20) NOT NULL,
     dateExpiration DATE NOT NULL,
     CCV INTEGER NOT NULL,
-    membreId VARCHAR (20) NOT NULL,
+    membreId VARCHAR (40) NOT NULL,
     PRIMARY KEY (numero),
     FOREIGN KEY (membreId) REFERENCES Membre (membreId)
 );
 
 CREATE TABLE IF NOT EXISTS Film(
     numero INTEGER,
-    titre VARCHAR (30) NOT NULL,
+    titre VARCHAR (40) NOT NULL,
     genre VARCHAR (20) NOT NULL,
     dateProduction DATE,
     dureeTotalMinutes INTEGER,
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS GagnantOscars(
 );
 
 CREATE TABLE IF NOT EXISTS VisionnementFilm(
-    membreId VARCHAR (20),
+    membreId VARCHAR (40),
     filmNo INTEGER,
     dateVisionnement DATE,
     dureeVisionnement INTEGER,
@@ -175,14 +175,26 @@ CREATE TABLE IF NOT EXISTS VisionnementFilm(
 );
 
 CREATE TABLE IF NOT EXISTS AchatDVD(
-    membreId VARCHAR (20),
+    membreId VARCHAR (40),
     DVDNo VARCHAR (20),
-    cout INTEGER cout = (0.25 * distance), -- implementer un calcul pour la distance Chaque km coûte 25 cents.
+    cout INTEGER , -- implementer un calcul pour la distance Chaque km coûte 25 cents.
     distance NUMERIC(6,3) NOT NULL,
     dateEnvoi DATE,
     PRIMARY KEY (membreId, DVDNo),
     FOREIGN KEY (membreId) REFERENCES Membre(membreId),
     FOREIGN KEY (DVDNo) REFERENCES DVD(numero) -- to check as dvd has composed pks 
 );
+
+-- CREATE TABLE IF NOT EXISTS Pannier(
+--    NoPaiement VARCHAR (20),
+--    DatePaiement DATE NOT NULL,
+--    MontantPaiement NUMERIC (7,3) NOT NULL,
+--    ModeDePaiement VARCHAR (20) NOT NULL,
+--    ReservationId VARCHAR (20) NOT NULL,
+--    CarteDeCreditId INTEGER ,
+--    PRIMARY KEY (NoPaiement),
+--    FOREIGN KEY (ReservationId) REFERENCES reservation(NoReservation),
+--    FOREIGN KEY (CarteDeCreditId) REFERENCES CarteDeCredit(NoCarte)
+-- );
 
 
