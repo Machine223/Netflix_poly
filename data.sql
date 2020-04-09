@@ -38,8 +38,8 @@ VALUES
 (3, 'Indiana Jones :Temple of Doom', 'action', DATE'1984-01-01', 140),
 (4, 'man in black 3', 'comedie',  DATE'2008-01-01', 132),
 (5, 'Empire of the Sun', 'action',  DATE'1987-01-01', 153),
-(6, 'JOKER', 'drame', DATE'01-01-2019', 143),
-(7, 'Parasite', 'romance', DATE'01-01-2012', 150);
+(6, 'JOKER', 'drame', DATE'2019-01-01', 143),
+(7, 'Parasite', 'romance', DATE'2019-01-01', 150);
 
 INSERT INTO DVD(numero, filmNo)
 VALUES
@@ -49,7 +49,7 @@ VALUES
 (604,5),
 (605,6);
 
-INSERT INTO Personne(personnageId, nom, age, sexe, nationalite)
+INSERT INTO Personne(personneId, nom, age, sexe, nationalite)
 VALUES
 ( 1, 'Chris Pratt', 21, 'M', 'USA'),
 ( 2, 'Henry Thomas', 14, 'M', 'USA'),
@@ -80,17 +80,17 @@ VALUES
 
 INSERT INTO NominationOscars(oscarId, filmId, categorie)
 VALUES
-( 56, 5,'Meilleur producteur'),
-( 57, 6,'Meilleur acteur'),
-( 58, 7,'costume design' ),
-( 59, 8,'Meilleur acteur' );
+( 57, 5,'Meilleur producteur'),
+( 58, 6,'Meilleur acteur'),
+( 58, 6,'costume design' ),
+( 59, 7,'Meilleur acteur' );
 
 INSERT INTO GagnantOscars(oscarId, filmId, categorie)
 VALUES
-( 56, 5,'Meilleur producteur'),
-( 57, 6,'Meilleur acteur'),
+( 57, 5,'Meilleur producteur'),
+( 58, 6,'Meilleur acteur'),
 ( 58, 7,'costume design'),
-( 59, 8,'Meilleur acteur' );
+( 59, 7,'Meilleur acteur' );
 
 INSERT INTO VisionnementFilm(membreId, filmNo, dateVisionnement, dureeVisionnement)
 VALUES
@@ -105,4 +105,4 @@ VALUES
 ('alexander@gmail.com', 602, 10,  DATE'2019-01-01'),
 ('ismael@gmail.com', 602, 8, DATE'2018-01-01'),
 ('alexa@gmail.com', 603, 12, DATE'2019-01-01'),
-('laura@gmail.com',604, 6,  DATE'2019-01-01');
+('laura@gmail.com', 604, 6,  DATE'2019-01-01');

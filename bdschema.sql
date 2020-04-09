@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS MembreVue(
 );
 
 CREATE TABLE IF NOT EXISTS CarteCredit(
-    numero INTEGER UNIQUE,
+    numero BIGINT UNIQUE,
     titulaire VARCHAR (20) NOT NULL,
     dateExpiration DATE NOT NULL,
     CCV INTEGER NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS CeremonieOscars(
 CREATE TABLE IF NOT EXISTS NominationOscars(
     oscarId INTEGER,
     filmId INTEGER,
-    categorie VARCHAR (20) NOT NULL,
+    categorie VARCHAR (40) NOT NULL,
     PRIMARY KEY (oscarId, filmId, categorie),
     FOREIGN KEY (oscarId) REFERENCES CeremonieOscars(oscarId),
     FOREIGN KEY (filmId) REFERENCES Film(numero)
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS NominationOscars(
 CREATE TABLE IF NOT EXISTS GagnantOscars(
     oscarId INTEGER,
     filmId INTEGER,
-    categorie VARCHAR (20) NOT NULL,
+    categorie VARCHAR (40) NOT NULL,
     PRIMARY KEY (oscarId, filmId, categorie),
     FOREIGN KEY (oscarId) REFERENCES CeremonieOscars(oscarId),
     FOREIGN KEY (filmId) REFERENCES Film(numero)
@@ -185,7 +185,11 @@ CREATE TABLE IF NOT EXISTS AchatDVD(
     FOREIGN KEY (DVDNo) REFERENCES DVD(numero) -- to check as dvd has composed pks 
 );
 
--- CREATE TABLE IF NOT EXISTS Pannier(
+
+-- Il faut ainsi être capable de retrouver
+-- toutes les commandes d’un membre, qu’elles concernent l’envoi d’un DVD ou le visionnement
+-- d’un film.
+-- CREATE TABLE IF NOT EXISTS Pannier( 
 --    NoPaiement VARCHAR (20),
 --    DatePaiement DATE NOT NULL,
 --    MontantPaiement NUMERIC (7,3) NOT NULL,
