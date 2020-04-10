@@ -36,7 +36,7 @@ VALUES
 (1, 'Jurassic World', 'action', DATE'2015-01-01', 120),
 (2, 'E.T. the Extra-Terrestrial ', 'action',  DATE'1982-01-01', 132),
 (3, 'Indiana Jones :Temple of Doom', 'action', DATE'1984-01-01', 140),
-(4, 'man in black 3', 'comedie',  DATE'2008-01-01', 132),
+(4, 'Men in black 3', 'comedie',  DATE'2008-01-01', 132),
 (5, 'Empire of the Sun', 'action',  DATE'1987-01-01', 153),
 (6, 'JOKER', 'drame', DATE'2019-01-01', 143),
 (7, 'Parasite', 'romance', DATE'2019-01-01', 150);
@@ -44,7 +44,7 @@ VALUES
 INSERT INTO DVD(numero, filmNo)
 VALUES
 (601,1),
-(602,1),
+(602,2),
 (603,4),
 (604,5),
 (605,6);
@@ -95,14 +95,19 @@ VALUES
 INSERT INTO VisionnementFilm(membreId, filmNo, dateVisionnement, dureeVisionnement)
 VALUES
 ('alexander@gmail.com', 4,  DATE'2017-10-01', 132 ),
+('alexander@gmail.com', 4,  DATE'2018-04-01', 132 ),
+('ismael@gmail.com', 4,  DATE'2018-11-01', 132 ),
 ('ismael@gmail.com', 5,  DATE'2018-10-01', 153 ),
 ('alexa@gmail.com', 6, DATE'2019-02-01', 143 ),
 ('laura@gmail.com',7, DATE'2019-03-01', 70 );
 
 
-INSERT INTO AchatDVD(membreId, DVDNo, distance, dateEnvoi)
+INSERT INTO AchatDVD(membreId, DVDNo, cout, distance, dateEnvoi)
 VALUES
-('alexander@gmail.com', 602, 10,  DATE'2019-01-01'),
-('ismael@gmail.com', 602, 8, DATE'2018-01-01'),
-('alexa@gmail.com', 603, 12, DATE'2019-01-01'),
-('laura@gmail.com', 604, 6,  DATE'2019-01-01');
+('alexander@gmail.com',604, 25, 100,  DATE'2019-01-01'),
+('alexander@gmail.com',602, 25, 100,  DATE'2019-02-01'),
+('alexander@gmail.com',601, 25, 100,  DATE'2019-03-01'),
+('ismael@gmail.com', 602, 20, 80, DATE'2018-01-01'),
+('ismael@gmail.com', 603, 20, 80, DATE'2018-01-01'),
+('alexa@gmail.com',604, 30, 120, DATE'2019-01-01'),
+('laura@gmail.com',605, 15, 60,  DATE'2019-01-01');

@@ -120,8 +120,10 @@ CREATE TABLE IF NOT EXISTS AchatDVD(
 
 -- Query -- Liste des requêtes à implanter
 
+SET search_path TO schema_films;
+
 -- 1. Affichez toutes les informations sur un film spécifié par 
--- l'utilisateur (selon le titre)
+-- l'utilisateur (selon le titre).
 
 -- SELECT * 
 -- FROM Film
@@ -139,7 +141,7 @@ $infoFilm$ LANGUAGE plpgsql;
 -- 2. Pour chaque genre de film, listez tous les titres de films ainsi que la dernière date à laquelle
 -- un film a été acheté(DVD) ou visionné
 -- Q/R forum : sortie souhaité  -- Comédie, la grande vadrouille, 10/03/2020
-
+-- SELECT à utiliser CASES
 
 
 
@@ -147,12 +149,10 @@ $infoFilm$ LANGUAGE plpgsql;
 -- le plus souvent. Par exemple, Amal Z est le membre qui a visionné le plus de documentaires
 -- animaliers
 -- TODO
-SELECT Membre.nom AS Nom, Film.genre 
-FROM Membre NATURAL JOIN VisionnementFilm
--- WHERE VisionnementFilm > 200
--- GROUP BY Membre.membreId , VisionnementFilm.membreId 
 
-
+SELECT Membre.membreId, Membre.nom , Film.genre
+FROM Membre, VisionnementFilm, Film
+WHERE Membre.membreId = VisionnementFilm.membreId  AND VisionnementFilm.filmNo = Film.numero;
 
 
 
@@ -166,6 +166,18 @@ FROM Membre NATURAL JOIN VisionnementFilm
 -- 5. Trouvez les noms des membres dont le coût total d’achat de DVD est plus élevé que la
 -- moyenne.
 
+SELECT Membre.nom , SUM(AchatDVD.cout) somme
+FROM Membre, AchatDVD
+WHERE Membre.membreId = AchatDVD.membreId
+GROUP BY Membre.nom
+HAVING SUM(AchatDVD.cout) > (
+    SELECT AVG(somme) FROM(
+        SELECT SUM(AchatDVD.cout) AS somme
+        FROM AchatDVD, Membre
+        WHERE Membre.membreId = AchatDVD.membreId
+        GROUP BY Membre.membreId
+    ) AS inner_query
+);
 
 
 
@@ -182,6 +194,7 @@ FROM Membre NATURAL JOIN VisionnementFilm
 -- qui ont été visionnés plus de 10 fois.
 -- Q/R forum :Requête 7: En fait, même le DVD n'a pas de prix, selon l'étude de cas. Donc oui, pour répondre à la requête 7, il semble raisonnable d'ajouter un attribut prix au film.
 
+SELECT DISTINCT Film.title, Film
 
 
 

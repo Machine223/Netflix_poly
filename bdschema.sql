@@ -51,7 +51,7 @@
 -- FK: numéroDVD REFERENCES DVD(numéro)
 -- FK: adresseMembre REFERENCES Membre(membreId)
 
-CREATE DATABASE filmsbd;
+-- CREATE DATABASE filmsbd;
 
 CREATE SCHEMA schema_films;
 
@@ -70,7 +70,7 @@ CREATE DOMAIN sexType AS CHAR
 SET search_path TO schema_films;
 
 CREATE TABLE IF NOT EXISTS Membre(
-    membreId VARCHAR (40),
+    membreId VARCHAR (40), 
     motDePasse VARCHAR (20) NOT NULL, --ENCRYPTED check function or type
     nom VARCHAR (20),
     adressePostal zip_code NOT NULL,
