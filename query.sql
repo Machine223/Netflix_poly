@@ -22,7 +22,19 @@ $infoFilm$ LANGUAGE plpgsql;
 -- un film a été acheté(DVD) ou visionné
 -- Q/R forum : sortie souhaité  -- Comédie, la grande vadrouille, 10/03/2020
 -- SELECT à utiliser CASES
-
+ 
+SELECT Film.genre, Film.titre,
+(CASE 
+    WHEN VisionnementFilm.dateVisionnement > AchatDVD.dateEnvoi
+    THEN VisionnementFilm.dateVisionnement
+    ELSE AchatDVD.dateEnvoi 
+    END
+) AS date_Achat_Visionnment   
+FROM Film , VisionnementFilm, DVD, AchatDVD
+WHERE   VisionnementFilm.filmID = Film.filmID 
+AND     VisionnementFilm.filmID = DVD.filmID
+AND     DVD.dvdID = AchatDVD.dvdID
+ORDER BY date_Achat_Visionnment;
 
 
 
@@ -77,15 +89,15 @@ ORDER BY total_DVD_Visionnement;
 -- Q/R forum :Requête 7: En fait, même le DVD n'a pas de prix, selon l'étude de cas. 
 -- Donc oui, pour répondre à la requête 7, il semble raisonnable d'ajouter un attribut prix au film.
 
-SELECT DISTINCT Film.title, VisionnementFilm.cout 
-FROM Film, VisionnementFilm, 
+SELECT Film.titre, VisionnementFilm.cout 
+FROM Film, VisionnementFilm
 WHERE Film.filmID = VisionnementFilm.filmID AND Film.filmID NOT IN (
     SELECT DVD.filmID
     FROM AchatDVD , DVD
     WHERE DVD.filmID = AchatDVD.dvdID
 )
-
-
+GROUP BY Film.titre, VisionnementFilm.cout 
+HAVING COUNT(VisionnementFilm.filmID)>10;
 
 
 -- 8. Trouvez le nom et date de naissance des acteurs qui jouent dans les films qui sont visionnés
