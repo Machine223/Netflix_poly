@@ -1,4 +1,4 @@
-import { SortType } from "./enums";
+import { SortType } from './enums';
 
 export class Classification {
     title: string;

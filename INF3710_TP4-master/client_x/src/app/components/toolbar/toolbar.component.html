@@ -1,0 +1,25 @@
+<p>toolbar works!</p>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <div>
+            <span *ngIf="activeMember.isAdmin" class='left-item' mat-button [matMenuTriggerFor]="aboveMenu">Films</span>
+            <mat-menu #aboveMenu="matMenu" yPosition="below">
+                <button (click)="toggle('films')" mat-menu-item>Voir les films</button>
+                <button *ngIf="activeMember.isAdmin" mat-menu-item (click)="this.addMovie()">Ajouter un film</button>
+            </mat-menu>
+            <span *ngIf="activeMember.isAdmin" class='left-item' mat-button [matMenuTriggerFor]="belowMenu">Membres</span>
+            <mat-menu #belowMenu="matMenu" yPosition="below">
+                <button (click)="toggle('membres')" mat-menu-item>Voir les membres</button>
+                <button mat-menu-item (click)="this.signUp()">Ajouter un membre</button>
+            </mat-menu>
+        </div>
+        <span id='fill-space'></span>
+        <div>
+            <span class='right-item' mat-button [matMenuTriggerFor]="beforeMenu">{{activeMember?.nom}}</span>
+            <mat-menu #beforeMenu="matMenu" yPosition="below">
+                <!-- <button *ngIf="activeMember !== null" mat-menu-item>Modifier profil</button> -->
+                <button mat-menu-item (click)="this.logOut()">Se déconnecter</button>
+            </mat-menu>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

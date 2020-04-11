@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignUpModalComponent } from './sign-up-modal.component';
 
-describe('SignUpModalComponent', () => {
+describe('SignInModalComponent', () => {
   let component: SignUpModalComponent;
   let fixture: ComponentFixture<SignUpModalComponent>;
 
