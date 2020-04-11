@@ -1,50 +1,138 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schema = `
-SET search_path = hotelDB;
+SET search_path = schema_films;
 
-DROP SCHEMA IF EXISTS HOTELDB CASCADE;
-CREATE SCHEMA HOTELDB;
+DROP SCHEMA IF EXISTS schema_films CASCADE;
+CREATE SCHEMA schema_films;
 
-CREATE TABLE IF NOT EXISTS  HOTELDB.Hotel (
-		hotelNo		VARCHAR(10)		NOT NULL,
-		hotelName 	VARCHAR(20)		NOT NULL,
-		city		VARCHAR(50)		NOT NULL,
-		PRIMARY KEY (hotelNo));
+CREATE TABLE IF NOT EXISTS Membre(
+    membreID SERIAl,
+    nom VARCHAR (20),
+    courriel VARCHAR (40),
+    motDePasse VARCHAR(255) NOT NULL, --ENCRYPTED check function or type
+    adressePostal zip_code NOT NULL,
+    isAdmin BOOLEAN NOT NULL,
+    PRIMARY KEY (membreID)
+);
 
-CREATE TABLE IF NOT EXISTS HOTELDB.Room(
-roomNo VARCHAR(10) NOT NULL,
-hotelNo VARCHAR(10)	NOT NULL,
-typeroom VARCHAR(10)	NOT NULL,
-price NUMERIC(6,3) NOT NULL,
-PRIMARY KEY (roomNo, hotelNo),
-FOREIGN KEY(hotelNo) REFERENCES HOTELDB.Hotel(hotelNo) ON DELETE CASCADE ON UPDATE CASCADE);
+CREATE TABLE IF NOT EXISTS MembreMensuel(
+    membreID INTEGER,
+    prixAbonnement NUMERIC (4, 2) NOT NULL,
+    dateDebut DATE NOT NULL,
+    dateEcheance DATE NOT NULL,
+    PRIMARY KEY (membreID),
+    FOREIGN KEY (membreID) REFERENCES Membre(membreID)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS MembreVue(
+    membreID INTEGER,
+    nbFilmVue INTEGER NOT NULL,
+    PRIMARY KEY (membreID),
+    FOREIGN KEY (membreID) REFERENCES Membre(membreID)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CarteCredit(
+    carteID SERIAL,
+    membreID INTEGER,
+    numero CHAR(16) UNIQUE NOT NULL,
+    titulaire VARCHAR(255) NOT NULL,
+    dateExpiration DATE NOT NULL,
+    CCV INTEGER NOT NULL,
+    PRIMARY KEY (carteID, membreID),
+    FOREIGN KEY (membreID) REFERENCES Membre (membreID)
+);
+
+CREATE TABLE IF NOT EXISTS Film(
+    filmID SERIAL,
+    titre VARCHAR (40) NOT NULL,
+    genre VARCHAR (20) NOT NULL,
+    dateProduction DATE,
+    dureeTotalMinutes INTEGER,
+    PRIMARY KEY (filmID)
+);
+
+CREATE TABLE IF NOT EXISTS DVD( 
+    dvdID SERIAL UNIQUE,
+    numeroInstance INTEGER,
+    filmID INTEGER,
+    PRIMARY KEY (dvdID, filmID),
+    FOREIGN KEY (filmID) REFERENCES Film(filmID)
+);
+
+CREATE TABLE IF NOT EXISTS Personne(
+    personneID SERIAL,
+    nom VARCHAR (20) NOT NULL,
+    age INTEGER,
+    sexe sexType,
+    nationalite VARCHAR (20),
+    PRIMARY KEY (personneID)
+);
+
+CREATE TABLE IF NOT EXISTS Participation( 
+    personneID INTEGER,
+    filmID INTEGER,
+    typeRole VARCHAR (20),
+    salaire DECIMAL(6,2), 
+    PRIMARY KEY (filmID, personneID, typeRole),
+    FOREIGN KEY (personneID) REFERENCES Personne(personneID),
+    FOREIGN KEY (filmID) REFERENCES Film(filmID)
+);
 
 
-CREATE DOMAIN HOTELDB.sexType AS CHAR
-	CHECK (VALUE IN ('M', 'F'));
+CREATE TABLE IF NOT EXISTS CeremonieOscars(
+    oscarID INTEGER,
+    lieu VARCHAR (20) NOT NULL,
+    dateOscar DATE NOT NULL,
+    maitreCeremonie VARCHAR (20) NOT NULL,
+    PRIMARY KEY (oscarID)
+);
 
-CREATE TABLE IF NOT EXISTS HOTELDB.Guest(
-guestNo		VARCHAR(10)		NOT NULL,
-nas		VARCHAR(10)		UNIQUE NOT NULL,
-guestName 	VARCHAR(20)		NOT NULL,
-gender		sexType			DEFAULT 'M',
-guestCity	VARCHAR(50)		NOT NULL,
-PRIMARY KEY (guestNo));
+CREATE TABLE IF NOT EXISTS NominationOscars(
+    oscarID INTEGER,
+    filmID INTEGER,
+    categorie VARCHAR (40) NOT NULL,
+    PRIMARY KEY (oscarID, filmID, categorie),
+    FOREIGN KEY (oscarID) REFERENCES CeremonieOscars(oscarID),
+    FOREIGN KEY (filmID) REFERENCES Film(filmID)
+);
 
-CREATE TABLE IF NOT EXISTS HOTELDB.Booking(
-		hotelNo		VARCHAR(10)		NOT NULL,
-		guestNo	  	VARCHAR(10)		NOT NULL,
-		dateFrom 	DATE			NOT NULL,
-		dateTo		DATE			NULL,
-		roomNo		VARCHAR(10)		NOT NULL,
-		PRIMARY KEY (hotelNo, guestNo, roomNO, dateFrom),
-		FOREIGN KEY (guestNo) REFERENCES HOTELDB.Guest(guestNo)
-		ON DELETE SET NULL ON UPDATE CASCADE,
-		FOREIGN KEY (hotelNo, roomNo) REFERENCES HOTELDB.Room (hotelNo, roomNo)
-		ON DELETE CASCADE ON UPDATE CASCADE,
-		CONSTRAINT date CHECK (dateTo >= dateFrom),
-		CONSTRAINT dateFrom CHECK (dateFrom >= current_date));
+CREATE TABLE IF NOT EXISTS GagnantOscars(
+    oscarID INTEGER,
+    filmID INTEGER,
+    categorie VARCHAR (40) NOT NULL,
+    PRIMARY KEY (oscarID, filmID, categorie),
+    FOREIGN KEY (oscarID) REFERENCES CeremonieOscars(oscarID),
+    FOREIGN KEY (filmID) REFERENCES Film(filmID)
+);
+
+CREATE TABLE IF NOT EXISTS VisionnementFilm(
+    membreID INTEGER,
+    filmID INTEGER,
+    cout NUMERIC(4, 2) NOT NULL,
+    dateVisionnement DATE,
+    dureeVisionnement INTEGER,
+    PRIMARY KEY (membreID, filmID, dateVisionnement),
+    FOREIGN KEY (membreID) REFERENCES Membre(membreID),
+    FOREIGN KEY (filmID) REFERENCES Film(filmID)
+);
+
+CREATE TABLE IF NOT EXISTS AchatDVD(
+    achatID SERIAL,
+    membreID INTEGER,
+    dvdID INTEGER,
+    cout NUMERIC(4, 2) NOT NULL ,
+    distance INTEGER,
+    dateEnvoi DATE NOT NULL,
+    PRIMARY KEY (achatID),
+    FOREIGN KEY (membreID) REFERENCES Membre(membreID),
+    FOREIGN KEY (dvdID) REFERENCES DVD(dvdID)
+);
+
+
+
 
 ALTER TABLE HOTELDB.Guest ALTER gender DROP DEFAULT;
 `;
