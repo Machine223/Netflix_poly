@@ -4,7 +4,6 @@ import * as pg from "pg";
 
 import { Film } from "../../../common/tables/Film";
 import { Membre } from "../../../common/tables/Membre";
-import {Room} from '../../../common/tables/Room';
 
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";

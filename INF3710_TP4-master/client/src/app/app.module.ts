@@ -2,18 +2,18 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatToolbarModule } from '@angular/material'
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule} from "@angular/material/menu";
-import { MatToolbarModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule } from '@angular/material'
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { appRoutes, AppComponent  } from "./app.component";
+import { appRoutes, AppComponent } from "./app.component";
 import { CommunicationService } from "./communication.service";
 import { AdminComponent } from "./components/admin/admin.component";
 import { HomepageComponent } from "./components/homepage/homepage.component";
-import { MembreComponent } from "./components/membre/membre.component";
+import { MemberComponent } from "./components/membre/membre.component";
 import { AddMovieModalComponent } from "./components/modals/add-movie-modal/add-movie-modal.component";
 import { AddParticipantModalComponent } from "./components/modals/add-particpant-modal/add-particpant-modal.component";
 import { EditModalComponent } from "./components/modals/edit-modal/edit-modal.component";
@@ -29,7 +29,7 @@ import { ToolbarComponent } from "./components/toolbar/toolbar.component";
     AppComponent,
     AdminComponent,
     HomepageComponent,
-    MembreComponent,
+    MemberComponent,
     ModalsComponent,
     MoviesGridComponent,
     AddMovieModalComponent,
@@ -42,14 +42,18 @@ import { ToolbarComponent } from "./components/toolbar/toolbar.component";
     MatGridListModule,
     MatIconModule,
     MatMenuModule,
-    MatToolbarModule, 
+    MatToolbarModule,
     MatMenuModule,
     RouterModule,
     MatGridListModule,
     MatIconModule,
     MatDialogModule,
     FormsModule,
-    MatButtonModule, MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   imports: [
     CommonModule,
