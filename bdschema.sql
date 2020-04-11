@@ -41,7 +41,7 @@
 -- FK: oscarID REFERENCES Oscar(oscarID)
 -- FK: filmID REFERENCES Film(filmID)
 
--- VisionnementFilm(adresseMembre, numéroFilm, dateVisionnement, duréVisionnement)
+-- VisionnementFilm(adresseMembre, numéroFilm, cout, dateVisionnement, duréVisionnement)
 -- PK: (adresseMembre, numéroFilm)
 -- FK: numéroFilm REFERENCES Film(filmID)
 -- FK: adresseMembre REFERENCES Membre(membreID)
@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS MembreMensuel(
     dateEcheance DATE NOT NULL,
     PRIMARY KEY (membreID),
     FOREIGN KEY (membreID) REFERENCES Membre(membreID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS MembreVue(
@@ -94,6 +95,7 @@ CREATE TABLE IF NOT EXISTS MembreVue(
     nbFilmVue INTEGER NOT NULL,
     PRIMARY KEY (membreID),
     FOREIGN KEY (membreID) REFERENCES Membre(membreID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS CarteCredit(
@@ -173,6 +175,7 @@ CREATE TABLE IF NOT EXISTS GagnantOscars(
 CREATE TABLE IF NOT EXISTS VisionnementFilm(
     membreID INTEGER,
     filmNo INTEGER,
+    cout NUMERIC(4, 2) NOT NULL,
     dateVisionnement DATE,
     dureeVisionnement INTEGER,
     PRIMARY KEY (membreID, filmNo, dateVisionnement),

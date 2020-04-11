@@ -1,29 +1,28 @@
 -- DATA insertion
 SET search_path TO schema_films;
 
-INSERT INTO Membre(nom, courriel, motDePasse, adressePostal, isAdmin)
+INSERT INTO Membre(membreID , nom, courriel, motDePasse, adressePostal, isAdmin)
 VALUES
-('ADMIN', 'admin@admin.com', 'admin123', 'H4A1E1', true),
-('ALEX GIBBS', 'alexander@gmail.com', 'alex1234', 'H4A1E1', false),
-('ISMAEL FABER','ismael@gmail.com', 'ismae345', 'H2L2G2', false),
-('ALEXA REYNOLDS','alexa@gmail.com', 'alexa32',  'H1W1A3', false),
-('LAURA DONOVAN', 'laura@gmail.com', 'laura28', 'H1Y1X6', false),
-('XAVI GIBBS', 'xavi@outlook.com', 'xavi243',  'H2A3M4', false),
-('LEO CHARLSON', 'leo@gmail.com', 'leomama23', 'H4L2H4', false);
+(DEFAULT, 'ADMIN', 'admin@admin.com', 'admin123', 'H4A1E1', true),
+(DEFAULT, 'ALEX GIBBS', 'alexander@gmail.com', 'alex1234', 'H4A1E1', false),
+(DEFAULT, 'ISMAEL FABER','ismael@gmail.com', 'ismae345', 'H2L2G2', false),
+(DEFAULT, 'ALEXA REYNOLDS','alexa@gmail.com', 'alexa32',  'H1W1A3', false),
+(DEFAULT, 'LAURA DONOVAN', 'laura@gmail.com', 'laura28', 'H1Y1X6', false),
+(DEFAULT, 'XAVI GIBBS', 'xavi@outlook.com', 'xavi243',  'H2A3M4', false),
+(DEFAULT, 'LEO CHARLSON', 'leo@gmail.com', 'leomama23', 'H4L2H4', false);
 
-INSERT INTO MembreMensuel(membreID, prixAbonnement,dateDebut, dateEcheance)
+INSERT INTO MembreMensuel(membreID, prixAbonnement, dateDebut, dateEcheance)
 VALUES
-(4, 15, DATE'2019-04-21', DATE'2020-03-21'),
-(5, 15, DATE'2019-04-21', DATE'2020-03-21'),
-(6, 15, DATE'2019-04-21', DATE'2020-03-21'),
-(7, 15 ,DATE'2019-04-21', DATE'2020-03-21');
+(4, 15.00, DATE'2019-04-21', DATE'2020-03-21'),
+(5, 15.00, DATE'2019-04-21', DATE'2020-03-21'),
+(6, 15.00, DATE'2019-04-21', DATE'2020-03-21');
 
 INSERT INTO MembreVue (membreID, nbFilmVue)
 VALUES
 (2, 4),
 (3, 5);
 
-INSERT INTO CarteCredit(carteID,membreID, numero, titulaire, dateExpiration, CCV)
+INSERT INTO CarteCredit(membreID, numero, titulaire, dateExpiration, CCV)
 VALUES
 (2,'4539711103420778', 'ALEX GIBBS', DATE'2020-04-04', 100 ),
 (3,'4024007188923493', 'ISMAEL FABER', DATE'2020-04-04', 203),
@@ -42,7 +41,7 @@ VALUES
 ('JOKER', 'drame', DATE'2019-01-01', 143),
 ('Parasite', 'romance', DATE'2019-01-01', 150);
 
-INSERT INTO DVD(numeroInstance, filmNo)
+INSERT INTO DVD(numeroInstance, filmID)
 VALUES
 (1,1),
 (2,2),
@@ -93,22 +92,22 @@ VALUES
 ( 58, 7,'costume design'),
 ( 59, 7,'Meilleur acteur' );
 
-INSERT INTO VisionnementFilm(membreID, filmNo, dateVisionnement, dureeVisionnement)
+INSERT INTO VisionnementFilm(membreID, filmNo, cout, dateVisionnement, dureeVisionnement)
 VALUES
-(2, 4,  DATE'2017-10-01', 132 ),
-(2, 4,  DATE'2018-04-01', 132 ),
-(3, 4,  DATE'2018-11-01', 132 ),
-(3, 5,  DATE'2018-10-01', 153 ),
-(3 6, DATE'2019-02-01', 143 ),
-(4,7, DATE'2019-03-01', 70 );
+(2, 4, 05.00, DATE'2017-10-01', 132 ),
+(4, 4, 00.00, DATE'2018-04-01', 132 ),
+(5, 4, 00.00, DATE'2018-11-01', 132 ),
+(6, 5, 00.00, DATE'2018-10-01', 153 ),
+(6, 6, 00.00, DATE'2019-02-01', 143 ),
+(7, 7, 00.00, DATE'2019-03-01', 70 );
 
 
-INSERT INTO AchatDVD(membreID, DVDNo, cout, distance, dateEnvoi)
+INSERT INTO AchatDVD(membreID, dvdID, cout, distance, dateEnvoi)
 VALUES
-(2,604, 25, 100,  DATE'2019-01-01'),
-(2,602, 25, 100,  DATE'2019-02-01'),
-(2,601, 25, 100,  DATE'2019-03-01'),
-(3, 602, 20, 80, DATE'2018-01-01'),
-(3, 603, 20, 80, DATE'2018-01-01'),
-(3,604, 30, 120, DATE'2019-01-01'),
-(4,605, 15, 60,  DATE'2019-01-01');
+(2,1, 25, 100,  DATE'2019-01-01'),
+(2,1, 25, 100,  DATE'2019-02-01'),
+(2,1, 25, 100,  DATE'2019-03-01'),
+(3,2, 20, 80 ,  DATE'2018-01-01'),
+(3,3, 20, 80 ,  DATE'2018-01-01'),
+(3,4, 30, 120,  DATE'2019-01-01'),
+(4,5, 15, 60 ,  DATE'2019-01-01');
