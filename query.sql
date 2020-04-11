@@ -61,15 +61,29 @@ HAVING SUM(AchatDVD.cout) > (
 -- 6. Ordonnez et retournez les films en termes de quantité totale vendue (DVD) et en nombre de
 -- visionnements.
 
-
-
-
+SELECT Film.titre, COUNT(Film.filmID) AS total_DVD_Visionnement
+FROM Film, AchatDVD, DVD
+WHERE Film.filmID = DVD.filmID AND DVD.filmID = AchatDVD.dvdID
+GROUP BY Film.titre
+UNION ALL
+SELECT Film.titre, COUNT(Film.filmID) AS total_DVD_Visionnement
+FROM Film, VisionnementFilm
+WHERE Film.filmID = VisionnementFilm.filmID
+GROUP BY Film.titre
+ORDER BY total_DVD_Visionnement;
 
 -- 7. Trouvez le titre et le prix des films qui n’ont jamais été commandés sous forme de DVD mais
 -- qui ont été visionnés plus de 10 fois.
--- Q/R forum :Requête 7: En fait, même le DVD n'a pas de prix, selon l'étude de cas. Donc oui, pour répondre à la requête 7, il semble raisonnable d'ajouter un attribut prix au film.
+-- Q/R forum :Requête 7: En fait, même le DVD n'a pas de prix, selon l'étude de cas. 
+-- Donc oui, pour répondre à la requête 7, il semble raisonnable d'ajouter un attribut prix au film.
 
-SELECT DISTINCT Film.title, Film
+SELECT DISTINCT Film.title, VisionnementFilm.cout 
+FROM Film, VisionnementFilm, 
+WHERE Film.filmID = VisionnementFilm.filmID AND Film.filmID NOT IN (
+    SELECT DVD.filmID
+    FROM AchatDVD , DVD
+    WHERE DVD.filmID = AchatDVD.dvdID
+)
 
 
 
