@@ -11,6 +11,7 @@ export class MemberService {
   constructor() {
   }
   setActiveMember(newMember: Membre | null) {
+    console.log('setActiveMember');
     this.activeMember.next(newMember);
   }
 }

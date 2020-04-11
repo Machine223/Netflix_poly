@@ -25,7 +25,7 @@ export class MembersGridComponent implements OnInit {
 
   }
 
-  public colonnes: string[] = ['ID', 'Nom', 'Courriel', 'Ville', 'Administrateur'];
+  public colonnes: string[] = ['ID', 'Nom', 'Courriel', 'Code Postal', 'Administrateur'];
   public getMembres(): void {
     this.communicationService.getMembres().subscribe((membres: Membre[]) => {
         console.log(membres);

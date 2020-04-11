@@ -38,6 +38,7 @@ export class HomepageComponent implements OnInit {
                 membres[0].membreID, membres[0].nom, membres[0].courriel,
                 membres[0].motDePasse, membres[0].adressePostal, membres[0].isAdmin);
               this.memberService.setActiveMember(this.activeMember);
+              console.log('is an admin');
               this.router.navigateByUrl("/admin");
             } else {
               this.activeMember = new Membre(
