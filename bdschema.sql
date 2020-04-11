@@ -174,13 +174,13 @@ CREATE TABLE IF NOT EXISTS GagnantOscars(
 
 CREATE TABLE IF NOT EXISTS VisionnementFilm(
     membreID INTEGER,
-    filmNo INTEGER,
+    filmID INTEGER,
     cout NUMERIC(4, 2) NOT NULL,
     dateVisionnement DATE,
     dureeVisionnement INTEGER,
-    PRIMARY KEY (membreID, filmNo, dateVisionnement),
+    PRIMARY KEY (membreID, filmID, dateVisionnement),
     FOREIGN KEY (membreID) REFERENCES Membre(membreID),
-    FOREIGN KEY (filmNo) REFERENCES Film(filmID)
+    FOREIGN KEY (filmID) REFERENCES Film(filmID)
 );
 
 CREATE TABLE IF NOT EXISTS AchatDVD(

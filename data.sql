@@ -92,7 +92,7 @@ VALUES
 ( 58, 7,'costume design'),
 ( 59, 7,'Meilleur acteur' );
 
-INSERT INTO VisionnementFilm(membreID, filmNo, cout, dateVisionnement, dureeVisionnement)
+INSERT INTO VisionnementFilm(membreID, filmID, cout, dateVisionnement, dureeVisionnement)
 VALUES
 (2, 4, 05.00, DATE'2017-10-01', 132 ),
 (4, 4, 00.00, DATE'2018-04-01', 132 ),
