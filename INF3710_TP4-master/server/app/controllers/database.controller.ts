@@ -36,7 +36,7 @@ export class DatabaseController {
         router.get("/hotel",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
-                    this.databaseService.getHotels().then((result: pg.QueryResult) => {
+                    this.databaseService.getMovies().then((result: pg.QueryResult) => {
                     const hotels: Hotel[] = result.rows.map((hot: any) => (
                         {
                         hotelno: hot.hotelno,
@@ -51,7 +51,7 @@ export class DatabaseController {
 
         router.get("/hotel/hotelNo",
                    (req: Request, res: Response, next: NextFunction) => {
-                      this.databaseService.getHotelNo().then((result: pg.QueryResult) => {
+                      this.databaseService.getMembres().then((result: pg.QueryResult) => {
                         const hotelPKs: string[] = result.rows.map((row: any) => row.hotelno);
                         res.json(hotelPKs);
                       }).catch((e: Error) => {
@@ -71,7 +71,6 @@ export class DatabaseController {
                         res.json(-1);
                     });
         });
-		
 		router.delete("/hotel/insert", /*TODO*/);
 
         router.get("/rooms",

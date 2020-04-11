@@ -38,7 +38,7 @@ let DatabaseController = class DatabaseController {
         });
         router.get("/hotel", (req, res, next) => {
             // Send the request to the service and send the response
-            this.databaseService.getHotels().then((result) => {
+            this.databaseService.getMovies().then((result) => {
                 const hotels = result.rows.map((hot) => ({
                     hotelno: hot.hotelno,
                     hotelname: hot.hotelname,
@@ -50,7 +50,7 @@ let DatabaseController = class DatabaseController {
             });
         });
         router.get("/hotel/hotelNo", (req, res, next) => {
-            this.databaseService.getHotelNo().then((result) => {
+            this.databaseService.getMembres().then((result) => {
                 const hotelPKs = result.rows.map((row) => row.hotelno);
                 res.json(hotelPKs);
             }).catch((e) => {

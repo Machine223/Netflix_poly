@@ -27,12 +27,12 @@ export class AppComponent implements OnInit {
     public ngOnInit(): void {
         this.communicationService.listen().subscribe((m:any) => {
             console.log(m);
-            this.getHotels();
+            this.getMovies();
         });
     }
 
-    public getHotels(): void {
-        this.communicationService.getHotels().subscribe((hotels: Hotel[]) => {
+    public getMovies(): void {
+        this.communicationService.getMovies().subscribe((hotels: Hotel[]) => {
             this.hotels = hotels;
         });
     }
