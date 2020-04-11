@@ -49,7 +49,7 @@ let DatabaseService = class DatabaseService {
         return this.pool.query('SELECT * FROM TP4.Membre;');
     }
     login(email, password) {
-        return this.pool.query(`SELECT * FROM TP4.Membre m WHERE m.courriel='${email}' AND m.mot_de_passe='${password}';`);
+        return this.pool.query(`SELECT * FROM TP4.Membre m WHERE m.courriel='${email}' AND m.motDePasse='${password}';`);
     }
 };
 DatabaseService = __decorate([

@@ -36,70 +36,109 @@ let DatabaseController = class DatabaseController {
                 console.error(e.stack);
             });
         });
-        router.get("/hotel", (req, res, next) => {
+        router.get("/films", (req, res, next) => {
             // Send the request to the service and send the response
             this.databaseService.getMovies().then((result) => {
-                const hotels = result.rows.map((hot) => ({
-                    hotelno: hot.hotelno,
-                    hotelname: hot.hotelname,
-                    city: hot.city
+                const movies = result.rows.map((mov) => ({
+                    filmID: mov.filmID,
+                    titre: mov.titre,
+                    genre: mov.genre,
+                    dateProduction: mov.dateProduction,
+                    dureeTotalMinutes: mov.dureeTotalMinutes
                 }));
-                res.json(hotels);
+                res.json(movies);
             }).catch((e) => {
                 console.error(e.stack);
             });
         });
-        router.get("/hotel/hotelNo", (req, res, next) => {
+        router.get("/membres", (req, res, next) => {
+            // Send the request to the service and send the response
             this.databaseService.getMembres().then((result) => {
-                const hotelPKs = result.rows.map((row) => row.hotelno);
-                res.json(hotelPKs);
-            }).catch((e) => {
-                console.error(e.stack);
-            });
-        });
-        router.post("/hotel/insert", (req, res, next) => {
-            const hotelNo = req.body.hotelNo;
-            const hotelName = req.body.hotelName;
-            const city = req.body.city;
-            this.databaseService.createHotel(hotelNo, hotelName, city).then((result) => {
-                res.json(result.rowCount);
-            }).catch((e) => {
-                console.error(e.stack);
-                res.json(-1);
-            });
-        });
-        router.delete("/hotel/insert");
-        router.get("/rooms", (req, res, next) => {
-            this.databaseService.getRoomFromHotelParams(req.query)
-                .then((result) => {
-                const rooms = result.rows.map((room) => ({
-                    hotelno: room.hotelno,
-                    roomno: room.roomno,
-                    typeroom: room.typeroom,
-                    price: parseFloat(room.price.toString())
+                const membres = result.rows.map((mem) => ({
+                    membreID: mem.membreID,
+                    nom: mem.nom,
+                    courriel: mem.courriel,
+                    motDePasse: mem.motDePasse,
+                    adressePostal: mem.adressePostal,
+                    isAdmin: mem.isAdmin
                 }));
-                res.json(rooms);
+                res.json(membres);
             }).catch((e) => {
                 console.error(e.stack);
             });
         });
-        router.post("/rooms/insert", (req, res, next) => {
-            const room = {
-                hotelno: req.body.hotelno,
-                roomno: req.body.roomno,
-                typeroom: req.body.typeroom,
-                price: parseFloat(req.body.price)
-            };
-            console.log(room);
-            this.databaseService.createRoom(room)
-                .then((result) => {
-                res.json(result.rowCount);
-            })
-                .catch((e) => {
+        router.get("/login", (req, res, next) => {
+            // Send the request to the service and send the response
+            this.databaseService.login(req.query.email, req.query.password).then((result) => {
+                const membres = result.rows.map((mem) => ({
+                    membreID: mem.membreID,
+                    nom: mem.nom,
+                    courriel: mem.courriel,
+                    motDePasse: mem.motDePasse,
+                    adressePostal: mem.adressePostal,
+                    isAdmin: mem.isAdmin
+                }));
+                console.log(membres);
+                res.json(membres);
+            }).catch((e) => {
                 console.error(e.stack);
-                res.json(-1);
             });
         });
+        // router.get("/hotel/hotelNo",
+        //            (req: Request, res: Response, next: NextFunction) => {
+        //               this.databaseService.getMembres().then((result: pg.QueryResult) => {
+        //                 const hotelPKs: string[] = result.rows.map((row: any) => row.hotelno);
+        //                 res.json(hotelPKs);
+        //               }).catch((e: Error) => {
+        //                 console.error(e.stack);
+        //             });
+        //           });
+        // router.post("/hotel/insert",
+        //             (req: Request, res: Response, next: NextFunction) => {
+        //                 const hotelNo: string = req.body.hotelNo;
+        //                 const hotelName: string = req.body.hotelName;
+        //                 const city: string = req.body.city;
+        //                 this.databaseService.createHotel(hotelNo, hotelName, city).then((result: pg.QueryResult) => {
+        //                 res.json(result.rowCount);
+        //             }).catch((e: Error) => {
+        //                 console.error(e.stack);
+        //                 res.json(-1);
+        //             });
+        // });
+        // router.delete("/hotel/insert", /*TODO*/);
+        // router.get("/rooms",
+        //            (req: Request, res: Response, next: NextFunction) => {
+        //             this.databaseService.getRoomFromHotelParams(req.query)
+        //             .then((result: pg.QueryResult) => {
+        //                 const rooms: Room[] = result.rows.map((room: Room) => (
+        //                     {
+        //                     hotelno: room.hotelno,
+        //                     roomno: room.roomno,
+        //                     typeroom: room.typeroom,
+        //                     price: parseFloat(room.price.toString())
+        //                 }));
+        //                 res.json(rooms);
+        //             }).catch((e: Error) => {
+        //                 console.error(e.stack);
+        //             });
+        //     });
+        // router.post("/rooms/insert",
+        //             (req: Request, res: Response, next: NextFunction) => {
+        //             const room: Room = {
+        //                 hotelno: req.body.hotelno,
+        //                 roomno: req.body.roomno,
+        //                 typeroom: req.body.typeroom,
+        //                 price: parseFloat(req.body.price)};
+        //             console.log(room);
+        //             this.databaseService.createRoom(room)
+        //             .then((result: pg.QueryResult) => {
+        //                 res.json(result.rowCount);
+        //             })
+        //             .catch((e: Error) => {
+        //                 console.error(e.stack);
+        //                 res.json(-1);
+        //             });
+        // });
         router.get("/tables/:tableName", (req, res, next) => {
             this.databaseService.getAllFromTable(req.params.tableName)
                 .then((result) => {

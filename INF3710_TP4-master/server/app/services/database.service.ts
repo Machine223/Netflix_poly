@@ -55,7 +55,7 @@ export class DatabaseService {
     }
 
     public login(email: String, password: String): Promise<pg.QueryResult> {
-        return this.pool.query(`SELECT * FROM TP4.Membre m WHERE m.courriel='${email}' AND m.mot_de_passe='${password}';`);
+        return this.pool.query(`SELECT * FROM TP4.Membre m WHERE m.courriel='${email}' AND m.motDePasse='${password}';`);
 
     }
 
