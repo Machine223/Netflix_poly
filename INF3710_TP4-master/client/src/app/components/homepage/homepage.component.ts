@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { Router} from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material";
+import { Router} from "@angular/router";
+import { CommunicationService } from "src/app/communication.service";
 import { Membre } from "../../Membre";
-import { MemberService } from '../Services/member-service.service';
-import { ErrorModalComponent } from '../modals/error-modal/error-modal.component';
-import { CommunicationService } from '../services/communication-service/communication.service'
+import { MemberService } from "../Services/member-service.service";
+import { ErrorModalComponent } from "../modals/error-modal/error-modal.component";
 
 @Component({
   selector: "app-homepage",
@@ -16,7 +16,10 @@ export class HomepageComponent implements OnInit {
   public password: string = "";
   public loginEmailAddress: string = "";
 
-  public constructor(public router: Router, public errorDialog: MatDialog/*, public signUpDialog: MatDialog*/, public communicationService: CommunicationService, private memberService: MemberService) {}
+  public constructor(public router: Router,
+                     public errorDialog: MatDialog/*, public signUpDialog: MatDialog*/, 
+                     public communicationService: CommunicationService,
+                     private memberService: MemberService) {}
 
   ngOnInit() {}
 
