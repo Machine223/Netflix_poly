@@ -131,9 +131,5 @@ CREATE TABLE IF NOT EXISTS AchatDVD(
     FOREIGN KEY (dvdID) REFERENCES DVD(dvdID)
 );
 
-
-
-
-ALTER TABLE HOTELDB.Guest ALTER gender DROP DEFAULT;
 `;
 //# sourceMappingURL=createSchema.js.map
