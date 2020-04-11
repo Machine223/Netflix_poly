@@ -1,0 +1,37 @@
+mat-dialog-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#title {
+    text-align: center;
+}
+
+.tile-content {
+    position: absolute;
+    left: 15px;
+    bottom: 0px;
+}
+
+.tile-title {
+    position: absolute;
+    left: 15px;
+    bottom: 7px;
+}
+
+mat-form-field {
+    position: absolute;
+    offset: 0px;
+    left: 15px;
+    right: 15px;
+}
+
+#main {
+    width: 40vw !important;
+}
+
+#confirm {
+    float: right;
+    margin-top: 10px;
+}

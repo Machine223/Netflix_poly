@@ -1,0 +1,61 @@
+<p>add-particpant-modal works!</p>
+<div id="main">
+    <h1 mat-dialog-title id="title">Ajouter un participant</h1>
+    <div mat-dialog-content>
+        <mat-grid-list cols = "2" rowHeight="30px" class="content">
+            <mat-grid-tile><span class="tile-title">Prénom</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <input matInput value="newFirstName" [(ngModel)]="newFirstName"/>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile><span class="tile-title">Nom</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <input matInput value="newLastName" [(ngModel)]="newLastName"/>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile><span class="tile-title">Rôle</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <mat-select [(ngModel)]="newRole">
+                        <mat-option *ngFor="let role of roles" [value]="role">
+                          {{role}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile><span class="tile-title">Sexe</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <mat-select [(ngModel)]="newSex">
+                        <mat-option *ngFor="let sex of sexes" [value]="sex">
+                          {{sex}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile><span class="tile-title">Âge</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <input matInput value="newAge" [(ngModel)]="newAge"/>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile><span class="tile-title">Nationalité</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <input matInput value="newNationality" [(ngModel)]="newNationality"/>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile><span class="tile-title">Salaire</span></mat-grid-tile>
+            <mat-grid-tile class="tile-content">
+                <mat-form-field>
+                    <input matInput value="newSalary" [(ngModel)]="newSalary"/>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div id="confirm">
+        <button mat-button (click)="this.confirmAdd()">Confirmer</button>
+    </div>
+</div>

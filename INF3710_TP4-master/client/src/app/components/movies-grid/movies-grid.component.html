@@ -1,0 +1,55 @@
+<p>movies-grid works!</p>
+<div id='main'>
+    <div id="bd-button">
+      <button mat-raised-button id="importer-films" (click)="this.getMovies()" class='left-item' mat-button >Importer les films</button>
+    </div>
+    <div id='grid'>
+          <mat-grid-list cols = "21" rowHeight = "30px">
+              <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile' *ngFor="let classification of classifications">
+                  <div class='tile-content'>
+                      {{classification.title}}
+                      <mat-icon *ngIf="(classification.sortType === this.SortType.top)" (click)="this.sort(classification)">keyboard_arrow_down</mat-icon>
+                      <mat-icon *ngIf="(classification.sortType !== this.SortType.top)" (click)="this.sort(classification)">keyboard_arrow_up</mat-icon>
+                  </div>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan] = "1" [rowspan] = "1" class='tile'>
+                  <div class='tile-content'></div>
+              </mat-grid-tile>
+              <div *ngFor="let movie of movies">
+                  <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                      <div class='tile-content'>
+                          {{movie.titre}}
+                      </div>
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                      <div class='tile-content'>
+                          {{movie.genre}}
+                      </div>
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                      <div class='tile-content'>
+                          {{movie.duree_totale_min}}
+                      </div>
+                  </mat-grid-tile>
+                  <!-- <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                      <div class='tile-content'>
+                          {{movie.director}}
+                      </div>
+                  </mat-grid-tile> -->
+                  <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                      <div class='tile-content'>
+                          {{movie.annee_prod}}
+                      </div>
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan] = "1" [rowspan] = "1" class='tile'>
+                      <mat-icon [matMenuTriggerFor]="belowMenu">settings</mat-icon>
+                  </mat-grid-tile>
+                  <mat-menu #belowMenu="matMenu" yPosition="below">
+                      <button mat-menu-item (click)="this.show(movie)">Voir le film</button>
+                      <button mat-menu-item *ngIf="activeMember.isAdmin" (click)="this.edit(movie)">Modifier le film</button>
+                      <button mat-menu-item *ngIf="activeMember.isAdmin" (click)="this.delete(movie)">Supprimer le film</button>
+                  </mat-menu>
+              </div>
+           </mat-grid-list>
+      </div>
+  </div>
