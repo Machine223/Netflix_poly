@@ -105,7 +105,21 @@ HAVING COUNT(VisionnementFilm.filmID)>10;
 -- Q/R forum : Requête 8: La requête indique clairement la date de naissance. Donc ce que vous devez vous demander, c'est si c'est une bonne idée de stocker l'âge d'un acteur, et sinon, quelle serait votre solution pour 
 -- faire une bonne modélisation ET répondre à la requête.
 
-
+-- TODO: Faire la date de naissance a place de l'age
+SELECT Personne.nom, Personne.age,
+FROM Personne NATURAL JOIN
+    (
+    SELECT Film.filmID
+    FROM Film NATURAL JOIN VisionnementFilm
+    GROUP BY Film.filmID
+    HAVING COUNT(Film.filmID) > (
+        SELECT AVG(nombrevisionnements) FROM (
+            SELECT COUNT(Film.filmID) as nombreVisionnements
+            FROM Film NATURAL JOIN VisionnementFilm
+            GROUP BY Film.filmID
+            ) as FilmCount
+        )
+    ) as FilmsPopulaires
 
 
 
