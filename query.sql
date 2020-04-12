@@ -164,7 +164,38 @@ WHERE nominations = (select max(nominations) from
 -- 10. Trouvez le nom des réalisateurs qui ont été le plus souvent nominés aux oscars mais qui
 -- n’ont jamais gagné d’oscar
 
+select distinct(personne.nom) from personne natural join participation where
+personne.personneid in 
+(
+select personneid from (
 
+select personneid, count(filmid) as nominations from
+	(
+		select * from participation natural join 
+			(
+				select distinct(filmid) from nominationoscars
+			) as filmsNomines
+	) as lol
+	group by personneid
+	
+) as nominationCount
+WHERE nominations = (select max(nominations) from
+(
+	select personneid, count(filmid) as nominations from
+	(
+		select * from participation natural join 
+			(
+				select distinct(filmid) from nominationoscars
+			) as filmsNomines
+	) as lol
+	group by personneid
+) as nominationCount
+	where personneid IN (
+	select personneid from participation 
+	where typerole = 'réalisateur'
+)
+) 
+	) and typerole = 'réalisateur'
 
 
 
