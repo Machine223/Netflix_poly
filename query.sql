@@ -190,6 +190,28 @@ select max(countGagne) from (
 -- 12. Quelles paires de femmes québécoises ont le plus souvent travaillé ensemble dans différents
 -- films ?
 
+select nbContacts, p1, p2, pers1.nom as nom1, pers2.nom as nom2 from(
+select COUNT(p1.filmid) as nbContacts, p1.personneid as p1, p2.personneid as p2 from participation as p1 join participation as p2 on p2.filmid = p1.filmid
+where p1.personneid != p2.personneid
+group by(p1.personneid, p2.personneid)
+) as rencontres
+join personne as pers1 on rencontres.p1 = pers1.personneid 
+join personne as pers2 on rencontres.p2 = pers2.personneid
+where pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and pers2.nationalite = 'Quebec'
+and nbContacts =
+(
+select max (nbcontacts) from 
+(
+select nbContacts, p1, p2, pers1.nom as nom1, pers2.nom as nom2 from(
+select COUNT(p1.filmid) as nbContacts, p1.personneid as p1, p2.personneid as p2 from participation as p1 join participation as p2 on p2.filmid = p1.filmid
+where p1.personneid != p2.personneid
+group by(p1.personneid, p2.personneid)
+) as rencontres
+join personne as pers1 on rencontres.p1 = pers1.personneid 
+join personne as pers2 on rencontres.p2 = pers2.personneid
+where pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and pers2.nationalite = 'Quebec'
+) as maxContacts
+)
 
 
 
