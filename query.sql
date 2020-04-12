@@ -122,11 +122,45 @@ FROM Personne NATURAL JOIN
     ) as FilmsPopulaires
 
 
-
-
 -- 9. Trouvez le nom du ou des réalisateurs qui ont réalisé les films qui ont le plus grand nombre
 -- de nominations aux oscars. Par exemple, Woody Allen et Steven Spielberg ont réalisé 10
 -- films qui ont été nominés aux oscars.
+
+
+select distinct(personne.nom) from personne natural join participation where
+personne.personneid in 
+(
+select personneid from (
+
+select personneid, count(filmid) as nominations from
+	(
+		select * from participation natural join 
+			(
+				select distinct(filmid) from nominationoscars
+			) as filmsNomines
+	) as lol
+	group by personneid
+	
+) as nominationCount
+WHERE nominations = (select max(nominations) from
+(
+	select personneid, count(filmid) as nominations from
+	(
+		select * from participation natural join 
+			(
+				select distinct(filmid) from nominationoscars
+			) as filmsNomines
+	) as lol
+	group by personneid
+) as nominationCount
+	where personneid IN (
+	select personneid from participation 
+	where typerole = 'producteur'
+)
+) 
+	) and typerole = 'producteur'
+
+
 
 
 
