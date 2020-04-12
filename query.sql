@@ -161,11 +161,6 @@ WHERE nominations = (select max(nominations) from
 	) and typerole = 'producteur'
 
 
-
-
-
-
-
 -- 10. Trouvez le nom des réalisateurs qui ont été le plus souvent nominés aux oscars mais qui
 -- n’ont jamais gagné d’oscar
 
@@ -176,8 +171,18 @@ WHERE nominations = (select max(nominations) from
 
 -- 11. Trouvez les films (titre, année) qui ont gagné le plus d’oscars. Listez également leur
 -- réalisateurs et leurs acteurs
-
-
+select titre, dateProduction from film natural join 
+(
+	select filmid, count(categorie) from GagnantOscars
+	group by filmid
+) as nmbGagne
+where nmbGagne.count = 
+(
+select max(countGagne) from (
+	select count(categorie) as countGagne from GagnantOscars
+	group by filmid
+) as subquery
+)
 
 
 
