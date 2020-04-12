@@ -195,7 +195,13 @@ select max(countGagne) from (
 
 
 
+
 -- 13. Comment a évolué la carrière de Woody Allen ? (On veut connaitre tous ses rôles dans un
 -- film (réalisateur, acteur, etc.) du plus ancien au plus récent)
+
+select typerole from personne natural join participation natural join film
+where nom = 'Woody Allen'
+order by(dateproduction)
+
 
 
