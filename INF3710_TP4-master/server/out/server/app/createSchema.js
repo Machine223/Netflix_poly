@@ -6,6 +6,13 @@ SET search_path = schema_films;
 DROP SCHEMA IF EXISTS schema_films CASCADE;
 CREATE SCHEMA schema_films;
 
+CREATE DOMAIN zip_code varchar(6) 
+    CONSTRAINT valid_zipcode 
+    CHECK (VALUE ~ '[A-Z0-9-]+');
+
+CREATE DOMAIN sexType AS CHAR
+	CHECK (VALUE IN ('M', 'F'));
+
 CREATE TABLE IF NOT EXISTS Membre(
     membreID SERIAl,
     nom VARCHAR (20),
