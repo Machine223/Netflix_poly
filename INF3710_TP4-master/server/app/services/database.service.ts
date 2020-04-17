@@ -12,7 +12,7 @@ export class DatabaseService {
         user: "sysadmin",
         database: "TP4",
         password: "1234",
-        port: 5432,
+        port: 15432,
         host: "127.0.0.1",
         keepAlive : true
     };
@@ -27,7 +27,6 @@ export class DatabaseService {
         METHODES DE DEBUG
     */
     public createSchema(): Promise<pg.QueryResult> {
-
         return this.pool.query(schema);
     }
 
@@ -43,8 +42,7 @@ export class DatabaseService {
 
     // NETFLIX
     public getMovies(): Promise<pg.QueryResult> {
-
-        return this.pool.query('SELECT * FROM TP4.Film;');
+        return this.pool.query('set search_path to schema_films; SELECT * FROM film;');
     }
 
     public getMembres(): Promise<pg.QueryResult> {

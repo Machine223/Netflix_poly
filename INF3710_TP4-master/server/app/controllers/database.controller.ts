@@ -33,11 +33,11 @@ export class DatabaseController {
                     });
                 });
 
-        router.get("/films",
+        router.get("/movies",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
                     this.databaseService.getMovies().then((result: pg.QueryResult) => {
-                    const movies: Film[] = result.rows.map((mov: any) => (
+                    const movies: Film[] = result[1]['rows'].map((mov: any) => (
                         {
                         filmID: mov.filmID,
                         titre: mov.titre,

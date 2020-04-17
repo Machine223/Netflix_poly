@@ -21,7 +21,7 @@ let DatabaseService = class DatabaseService {
             user: "sysadmin",
             database: "TP4",
             password: "1234",
-            port: 5432,
+            port: 15432,
             host: "127.0.0.1",
             keepAlive: true
         };
@@ -43,7 +43,7 @@ let DatabaseService = class DatabaseService {
     }
     // NETFLIX
     getMovies() {
-        return this.pool.query('SELECT * FROM TP4.Film;');
+        return this.pool.query('set search_path to schema_films; SELECT * FROM film;');
     }
     getMembres() {
         return this.pool.query('SELECT * FROM TP4.Membre;');

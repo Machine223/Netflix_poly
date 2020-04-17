@@ -57,6 +57,7 @@ export class MoviesGridComponent implements OnInit {
   }
 
   public getMovies(): void {
+    console.log('getMovies -------');
     this.communicationService.getMovies().subscribe((movies: Film[]) => {
         console.log(movies);
         this.movies = movies;
