@@ -52,7 +52,7 @@
 -- FK: adresseMembre REFERENCES Membre(membreID)
 
 
--- CREATE DATABASE filmsbd;
+-- CREATE DATABASE TP4;
 
 CREATE SCHEMA schema_films;
 
