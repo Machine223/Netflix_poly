@@ -259,7 +259,7 @@ order by(dateproduction)
 -- l'utilisateur (selon le titre).
 
 
-FilmSpecifier = π titre, genre, dateProduction, dureeTotalMinutes (σ titre = 'titleName'(Film))
+FilmSpecifier = π titre, genre, dateProduction, dureeTotalMinutes (σ Film.titre = 'titleName'(Film))
 
 -- 2. Pour chaque genre de film, listez tous les titres de films ainsi que la dernière date à laquelle
 -- un film a été acheté(DVD) ou visionné
