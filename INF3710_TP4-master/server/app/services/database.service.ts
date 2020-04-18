@@ -1,21 +1,21 @@
-import { injectable } from "inversify";
-import * as pg from "pg";
-import "reflect-metadata";
-import {schema} from "../createSchema";
-import {data} from "../populateDB";
-import { Membre } from "../../../common/tables/Membre";
+import { injectable } from 'inversify';
+import * as pg from 'pg';
+import 'reflect-metadata';
+import { schema } from '../createSchema';
+import { data } from '../populateDB';
+import { Membre } from '../../../common/tables/Membre';
+import { Film } from '../../../common/tables/Film';
 
 @injectable()
 export class DatabaseService {
-
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
-        user: "sysadmin",
-        database: "TP4",
-        password: "1234",
-        port: 5432,
-        host: "127.0.0.1",
-        keepAlive : true
+        user: 'sysadmin',
+        database: 'TP4',
+        password: '1234',
+        port: 15432,
+        host: '127.0.0.1',
+        keepAlive: true,
     };
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
@@ -32,12 +32,10 @@ export class DatabaseService {
     }
 
     public populateDb(): Promise<pg.QueryResult> {
-
         return this.pool.query(data);
     }
 
     public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-
         return this.pool.query(`SELECT * FROM TP4.${tableName};`);
     }
 
@@ -47,17 +45,38 @@ export class DatabaseService {
     }
 
     public getMembres(): Promise<pg.QueryResult> {
-
         return this.pool.query('SELECT * FROM TP4.Membre;');
-
     }
 
+    public deleteMovie(id: string): Promise<pg.QueryResult> {
+        return this.pool.query(`set search_path to schema_films; DELETE FROM film WHERE filmid='${id}';`);
+    }
+
+    public insertMovie(film: Film): Promise<pg.QueryResult> {
+        const dt = new Date(film.dateProduction);
+        const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
+        // return this.pool.query('set search_path to schema_films; INSERT INT');
+        return this.pool.query(
+            `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES('${film.titre}', '${film.genre}', DATE'${lel}', ${film.dureeTotalMinutes});`,
+            // `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES(${film.titre}, ${film.genre}, ${film.dateProduction}, ${film.dureeTotalMinutes});`,
+        );
+    }
+
+    public modifyMovie(film: Film): Promise<pg.QueryResult> {
+        const dt = new Date(film.dateProduction);
+        const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
+        // return this.pool.query('set search_path to schema_films; INSERT INT');
+        return this.pool.query(
+            `set search_path to schema_films; UPDATE Film SET titre='${film.titre}', genre='${film.genre}', dateProduction=DATE'${lel}', dureeTotalMinutes=${film.dureeTotalMinutes} WHERE Film.filmid = ${film.filmID};`,
+            // `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES(${film.titre}, ${film.genre}, ${film.dateProduction}, ${film.dureeTotalMinutes});`,
+        );
+    }
     public async login(email: String, password: String): Promise<pg.QueryResult> {
         let query = this.pool.query(
             `SET search_path TO schema_films;
-            SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`
+            SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`,
         );
-        const temp = (await query);
+        const temp = await query;
         return temp[1];
     }
 
@@ -66,9 +85,8 @@ export class DatabaseService {
             `SET search_path TO schema_films;
             INSERT INTO Membre(membreID, nom, courriel, motDePasse, adressePostal, isAdmin)
             VALUES(DEFAULT, '${member.nom}', '${member.courriel}', '${member.motDePasse}',
-            '${member.adressePostal}', 'false');`
+            '${member.adressePostal}', 'false');`,
         );
-
     }
     // public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
     //     const values: string[] = [
@@ -80,10 +98,10 @@ export class DatabaseService {
 
     //     return this.pool.query(queryText, values);
     // }
-	
-	// public deleteHotel(/*Todo*/): void /*TODO*/  {
-	// 	/*TODO*/
-	// }
+
+    // public deleteHotel(/*Todo*/): void /*TODO*/  {
+    // 	/*TODO*/
+    // }
 
     // // ROOM
     // public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
@@ -130,17 +148,12 @@ export class DatabaseService {
 
     // }
 
-    public createRoom(room: Room): Promise<pg.QueryResult> {
-        const values: string[] = [
-            room.roomno,
-            room.hotelno,
-            room.typeroom,
-            room.price.toString()
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
+    // public createRoom(room: Room): Promise<pg.QueryResult> {
+    //     const values: string[] = [room.roomno, room.hotelno, room.typeroom, room.price.toString()];
+    //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
 
-        return this.pool.query(queryText, values);
-    }
+    //     return this.pool.query(queryText, values);
+    // }
 
     // // GUEST
     // public createGuest(guestNo: string,

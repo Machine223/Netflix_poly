@@ -27,12 +27,12 @@ let DatabaseService = class DatabaseService {
     constructor() {
         // A MODIFIER POUR VOTRE BD
         this.connectionConfig = {
-            user: "sysadmin",
-            database: "TP4",
-            password: "1234",
-            port: 5432,
-            host: "127.0.0.1",
-            keepAlive: true
+            user: 'sysadmin',
+            database: 'TP4',
+            password: '1234',
+            port: 15432,
+            host: '127.0.0.1',
+            keepAlive: true,
         };
         this.pool = new pg.Pool(this.connectionConfig);
         this.pool.connect();
@@ -57,11 +57,26 @@ let DatabaseService = class DatabaseService {
     getMembres() {
         return this.pool.query('SELECT * FROM TP4.Membre;');
     }
+    deleteMovie(id) {
+        return this.pool.query(`set search_path to schema_films; DELETE FROM film WHERE filmid='${id}';`);
+    }
+    insertMovie(film) {
+        const dt = new Date(film.dateProduction);
+        const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
+        // return this.pool.query('set search_path to schema_films; INSERT INT');
+        return this.pool.query(`set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES('${film.titre}', '${film.genre}', DATE'${lel}', ${film.dureeTotalMinutes});`);
+    }
+    modifyMovie(film) {
+        const dt = new Date(film.dateProduction);
+        const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
+        // return this.pool.query('set search_path to schema_films; INSERT INT');
+        return this.pool.query(`set search_path to schema_films; UPDATE Film SET titre='${film.titre}', genre='${film.genre}', dateProduction=DATE'${lel}', dureeTotalMinutes=${film.dureeTotalMinutes} WHERE Film.filmid = ${film.filmID};`);
+    }
     login(email, password) {
         return __awaiter(this, void 0, void 0, function* () {
             let query = this.pool.query(`SET search_path TO schema_films;
             SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`);
-            const temp = (yield query);
+            const temp = yield query;
             return temp[1];
         });
     }
@@ -70,63 +85,6 @@ let DatabaseService = class DatabaseService {
             INSERT INTO Membre(membreID, nom, courriel, motDePasse, adressePostal, isAdmin)
             VALUES(DEFAULT, '${member.nom}', '${member.courriel}', '${member.motDePasse}',
             '${member.adressePostal}', 'false');`);
-    }
-    // public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
-    //     const values: string[] = [
-    //         hotelNo,
-    //         hotelName,
-    //         city
-    //     ];
-    //     const queryText: string = `INSERT INTO HOTELDB.Hotel VALUES($1, $2, $3);`;
-    //     return this.pool.query(queryText, values);
-    // }
-    // public deleteHotel(/*Todo*/): void /*TODO*/  {
-    // 	/*TODO*/
-    // }
-    // // ROOM
-    // public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
-    //     let query: string =
-    //     `SELECT * FROM HOTELDB.room
-    //     WHERE hotelno=\'${hotelNo}\'`;
-    //     if (roomType !== undefined) {
-    //         query = query.concat('AND ');
-    //         query = query.concat(`typeroom=\'${roomType}\'`);
-    //     }
-    //     if (price !== undefined) {
-    //         query = query.concat('AND ');
-    //         query = query.concat(`price =\'${price}\'`);
-    //     }
-    //     console.log(query);
-    //     return this.pool.query(query);
-    // }
-    // public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
-    //     let query: string = 'SELECT * FROM HOTELDB.room \n';
-    //     const keys: string[] = Object.keys(params);
-    //     if (keys.length > 0) {
-    //         query = query.concat(`WHERE ${keys[0]} =\'${params[keys[0]]}\'`);
-    //     }
-    //     // On enleve le premier element
-    //     keys.shift();
-    //     // tslint:disable-next-line:forin
-    //     for (const param in keys) {
-    //         const value: string = keys[param];
-    //         query = query.concat(`AND ${value} = \'${params[value]}\'`);
-    //         if (param === 'price') {
-    //             query = query.replace('\'', '');
-    //         }
-    //     }
-    //     console.log(query);
-    //     return this.pool.query(query);
-    // }
-    createRoom(room) {
-        const values = [
-            room.roomno,
-            room.hotelno,
-            room.typeroom,
-            room.price.toString()
-        ];
-        const queryText = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
-        return this.pool.query(queryText, values);
     }
 };
 DatabaseService = __decorate([

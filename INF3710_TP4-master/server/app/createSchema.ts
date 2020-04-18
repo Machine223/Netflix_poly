@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS CarteCredit(
     CCV INTEGER NOT NULL,
     PRIMARY KEY (carteID, membreID),
     FOREIGN KEY (membreID) REFERENCES Membre (membreID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Film(
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS DVD(
     filmID INTEGER,
     PRIMARY KEY (dvdID, filmID),
     FOREIGN KEY (filmID) REFERENCES Film(filmID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Personne(
@@ -82,8 +84,9 @@ CREATE TABLE IF NOT EXISTS Participation(
     typeRole VARCHAR (20),
     salaire DECIMAL(6,2), 
     PRIMARY KEY (filmID, personneID, typeRole),
-    FOREIGN KEY (personneID) REFERENCES Personne(personneID),
+    FOREIGN KEY (personneID) REFERENCES Personne(personneID) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (filmID) REFERENCES Film(filmID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -100,8 +103,9 @@ CREATE TABLE IF NOT EXISTS NominationOscars(
     filmID INTEGER,
     categorie VARCHAR (40) NOT NULL,
     PRIMARY KEY (oscarID, filmID, categorie),
-    FOREIGN KEY (oscarID) REFERENCES CeremonieOscars(oscarID),
+    FOREIGN KEY (oscarID) REFERENCES CeremonieOscars(oscarID) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (filmID) REFERENCES Film(filmID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS GagnantOscars(
@@ -109,8 +113,9 @@ CREATE TABLE IF NOT EXISTS GagnantOscars(
     filmID INTEGER,
     categorie VARCHAR (40) NOT NULL,
     PRIMARY KEY (oscarID, filmID, categorie),
-    FOREIGN KEY (oscarID) REFERENCES CeremonieOscars(oscarID),
+    FOREIGN KEY (oscarID) REFERENCES CeremonieOscars(oscarID) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (filmID) REFERENCES Film(filmID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS VisionnementFilm(
@@ -120,8 +125,9 @@ CREATE TABLE IF NOT EXISTS VisionnementFilm(
     dateVisionnement DATE,
     dureeVisionnement INTEGER,
     PRIMARY KEY (membreID, filmID, dateVisionnement),
-    FOREIGN KEY (membreID) REFERENCES Membre(membreID),
+    FOREIGN KEY (membreID) REFERENCES Membre(membreID) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (filmID) REFERENCES Film(filmID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS AchatDVD(
@@ -132,8 +138,8 @@ CREATE TABLE IF NOT EXISTS AchatDVD(
     distance INTEGER,
     dateEnvoi DATE NOT NULL,
     PRIMARY KEY (achatID),
-    FOREIGN KEY (membreID) REFERENCES Membre(membreID),
-    FOREIGN KEY (dvdID) REFERENCES DVD(dvdID)
+    FOREIGN KEY (membreID) REFERENCES Membre(membreID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (dvdID) REFERENCES DVD(dvdID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 `;
