@@ -36,6 +36,7 @@ import { FilmssComponent } from "./components/filmss/filmss.component";
 import { MatListModule } from "@angular/material/list";
 import { NewFilmComponent } from "./components/new-film/new-film.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { UpdateComponentComponent } from './components/update-component/update-component.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     AdminComponent,
     MembersGridComponent,
     FilmssComponent,
-    NewFilmComponent
+    NewFilmComponent,
+    UpdateComponentComponent
   ],
   imports: [
     MatListModule,

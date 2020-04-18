@@ -170,6 +170,20 @@ export class DatabaseController {
                 });
         });
 
+        router.post('/film/modify', (req: Request, res: Response, next: NextFunction) => {
+            console.log(req.body);
+
+            this.databaseService
+                .modifyMovie(req.body)
+                .then((result: pg.QueryResult) => {
+                    console.log('deleted');
+                    res.json('lol');
+                })
+                .catch((e: Error) => {
+                    console.error(e.stack);
+                });
+        });
+
         router.get('/tables/:tableName', (req: Request, res: Response, next: NextFunction) => {
             this.databaseService
                 .getAllFromTable(req.params.tableName)

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Film } from "../../../../../common/tables/Film";
 import { CommunicationService } from "../services/communication-service/communication.service";
+import { DataService } from "../Services/data.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-filmss",
@@ -8,7 +10,11 @@ import { CommunicationService } from "../services/communication-service/communic
   styleUrls: ["./filmss.component.scss"]
 })
 export class FilmssComponent implements OnInit {
-  constructor(public communicationService: CommunicationService) {}
+  constructor(
+    public communicationService: CommunicationService,
+    public data: DataService,
+    public router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -16,6 +22,7 @@ export class FilmssComponent implements OnInit {
   public getMovies(): void {
     this.communicationService.getMovies().subscribe((movies: Film[]) => {
       this.movies = movies;
+      this.data.movies = movies;
     });
   }
 
@@ -27,5 +34,24 @@ export class FilmssComponent implements OnInit {
         console.log("111111111");
         this.getMovies();
       });
+  }
+
+  updateMovie(idx: number) {
+    this.data.selectedMovie = this.movies[idx];
+    this.router.navigateByUrl("/update");
+  }
+
+  reset() {
+    this.communicationService.setUpDatabase().subscribe((res: any) => {
+      this.communicationService.getMovies().subscribe((movies: Film[]) => {
+        this.movies = movies;
+        this.data.movies = movies;
+      });
+    });
+    this.communicationService.setDBcreated(true);
+  }
+
+  navigateNew() {
+    this.router.navigateByUrl("/new");
   }
 }

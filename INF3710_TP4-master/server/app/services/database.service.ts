@@ -56,17 +56,25 @@ export class DatabaseService {
     }
 
     public deleteMovie(id: string): Promise<pg.QueryResult> {
-        console.log('DELETING -----------------' + id);
         return this.pool.query(`set search_path to schema_films; DELETE FROM film WHERE filmid='${id}';`);
     }
 
     public insertMovie(film: Film): Promise<pg.QueryResult> {
-        console.log('INSERTING -----------------');
         const dt = new Date(film.dateProduction);
         const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
         // return this.pool.query('set search_path to schema_films; INSERT INT');
         return this.pool.query(
             `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES('${film.titre}', '${film.genre}', DATE'${lel}', ${film.dureeTotalMinutes});`,
+            // `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES(${film.titre}, ${film.genre}, ${film.dateProduction}, ${film.dureeTotalMinutes});`,
+        );
+    }
+
+    public modifyMovie(film: Film): Promise<pg.QueryResult> {
+        const dt = new Date(film.dateProduction);
+        const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
+        // return this.pool.query('set search_path to schema_films; INSERT INT');
+        return this.pool.query(
+            `set search_path to schema_films; UPDATE Film SET titre='${film.titre}', genre='${film.genre}', dateProduction=DATE'${lel}', dureeTotalMinutes=${film.dureeTotalMinutes} WHERE Film.filmid = ${film.filmID};`,
             // `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES(${film.titre}, ${film.genre}, ${film.dateProduction}, ${film.dureeTotalMinutes});`,
         );
     }

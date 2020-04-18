@@ -165,6 +165,18 @@ let DatabaseController = class DatabaseController {
                 console.error(e.stack);
             });
         });
+        router.post('/film/modify', (req, res, next) => {
+            console.log(req.body);
+            this.databaseService
+                .modifyMovie(req.body)
+                .then((result) => {
+                console.log('deleted');
+                res.json('lol');
+            })
+                .catch((e) => {
+                console.error(e.stack);
+            });
+        });
         router.get('/tables/:tableName', (req, res, next) => {
             this.databaseService
                 .getAllFromTable(req.params.tableName)

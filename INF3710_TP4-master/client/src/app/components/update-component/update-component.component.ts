@@ -1,25 +1,35 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { DataService } from "../Services/data.service";
 import { CommunicationService } from "../services/communication-service/communication.service";
 import { Film } from "../../../../../common/tables/Film";
-import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-new-film",
-  templateUrl: "./new-film.component.html",
-  styleUrls: ["./new-film.component.scss"]
+  selector: "app-update-component",
+  templateUrl: "./update-component.component.html",
+  styleUrls: ["./update-component.component.scss"]
 })
-export class NewFilmComponent implements OnInit {
+export class UpdateComponentComponent implements OnInit {
   titre = "";
   genre = "";
   duree = "";
-  annee = "";
   date: Date;
   constructor(
     public communication: CommunicationService,
-    private router: Router
+    private router: Router,
+    public data: DataService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadPage();
+  }
+
+  loadPage() {
+    this.titre = this.data.selectedMovie.titre;
+    this.genre = this.data.selectedMovie.genre;
+    this.date = new Date(this.data.selectedMovie.dateProduction);
+    this.duree = this.data.selectedMovie.dureeTotalMinutes.toString();
+  }
 
   saveFilm() {
     let isnum = /^\d+$/.test(this.duree);
@@ -34,14 +44,14 @@ export class NewFilmComponent implements OnInit {
 
     let time = this.date.toDateString();
     let film: Film = {
-      filmID: -1,
+      filmID: this.data.selectedMovie.filmID,
       genre: this.genre,
       titre: this.titre,
       dateProduction: Date.parse(time),
       dureeTotalMinutes: parseInt(this.duree)
     };
-    this.communication.addFilm(film).subscribe(lol => {
-      alert("Sauvegardé avec succès!");
+    this.communication.modifyFilm(film).subscribe(lol => {
+      alert("Modifié avec succès");
       this.router.navigateByUrl("/films");
     });
   }
