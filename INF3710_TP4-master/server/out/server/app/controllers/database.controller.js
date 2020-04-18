@@ -22,65 +22,96 @@ let DatabaseController = class DatabaseController {
     }
     get router() {
         const router = express_1.Router();
-        router.post("/createSchema", (req, res, next) => {
-            this.databaseService.createSchema().then((result) => {
+        router.post('/createSchema', (req, res, next) => {
+            this.databaseService
+                .createSchema()
+                .then((result) => {
                 res.json(result);
-            }).catch((e) => {
+            })
+                .catch((e) => {
                 console.error(e.stack);
             });
         });
-        router.post("/populateDb", (req, res, next) => {
-            this.databaseService.populateDb().then((result) => {
+        router.post('/populateDb', (req, res, next) => {
+            this.databaseService
+                .populateDb()
+                .then((result) => {
                 res.json(result);
-            }).catch((e) => {
+            })
+                .catch((e) => {
                 console.error(e.stack);
             });
         });
-        router.get("/movies", (req, res, next) => {
+        router.get('/movies', (req, res, next) => {
             // Send the request to the service and send the response
-            this.databaseService.getMovies().then((result) => {
+            this.databaseService
+                .getMovies()
+                .then((result) => {
                 const movies = result[1]['rows'].map((mov) => ({
-                    filmID: mov.filmID,
+                    filmID: mov.filmid,
                     titre: mov.titre,
                     genre: mov.genre,
-                    dateProduction: mov.dateProduction,
-                    dureeTotalMinutes: mov.dureeTotalMinutes
+                    dateProduction: mov.dateproduction,
+                    dureeTotalMinutes: mov.dureetotalminutes,
                 }));
+                //console.log(movies);
                 res.json(movies);
-            }).catch((e) => {
+            })
+                .catch((e) => {
                 console.error(e.stack);
             });
         });
-        router.get("/membres", (req, res, next) => {
+        router.get('/membres', (req, res, next) => {
             // Send the request to the service and send the response
-            this.databaseService.getMembres().then((result) => {
+            this.databaseService
+                .getMembres()
+                .then((result) => {
                 const membres = result.rows.map((mem) => ({
                     membreID: mem.membreID,
                     nom: mem.nom,
                     courriel: mem.courriel,
                     motDePasse: mem.motDePasse,
                     adressePostal: mem.adressePostal,
-                    isAdmin: mem.isAdmin
+                    isAdmin: mem.isAdmin,
                 }));
                 res.json(membres);
-            }).catch((e) => {
+            })
+                .catch((e) => {
                 console.error(e.stack);
             });
         });
-        router.get("/login", (req, res, next) => {
+        router.get('/login', (req, res, next) => {
             // Send the request to the service and send the response
-            this.databaseService.login(req.query.email, req.query.password).then((result) => {
+            console.log('hello from login');
+            console.log(req.query.email, req.query.password, '----------------------');
+            this.databaseService
+                .login(req.query.email, req.query.password)
+                .then((result) => {
+                console.log(result);
                 const membres = result.rows.map((mem) => ({
-                    membreID: mem.membreID,
+                    membreID: mem.membreid,
                     nom: mem.nom,
                     courriel: mem.courriel,
-                    motDePasse: mem.motDePasse,
-                    adressePostal: mem.adressePostal,
-                    isAdmin: mem.isAdmin
+                    motDePasse: mem.motdepasse,
+                    adressePostal: mem.adressepostal,
+                    isAdmin: mem.isadmin,
                 }));
                 console.log(membres);
                 res.json(membres);
-            }).catch((e) => {
+            })
+                .catch((e) => {
+                console.error(e.stack);
+            });
+        });
+        router.delete('/deleteMovie', (req, res, next) => {
+            console.log('hello hello' + req.query.filmid);
+            this.databaseService
+                .deleteMovie(req.query.filmid)
+                .then((result) => {
+                console.log('deleted');
+                res.json('lol');
+            })
+                .catch((e) => {
                 console.error(e.stack);
             });
         });
@@ -122,28 +153,25 @@ let DatabaseController = class DatabaseController {
         //                 console.error(e.stack);
         //             });
         //     });
-        // router.post("/rooms/insert",
-        //             (req: Request, res: Response, next: NextFunction) => {
-        //             const room: Room = {
-        //                 hotelno: req.body.hotelno,
-        //                 roomno: req.body.roomno,
-        //                 typeroom: req.body.typeroom,
-        //                 price: parseFloat(req.body.price)};
-        //             console.log(room);
-        //             this.databaseService.createRoom(room)
-        //             .then((result: pg.QueryResult) => {
-        //                 res.json(result.rowCount);
-        //             })
-        //             .catch((e: Error) => {
-        //                 console.error(e.stack);
-        //                 res.json(-1);
-        //             });
-        // });
-        router.get("/tables/:tableName", (req, res, next) => {
-            this.databaseService.getAllFromTable(req.params.tableName)
+        router.post('/film/insert', (req, res, next) => {
+            console.log(req.body);
+            this.databaseService
+                .insertMovie(req.body)
+                .then((result) => {
+                console.log('deleted');
+                res.json('lol');
+            })
+                .catch((e) => {
+                console.error(e.stack);
+            });
+        });
+        router.get('/tables/:tableName', (req, res, next) => {
+            this.databaseService
+                .getAllFromTable(req.params.tableName)
                 .then((result) => {
                 res.json(result.rows);
-            }).catch((e) => {
+            })
+                .catch((e) => {
                 console.error(e.stack);
             });
         });

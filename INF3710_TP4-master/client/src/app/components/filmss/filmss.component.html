@@ -1,0 +1,24 @@
+<p>films works!</p>
+<!-- <app-toolbar></app-toolbar>
+<app-movies-grid></app-movies-grid> -->
+
+<div id="bd-button">
+  <button
+    mat-raised-button
+    id="importer-films"
+    (click)="this.getMovies()"
+    class="left-item"
+    mat-button
+  >
+    Importer les films
+  </button>
+</div>
+<ul>
+  <li *ngFor="let mo of movies; let i = index">
+    {{ mo.filmID }} {{ mo.titre }} {{ mo.genre }} {{ mo.dureeTotalMinutes }}
+    {{ mo.dateProduction }}
+    <button (click)="removeMovie(i)" [attr.data-index]="i">Supprimer</button>
+  </li>
+</ul>
+
+<app-new-film></app-new-film>

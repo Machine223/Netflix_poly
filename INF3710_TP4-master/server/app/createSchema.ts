@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS Film(
     genre VARCHAR (20) NOT NULL,
     dateProduction DATE,
     dureeTotalMinutes INTEGER,
-    PRIMARY KEY (filmID)
+    PRIMARY KEY (filmID) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS DVD( 
