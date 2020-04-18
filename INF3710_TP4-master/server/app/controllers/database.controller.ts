@@ -94,17 +94,17 @@ export class DatabaseController {
 
         router.get("/login",
                    (req: Request, res: Response, next: NextFunction) => {
-                    // Send the request to the service and send the response
-                    console.log('helloooo');
+                    console.log('----------------------------------');
                     this.databaseService.login(req.query.email, req.query.password).then((result: pg.QueryResult) => {
+                    console.log(result);
                     const membres: Membre[] = result.rows.map((mem: any) => (
                     {
-                        membreID : mem.membreID,
+                        membreID : mem.membreid,
                         nom: mem.nom,
                         courriel: mem.courriel,
-                        motDePasse: mem.motDePasse,
-                        adressePostal: mem.adressePostal,
-                        isAdmin: mem.isAdmin
+                        motDePasse: mem.motdepasse,
+                        adressePostal: mem.adressepostal,
+                        isAdmin: mem.isadmin
                     }));
                     console.log(membres);
                     res.json(membres);

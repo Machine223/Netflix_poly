@@ -15,7 +15,7 @@ import { Membre } from "../../Membre";
 export class HomepageComponent implements OnInit {
   public activeMember: Membre | null = null;
   public password: string = "";
-  public loginEmailAddress: string = "";
+  public EmailAddress: string = "";
 
   constructor(public router: Router,
               public errorDialog: MatDialog, 
@@ -34,9 +34,11 @@ export class HomepageComponent implements OnInit {
     console.log('memberLogIn is called');
     if (this.communicationService.getDBcreated()) {
       let isValid: boolean = false;
-      console.log(this.loginEmailAddress, this.password);
-      this.communicationService.login(this.loginEmailAddress, this.password).subscribe((membres: Membre[]) => {
+      console.log(this.EmailAddress);
+      console.log(this.password);
+      this.communicationService.login(this.EmailAddress, this.password).subscribe((membres: Membre[]) => {
         console.log('communicationService.login work');  
+        console.log(membres);  
         isValid = membres.length > 0 ? true : false;
         if (isValid) {
           if (membres[0].isAdmin) {

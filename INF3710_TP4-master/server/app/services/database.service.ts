@@ -52,12 +52,13 @@ export class DatabaseService {
 
     }
 
-    public login(email: String, password: String): Promise<pg.QueryResult> {
-        return this.pool.query(
+    public async login(email: String, password: String): Promise<pg.QueryResult> {
+        let query = this.pool.query(
             `SET search_path TO schema_films;
             SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`
         );
-
+        const temp = (await query);
+        return temp[1];
     }
 
     public createMember(member: Membre): Promise<pg.QueryResult> {
@@ -142,22 +143,22 @@ export class DatabaseService {
     }
 
     // // GUEST
-    public createGuest(guestNo: string,
-                       nas: string,
-                       guestName: string,
-                       gender: string,
-                       guestCity: string): Promise<pg.QueryResult> {
-        // this.pool.connect();
-        const values: string[] = [
-            guestNo,
-            nas,
-            guestName,
-            gender,
-            guestCity
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
+    // public createGuest(guestNo: string,
+    //                    nas: string,
+    //                    guestName: string,
+    //                    gender: string,
+    //                    guestCity: string): Promise<pg.QueryResult> {
+    //     // this.pool.connect();
+    //     const values: string[] = [
+    //         guestNo,
+    //         nas,
+    //         guestName,
+    //         gender,
+    //         guestCity
+    //     ];
+    //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
 
-        return this.pool.query(queryText, values);
+    //     return this.pool.query(queryText, values);
     // }
 
     // // BOOKING

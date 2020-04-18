@@ -8,6 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const inversify_1 = require("inversify");
 const pg = require("pg");
@@ -49,8 +58,12 @@ let DatabaseService = class DatabaseService {
         return this.pool.query('SELECT * FROM TP4.Membre;');
     }
     login(email, password) {
-        return this.pool.query(`SET search_path TO schema_films;
+        return __awaiter(this, void 0, void 0, function* () {
+            let query = this.pool.query(`SET search_path TO schema_films;
             SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`);
+            const temp = (yield query);
+            return temp[1];
+        });
     }
     createMember(member) {
         return this.pool.query(`SET search_path TO schema_films;
@@ -114,36 +127,6 @@ let DatabaseService = class DatabaseService {
         ];
         const queryText = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
         return this.pool.query(queryText, values);
-    }
-    // // GUEST
-    createGuest(guestNo, nas, guestName, gender, guestCity) {
-        // this.pool.connect();
-        const values = [
-            guestNo,
-            nas,
-            guestName,
-            gender,
-            guestCity
-        ];
-        const queryText = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-        return this.pool.query(queryText, values);
-        // }
-        // // BOOKING
-        // public createBooking(hotelNo: string,
-        //                      guestNo: string,
-        //                      dateFrom: Date,
-        //                      dateTo: Date,
-        //                      roomNo: string): Promise<pg.QueryResult> {
-        //     const values: string[] = [
-        //         hotelNo,
-        //         guestNo,
-        //         dateFrom.toString(),
-        //         dateTo.toString(),
-        //         roomNo
-        //     ];
-        //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-        //     return this.pool.query(queryText, values);
-        //     }
     }
 };
 DatabaseService = __decorate([

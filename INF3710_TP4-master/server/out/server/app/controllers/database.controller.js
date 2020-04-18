@@ -87,16 +87,16 @@ let DatabaseController = class DatabaseController {
             });
         });
         router.get("/login", (req, res, next) => {
-            // Send the request to the service and send the response
-            console.log('helloooo');
+            console.log('----------------------------------');
             this.databaseService.login(req.query.email, req.query.password).then((result) => {
+                console.log(result);
                 const membres = result.rows.map((mem) => ({
-                    membreID: mem.membreID,
+                    membreID: mem.membreid,
                     nom: mem.nom,
                     courriel: mem.courriel,
-                    motDePasse: mem.motDePasse,
-                    adressePostal: mem.adressePostal,
-                    isAdmin: mem.isAdmin
+                    motDePasse: mem.motdepasse,
+                    adressePostal: mem.adressepostal,
+                    isAdmin: mem.isadmin
                 }));
                 console.log(membres);
                 res.json(membres);
