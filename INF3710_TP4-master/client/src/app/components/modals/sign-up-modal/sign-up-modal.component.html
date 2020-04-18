@@ -50,24 +50,24 @@
             <mat-grid-tile [colspan] = "6"><span class="tile-title">Carte de crédit</span></mat-grid-tile>
             <mat-grid-tile [colspan] = "6" class="tile-content">
                 <mat-form-field>
-                    <input matInput value="creditCardNumber" placeholder="Numéro" [(ngModel)]="creditCardNumber"/>
+                    <input matInput value="creditNumber" placeholder="Numéro" [(ngModel)]="creditNumber" [maxLength]="16"/>
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan] = "2"></mat-grid-tile>
             <mat-grid-tile [colspan] = "2" class="tile-content">
                 <mat-form-field>
-                    <input matInput value="expirationMonth" placeholder="Mois" [(ngModel)]="expirationMonth"/>
+                    <input matInput value="expirationMonth" placeholder="Mois" [(ngModel)]="expirationMonth" [maxLength]="2"/>
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan] = "2" class="tile-content">
                 <mat-form-field>
-                    <input matInput value="expirationYear" placeholder="Année" [(ngModel)]="expirationYear"/>
+                    <input matInput value="expirationYear" placeholder="Année" [(ngModel)]="expirationYear"[maxLength]="4"/>
                 </mat-form-field>
                 
             </mat-grid-tile>
             <mat-grid-tile [colspan] = "4" class="tile-content">
                 <mat-form-field>
-                    <input matInput value="ccv" placeholder="CCV" [(ngModel)]="ccv"/>
+                    <input matInput value="ccv" placeholder="CCV" [(ngModel)]="ccv" [maxLength]="3"/>
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan] = "6"><span class="tile-title">Mot de passe</span></mat-grid-tile>

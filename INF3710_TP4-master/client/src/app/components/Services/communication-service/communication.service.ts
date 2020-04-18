@@ -55,10 +55,11 @@ export class CommunicationService {
       return this.http.get<Film[]>(this.BASE_URL + "/membres").pipe(
           catchError(this.handleError<Film[]>("getMovies")),
       );
-  }
+    }
 
     public login(email: string, password: string): Observable<Membre[]> {
-        return this.http.get<Membre[]>(this.BASE_URL + `/login?email=${email}&password=${password}`).pipe(
+        console.log('login in communication is called')
+        return this.http.get<Membre[]>(this.BASE_URL +`/login?email=${email}&password=${password}`).pipe(
           catchError(this.handleError<Membre[]>("login")),
     );
 
