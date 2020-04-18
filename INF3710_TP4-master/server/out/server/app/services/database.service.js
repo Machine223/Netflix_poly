@@ -30,7 +30,7 @@ let DatabaseService = class DatabaseService {
             user: 'sysadmin',
             database: 'TP4',
             password: '1234',
-            port: 15432,
+            port: 5432,
             host: '127.0.0.1',
             keepAlive: true,
         };
