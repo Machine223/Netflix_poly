@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HomepageComponent } from "../homepage/homepage.component";
-import { AdminComponent } from "../admin/admin.component";
+// import { AdminComponent } from "../admin/admin.component";
 import { Routes } from "@angular/router";
 import { FilmssComponent } from "../filmss/filmss.component";
 import { NewFilmComponent } from "../new-film/new-film.component";
@@ -9,8 +9,8 @@ import { UpdateComponentComponent } from "../update-component/update-component.c
 export const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomepageComponent },
-  { path: "films", component: FilmssComponent },
-  { path: "admin", component: AdminComponent },
+  { path: "admin", component: FilmssComponent },
+  // { path: "admin", component: AdminComponent },
   { path: "new", component: NewFilmComponent },
   { path: "update", component: UpdateComponentComponent }
 ];
