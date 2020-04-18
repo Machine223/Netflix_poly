@@ -24,7 +24,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CommunicationService } from "./components/services/communication-service/communication.service";
 import { MemberService } from "./components/services/member-service/memberService";
 import { MembersGridComponent } from './components/members-grid/members-grid.component';
-import { FilmsComponent } from './components/films/films.component';
+
 
 
 @NgModule({
