@@ -44,6 +44,11 @@ export class CommunicationService {
         );
     }
 
+    public addMembre(membre: Membre): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/membres/insert", membre).pipe(
+            catchError(this.handleError<number>("insertMembre")),
+        );
+    }
 
     public getMembres(): Observable<any[]> {
 

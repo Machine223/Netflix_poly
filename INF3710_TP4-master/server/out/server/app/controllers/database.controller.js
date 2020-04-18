@@ -36,10 +36,10 @@ let DatabaseController = class DatabaseController {
                 console.error(e.stack);
             });
         });
-        router.get("/movies", (req, res, next) => {
+        router.get("/films", (req, res, next) => {
             // Send the request to the service and send the response
             this.databaseService.getMovies().then((result) => {
-                const movies = result[1]['rows'].map((mov) => ({
+                const movies = result.rows.map((mov) => ({
                     filmID: mov.filmID,
                     titre: mov.titre,
                     genre: mov.genre,

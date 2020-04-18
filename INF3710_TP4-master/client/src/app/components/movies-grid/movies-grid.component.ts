@@ -61,7 +61,6 @@ export class MoviesGridComponent implements OnInit {
         this.movies = movies;
     });
     console.log(this.movies);
-    
   }
 
   show(movie: Film) {

@@ -1,22 +1,12 @@
-#main {
+#loginPage {
     width: 100%;
     height: 100%;
     background-color: rgb(118, 234, 255);
 }
 
-#form-member {
-    width: 30%;
-    height: 23%;
-    position: absolute;
-    top: 35%;
-    left: 25%;
-    background-color: white;
-    margin: 15px;
-}
-
 #login-form {
-    width: 25%;
-    height: 23%;
+    width: 600px;
+    height: 200px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -24,7 +14,18 @@
     right: 30px;
     margin: auto;
     background-color: white;
+    border-radius: 17px;
 }
+
+// .button {
+//     width: 90%;
+//     margin: 5%;
+//     height: 50px;
+//     padding: auto;
+//     white-space: pre-line;
+//     line-height: 20px;
+//     vertical-align: top;
+// }
 
 mat-dialog-container {
     position: absolute;
@@ -33,7 +34,11 @@ mat-dialog-container {
 }
 
 #title {
+    display: block;
     text-align: center;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 150%;
 }
 
 .tile-content {
@@ -59,16 +64,32 @@ mat-form-field {
 #confirm {
     float: right;
     margin: 15px;
+    background-color:  rgb(92, 92, 92);
+    color: white;
 }
 
 #signUp {
     float: left;
     margin: 15px;
+    background-color:  rgb(92, 92, 92);
+    color: white;
 }
 
-#creer-bd {
-  position: absolute;
-  width: 25%;
-  top: 30%;
-  left: 37.5%;
+#confirm:hover, #signUp:hover {
+    background-color: rgb(216, 216, 216);
+    color: black;
+}
+
+#setupDB {
+    position:absolute;
+    margin: 16px 75px 15px 75px;
+    text-align:center;
+    width:auto;
+    background-color:  rgb(114, 6, 255);
+    color: white;
+}
+
+#setupDB:hover {
+    background-color: rgb(195, 178, 243);
+    color: black;
 }
