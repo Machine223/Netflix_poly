@@ -53,7 +53,10 @@ export class DatabaseService {
     }
 
     public login(email: String, password: String): Promise<pg.QueryResult> {
-        return this.pool.query(`SELECT * FROM TP4.Membre m WHERE m.courriel='${email}' AND m.motDePasse='${password}';`);
+        return this.pool.query(
+            `SET search_path TO schema_films;
+            SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`
+        );
 
     }
 

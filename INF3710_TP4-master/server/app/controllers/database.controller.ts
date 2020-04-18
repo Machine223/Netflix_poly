@@ -95,6 +95,7 @@ export class DatabaseController {
         router.get("/login",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
+                    console.log('helloooo');
                     this.databaseService.login(req.query.email, req.query.password).then((result: pg.QueryResult) => {
                     const membres: Membre[] = result.rows.map((mem: any) => (
                     {
@@ -111,6 +112,7 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
+
 
         // router.get("/hotel/hotelNo",
         //            (req: Request, res: Response, next: NextFunction) => {

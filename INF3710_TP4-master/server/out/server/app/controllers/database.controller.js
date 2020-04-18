@@ -88,6 +88,7 @@ let DatabaseController = class DatabaseController {
         });
         router.get("/login", (req, res, next) => {
             // Send the request to the service and send the response
+            console.log('helloooo');
             this.databaseService.login(req.query.email, req.query.password).then((result) => {
                 const membres = result.rows.map((mem) => ({
                     membreID: mem.membreID,

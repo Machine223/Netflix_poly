@@ -28,8 +28,8 @@ export class SignUpModalComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<SignUpModalComponent>, 
               public errorDialog: MatDialog, 
               private communicationService: CommunicationService) {
-                this.iterationNumber = 0;
-              }
+    this.iterationNumber = 0;
+    }
 
   ngOnInit() { }
 
