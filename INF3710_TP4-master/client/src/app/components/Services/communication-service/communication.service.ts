@@ -80,6 +80,13 @@ export class CommunicationService {
       .pipe(catchError(this.handleError<number>("inserHotel")));
   }
 
+  public modifyFilm(film: Film): Observable<number> {
+    console.log("called");
+    return this.http
+      .post<number>(this.BASE_URL + "/film/modify", film)
+      .pipe(catchError(this.handleError<number>("insertMembre")));
+  }
+
   // public insertRoom(room: Room): Observable<number> {
   //     return this.http.post<number>(this.BASE_URL + "/rooms/insert", room).pipe(
   //         catchError(this.handleError<number>("inserHotel")),
