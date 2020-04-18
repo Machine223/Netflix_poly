@@ -9,10 +9,8 @@ BEGIN
 
 -- we want to select the adress of the member
 SELECT * FROM Membre
-WHERE 
-(
-SELECT Membre.adressePostal 
-FROM Membre JOIN ACHATDVD ON Membre.membre = Achatdvd.membre
-) as subquery
+WHERE ( SELECT Membre.adressePostal 
+        FROM Membre JOIN ACHATDVD ON Membre.membre = Achatdvd.membre
+      ) as subquery
 END;
 $infoFilm$ LANGUAGE plpgsql;
