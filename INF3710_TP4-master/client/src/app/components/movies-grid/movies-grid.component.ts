@@ -36,10 +36,10 @@ export class MoviesGridComponent implements OnInit {
   ngOnInit() {
     this.memberService.obsMember.subscribe((obsMember: Membre | null) => this.activeMember = obsMember);
     // TODO: DATABASE CALL (GET MOVIE LIST)
-    this.communicationService.listen().subscribe((m:any) => {
-      console.log(m);
-      this.getMovies();
-   });
+    this.communicationService.getMovies().subscribe((movies: Film[]) => {
+      this.movies = movies;
+      console.log(this.movies);
+  });
   }
 
 
@@ -57,12 +57,11 @@ export class MoviesGridComponent implements OnInit {
   }
 
   public getMovies(): void {
-    console.log('getMovies -------');
     this.communicationService.getMovies().subscribe((movies: Film[]) => {
-        console.log(movies);
         this.movies = movies;
-        console.log(this.movies);
     });
+    console.log(this.movies);
+    
   }
 
   show(movie: Film) {

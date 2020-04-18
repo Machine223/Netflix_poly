@@ -20,6 +20,7 @@ export class ViewMovieModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, private dialogRef: MatDialogRef<ViewMovieModalComponent>) { }
 
   ngOnInit() {
+    
   }
 
   close() {

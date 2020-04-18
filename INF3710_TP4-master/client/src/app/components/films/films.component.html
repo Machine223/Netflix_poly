@@ -1,3 +1,13 @@
 <p>films works!</p>
-<app-toolbar></app-toolbar>
-<app-movies-grid></app-movies-grid>
+<!-- <app-toolbar></app-toolbar>
+<app-movies-grid></app-movies-grid> -->
+
+
+<div id="bd-button">
+    <button mat-raised-button id="importer-films" (click)="this.getMovies()" class='left-item' mat-button >Importer les films</button>
+</div>
+<ul>
+    <li *ngFor="let mo of movies;">
+        {{mo}}
+    </li>
+</ul>

@@ -245,10 +245,6 @@ where pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and
 )
 
 
-
-
-
-
 -- 13. Comment a évolué la carrière de Woody Allen ? (On veut connaitre tous ses rôles dans un
 -- film (réalisateur, acteur, etc.) du plus ancien au plus récent)
 
