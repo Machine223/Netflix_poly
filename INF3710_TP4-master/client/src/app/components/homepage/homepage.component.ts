@@ -61,8 +61,7 @@ export class HomepageComponent implements OnInit {
 }
 
 
-
-  public createDB(): void {
+  public createDataBase(): void {
     this.communicationService.setUpDatabase().subscribe((res: any) => {
         console.log(res);
     });

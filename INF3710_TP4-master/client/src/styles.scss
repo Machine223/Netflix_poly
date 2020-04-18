@@ -1,4 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/theming';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@include mat-core();
+
+$candy-app-primary: mat-palette($mat-indigo);
+
+$candy-app-accent: mat-palette($mat-deep-purple, A700, 700, 900);
+$candy-app-warn: mat-palette($mat-pink);
+
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+ 
+@include mat-checkbox-theme($candy-app-theme);
+@include angular-material-theme($candy-app-theme);
+// Reference : https://material.angular.io/guide/theming
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.basic-container {
+  padding: 30px;
+}

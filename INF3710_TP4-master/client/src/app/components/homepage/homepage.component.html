@@ -1,49 +1,30 @@
-<div id='main'>
-    <button mat-raised-button id="creer-bd" (click)="createDB()" class='left-item' mat-button >Initialiser base de données</button>
-    <!-- <div id='form-member'>
-        <h1 mat-dialog-title id="title">Se connecter en tant que membre</h1>
-        <div mat-dialog-content>
-            <mat-grid-list cols = "1" rowHeight="30px" class="content">
-                <mat-grid-tile class="tile-content">
-                    <mat-form-field>
-                        <input matInput value="logInEmailAddress" placeholder="Adresse courriel" [(ngModel)]="loginEmailAddress"/>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile class="tile-content">
-                    <mat-form-field>
-                        <input matInput value="password" type="password" placeholder="Mot de passe" [(ngModel)]="password"/>
-                    </mat-form-field>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </div>
-        <div id="signUp">
-            <button mat-button (click)="this.signUp()">S'inscrire</button>
-        </div>
-        <div id="confirm">
-            <button mat-button (click)="this.logInMember()">Se connecter</button>
-        </div>
-    </div> -->
+<div id='loginPage'>
     <div id='login-form'>
-        <h1 mat-dialog-title id="title">Se connecter</h1>
+        <span id="title"> Se connecter </span>
         <div mat-dialog-content>
             <mat-grid-list cols = "1" rowHeight="30px" class="content">
                 <mat-grid-tile class="tile-content">
                     <mat-form-field>
-                        <input matInput value="logInEmailAddress" placeholder="Adresse courriel" [(ngModel)]="loginEmailAddress"/>
+                        <input matInput 
+                        value="logInEmailAddress" 
+                        placeholder="Adresse courriel" 
+                        [(ngModel)]="loginEmailAddress"/>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile class="tile-content">
                     <mat-form-field>
-                        <input matInput value="password" type="password" placeholder="Mot de passe" [(ngModel)]="password"/>
+                        <input matInput 
+                        value="password" 
+                        type="password" 
+                        placeholder="Mot de passe" 
+                        [(ngModel)]="password"/>
                     </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>
-        </div>
-        <div id="signUp">
-          <button mat-raised-button (click)="this.signUp()">S'inscrire</button>
-      </div>
-        <div id="confirm">
-            <button mat-raised-button (click)="this.logIn()">Se connecter</button>
+            <button mat-raised-button id="signUp" (click)="this.signUp()">S'inscrire</button>
+            <button mat-raised-button id="setupDB" (click)="createDataBase()" mat-button >
+                Initialiser base de données</button>
+            <button mat-raised-button id="confirm" (click)="this.logIn()">Se connecter</button>
         </div>
     </div>
 </div>

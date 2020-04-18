@@ -5,7 +5,11 @@ mat-dialog-container {
 }
 
 #title {
+    display: block;
     text-align: center;
+    margin: 10px;
+    font-weight: 900;
+    font-size: 200%;
 }
 
 .tile-content {
