@@ -24,11 +24,11 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CommunicationService } from "./components/services/communication-service/communication.service";
 import { MemberService } from "./components/services/member-service/memberService";
 import { MembersGridComponent } from './components/members-grid/members-grid.component';
-import { FilmsComponent } from './components/films/films.component';
+// import { FilmsComponent } from './components/films/films.component';
 
 
 @NgModule({
-    declarations: [AppComponent, ToolbarComponent, MoviesGridComponent, EditModalComponent, ErrorModalComponent, ViewMovieModalComponent, AddMovieModalComponent, AddParticipantModalComponent, SignUpModalComponent, HomepageComponent, MemberComponent, AdminComponent, MembersGridComponent, FilmsComponent],
+    declarations: [AppComponent, ToolbarComponent, MoviesGridComponent, EditModalComponent, ErrorModalComponent, ViewMovieModalComponent, AddMovieModalComponent, AddParticipantModalComponent, SignUpModalComponent, HomepageComponent, MemberComponent, AdminComponent, MembersGridComponent],
     imports: [BrowserModule, HttpClientModule, BrowserAnimationsModule, MatToolbarModule, MatMenuModule, RouterModule,
               MatGridListModule, MatIconModule, MatDialogModule, FormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule, RouterModule.forRoot(appRoutes)],
     providers: [MatDialogModule, CommunicationService, MoviesGridComponent, MemberService, MembersGridComponent],
