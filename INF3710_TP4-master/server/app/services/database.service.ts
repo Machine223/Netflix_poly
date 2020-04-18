@@ -3,6 +3,7 @@ import * as pg from "pg";
 import "reflect-metadata";
 import {schema} from "../createSchema";
 import {data} from "../populateDB";
+import { Membre } from "../../../common/tables/Membre";
 
 @injectable()
 export class DatabaseService {
@@ -56,6 +57,15 @@ export class DatabaseService {
 
     }
 
+    public createMember(member: Membre): Promise<pg.QueryResult> {
+        return this.pool.query(
+            `SET search_path TO schema_films;
+            INSERT INTO Membre(membreID, nom, courriel, motDePasse, adressePostal, isAdmin)
+            VALUES(DEFAULT, '${member.nom}', '${member.courriel}', '${member.motDePasse}',
+            '${member.adressePostal}', 'false');`
+        );
+
+    }
     // public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
     //     const values: string[] = [
     //         hotelNo,
@@ -116,35 +126,35 @@ export class DatabaseService {
 
     // }
 
-    // public createRoom(room: Room): Promise<pg.QueryResult> {
-    //     const values: string[] = [
-    //         room.roomno,
-    //         room.hotelno,
-    //         room.typeroom,
-    //         room.price.toString()
-    //     ];
-    //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
+    public createRoom(room: Room): Promise<pg.QueryResult> {
+        const values: string[] = [
+            room.roomno,
+            room.hotelno,
+            room.typeroom,
+            room.price.toString()
+        ];
+        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
 
-    //     return this.pool.query(queryText, values);
-    // }
+        return this.pool.query(queryText, values);
+    }
 
     // // GUEST
-    // public createGuest(guestNo: string,
-    //                    nas: string,
-    //                    guestName: string,
-    //                    gender: string,
-    //                    guestCity: string): Promise<pg.QueryResult> {
-    //     // this.pool.connect();
-    //     const values: string[] = [
-    //         guestNo,
-    //         nas,
-    //         guestName,
-    //         gender,
-    //         guestCity
-    //     ];
-    //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
+    public createGuest(guestNo: string,
+                       nas: string,
+                       guestName: string,
+                       gender: string,
+                       guestCity: string): Promise<pg.QueryResult> {
+        // this.pool.connect();
+        const values: string[] = [
+            guestNo,
+            nas,
+            guestName,
+            gender,
+            guestCity
+        ];
+        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
 
-    //     return this.pool.query(queryText, values);
+        return this.pool.query(queryText, values);
     // }
 
     // // BOOKING

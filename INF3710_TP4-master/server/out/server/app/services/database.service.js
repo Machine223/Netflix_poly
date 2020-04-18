@@ -51,6 +51,99 @@ let DatabaseService = class DatabaseService {
     login(email, password) {
         return this.pool.query(`SELECT * FROM TP4.Membre m WHERE m.courriel='${email}' AND m.motDePasse='${password}';`);
     }
+    createMember(member) {
+        return this.pool.query(`SET search_path TO schema_films;
+            INSERT INTO Membre(membreID, nom, courriel, motDePasse, adressePostal, isAdmin)
+            VALUES(DEFAULT, '${member.nom}', '${member.courriel}', '${member.motDePasse}',
+            '${member.adressePostal}', 'false');`);
+    }
+    // public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
+    //     const values: string[] = [
+    //         hotelNo,
+    //         hotelName,
+    //         city
+    //     ];
+    //     const queryText: string = `INSERT INTO HOTELDB.Hotel VALUES($1, $2, $3);`;
+    //     return this.pool.query(queryText, values);
+    // }
+    // public deleteHotel(/*Todo*/): void /*TODO*/  {
+    // 	/*TODO*/
+    // }
+    // // ROOM
+    // public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
+    //     let query: string =
+    //     `SELECT * FROM HOTELDB.room
+    //     WHERE hotelno=\'${hotelNo}\'`;
+    //     if (roomType !== undefined) {
+    //         query = query.concat('AND ');
+    //         query = query.concat(`typeroom=\'${roomType}\'`);
+    //     }
+    //     if (price !== undefined) {
+    //         query = query.concat('AND ');
+    //         query = query.concat(`price =\'${price}\'`);
+    //     }
+    //     console.log(query);
+    //     return this.pool.query(query);
+    // }
+    // public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
+    //     let query: string = 'SELECT * FROM HOTELDB.room \n';
+    //     const keys: string[] = Object.keys(params);
+    //     if (keys.length > 0) {
+    //         query = query.concat(`WHERE ${keys[0]} =\'${params[keys[0]]}\'`);
+    //     }
+    //     // On enleve le premier element
+    //     keys.shift();
+    //     // tslint:disable-next-line:forin
+    //     for (const param in keys) {
+    //         const value: string = keys[param];
+    //         query = query.concat(`AND ${value} = \'${params[value]}\'`);
+    //         if (param === 'price') {
+    //             query = query.replace('\'', '');
+    //         }
+    //     }
+    //     console.log(query);
+    //     return this.pool.query(query);
+    // }
+    createRoom(room) {
+        const values = [
+            room.roomno,
+            room.hotelno,
+            room.typeroom,
+            room.price.toString()
+        ];
+        const queryText = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
+        return this.pool.query(queryText, values);
+    }
+    // // GUEST
+    createGuest(guestNo, nas, guestName, gender, guestCity) {
+        // this.pool.connect();
+        const values = [
+            guestNo,
+            nas,
+            guestName,
+            gender,
+            guestCity
+        ];
+        const queryText = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
+        return this.pool.query(queryText, values);
+        // }
+        // // BOOKING
+        // public createBooking(hotelNo: string,
+        //                      guestNo: string,
+        //                      dateFrom: Date,
+        //                      dateTo: Date,
+        //                      roomNo: string): Promise<pg.QueryResult> {
+        //     const values: string[] = [
+        //         hotelNo,
+        //         guestNo,
+        //         dateFrom.toString(),
+        //         dateTo.toString(),
+        //         roomNo
+        //     ];
+        //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
+        //     return this.pool.query(queryText, values);
+        //     }
+    }
 };
 DatabaseService = __decorate([
     inversify_1.injectable(),

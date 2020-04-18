@@ -33,6 +33,54 @@ export class SignUpModalComponent implements OnInit {
 
   ngOnInit() { }
 
+  createCurrentMember(){
+    this.currentMembre = new Membre(this.iterationNumber, `${this.firstName} ${this.lastName}`, this.password, this.emailAddress, this.postalCode, false,);
+    this.iterationNumber += 1;
+  }
+
+  public addNewMembre(newMembre: Membre): void {
+    this.communicationService.addMembre(newMembre).subscribe((res: number) => {
+        console.log(res);
+        if (res > 0) {
+          this.communicationService.filter("update");
+        }
+    });
+  }
+
+  checkIfValid(): boolean {
+    let isValid: boolean = true;
+    
+    isValid = isValid && (this.firstName !== "");
+    
+    isValid = isValid && (this.lastName !== "");
+    
+    isValid = isValid && (this.city != "");
+    
+    isValid = isValid && (this.monthly !== null);
+    
+    let regexp1 = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    
+    isValid = isValid && regexp1.test(this.emailAddress);
+    
+    let regexp2 = new RegExp(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/);
+    
+    isValid = isValid && regexp2.test(this.postalCode);
+    
+    isValid = isValid && (this.creditNumber.toString() != "");
+    
+    console.log(this.creditNumber);
+    isValid = isValid && (this.expirationMonth !== null) && (this.expirationMonth >= 1 && this.expirationMonth <= 12);
+    
+    isValid = isValid && (this.expirationYear !== null);
+    
+    isValid = isValid && (this.ccv !== null) && (this.creditNumber.toString()!= "");
+    
+    isValid = isValid && this.password === this.confirmation;
+    
+    this.createCurrentMember();
+    return isValid;
+  }
+
   signUp() {
     if (this.checkIfValid()) {
       this.addNewMembre(this.currentMembre)
@@ -46,37 +94,6 @@ export class SignUpModalComponent implements OnInit {
         data: "Le mot de passe n'est pas le même dans les deux champs!"
       })
     }
-  }
-
-  checkIfValid(): boolean {
-    let isValid: boolean = true;
-    isValid = isValid && (this.firstName !== "");
-    isValid = isValid && (this.lastName !== "");
-    isValid = isValid && (this.city != "")
-    isValid = isValid && (this.monthly !== null);
-    let regexp1 = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    isValid = isValid && regexp1.test(this.emailAddress);
-    let regexp2 = new RegExp(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/);
-    isValid = isValid && regexp2.test(this.postalCode);
-    isValid = isValid && (this.creditNumber !== null) && (Number.isInteger(this.creditNumber)) && (this.creditNumber.toString().length === 16);
-    isValid = isValid && (this.expirationMonth !== null) && (Number.isInteger(this.expirationMonth)) && (this.expirationMonth >= 1 && this.expirationMonth <= 12);
-    isValid = isValid && (this.expirationYear !== null) && (Number.isInteger(this.expirationYear));
-    isValid = isValid && (this.ccv !== null) && (Number.isInteger(this.expirationYear)) && (this.creditNumber.toString().length === 3);
-    isValid = isValid && this.password === this.confirmation;
-    this.createCurrentMember();
-    return isValid;
-  }
-  createCurrentMember(){
-    this.currentMembre = new Membre(this.iterationNumber, `${this.firstName} ${this.lastName}`, this.password, this.emailAddress, this.postalCode, false,);
-    this.iterationNumber += 1;
-  }
-  public addNewMembre(newMembre: Membre): void {
-    this.communicationService.addMembre(newMembre).subscribe((res: number) => {
-        console.log(res);
-        if (res > 0) {
-            this.communicationService.filter("update");
-        }
-    });
   }
 
 }
