@@ -57,13 +57,6 @@ let DatabaseService = class DatabaseService {
     getMembres() {
         return this.pool.query('SELECT * FROM TP4.Membre;');
     }
-    login(email, password) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const lol = this.pool.query(`set search_path to schema_films; SELECT * FROM membre WHERE courriel='admin@admin.com'; `);
-            const temp = yield lol;
-            return temp[1];
-        });
-    }
     deleteMovie(id) {
         return this.pool.query(`set search_path to schema_films; DELETE FROM film WHERE filmid='${id}';`);
     }
@@ -78,6 +71,20 @@ let DatabaseService = class DatabaseService {
         const lel = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
         // return this.pool.query('set search_path to schema_films; INSERT INT');
         return this.pool.query(`set search_path to schema_films; UPDATE Film SET titre='${film.titre}', genre='${film.genre}', dateProduction=DATE'${lel}', dureeTotalMinutes=${film.dureeTotalMinutes} WHERE Film.filmid = ${film.filmID};`);
+    }
+    login(email, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let query = this.pool.query(`SET search_path TO schema_films;
+            SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`);
+            const temp = yield query;
+            return temp[1];
+        });
+    }
+    createMember(member) {
+        return this.pool.query(`SET search_path TO schema_films;
+            INSERT INTO Membre(membreID, nom, courriel, motDePasse, adressePostal, isAdmin)
+            VALUES(DEFAULT, '${member.nom}', '${member.courriel}', '${member.motDePasse}',
+            '${member.adressePostal}', 'false');`);
     }
 };
 DatabaseService = __decorate([

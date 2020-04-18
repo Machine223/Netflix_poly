@@ -3,6 +3,7 @@ import * as pg from 'pg';
 import 'reflect-metadata';
 import { schema } from '../createSchema';
 import { data } from '../populateDB';
+import { Membre } from '../../../common/tables/Membre';
 import { Film } from '../../../common/tables/Film';
 
 @injectable()
@@ -47,14 +48,6 @@ export class DatabaseService {
         return this.pool.query('SELECT * FROM TP4.Membre;');
     }
 
-    public async login(email: String, password: String): Promise<pg.QueryResult> {
-        const lol = this.pool.query(
-            `set search_path to schema_films; SELECT * FROM membre WHERE courriel='admin@admin.com'; `,
-        );
-        const temp = await lol;
-        return temp[1];
-    }
-
     public deleteMovie(id: string): Promise<pg.QueryResult> {
         return this.pool.query(`set search_path to schema_films; DELETE FROM film WHERE filmid='${id}';`);
     }
@@ -78,7 +71,23 @@ export class DatabaseService {
             // `set search_path to schema_films; INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)VALUES(${film.titre}, ${film.genre}, ${film.dateProduction}, ${film.dureeTotalMinutes});`,
         );
     }
+    public async login(email: String, password: String): Promise<pg.QueryResult> {
+        let query = this.pool.query(
+            `SET search_path TO schema_films;
+            SELECT * FROM Membre WHERE courriel='${email}' AND motDePasse='${password}';`,
+        );
+        const temp = await query;
+        return temp[1];
+    }
 
+    public createMember(member: Membre): Promise<pg.QueryResult> {
+        return this.pool.query(
+            `SET search_path TO schema_films;
+            INSERT INTO Membre(membreID, nom, courriel, motDePasse, adressePostal, isAdmin)
+            VALUES(DEFAULT, '${member.nom}', '${member.courriel}', '${member.motDePasse}',
+            '${member.adressePostal}', 'false');`,
+        );
+    }
     // public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
     //     const values: string[] = [
     //         hotelNo,
@@ -140,12 +149,7 @@ export class DatabaseService {
     // }
 
     // public createRoom(room: Room): Promise<pg.QueryResult> {
-    //     const values: string[] = [
-    //         room.roomno,
-    //         room.hotelno,
-    //         room.typeroom,
-    //         room.price.toString()
-    //     ];
+    //     const values: string[] = [room.roomno, room.hotelno, room.typeroom, room.price.toString()];
     //     const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
 
     //     return this.pool.query(queryText, values);

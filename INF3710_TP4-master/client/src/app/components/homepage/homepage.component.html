@@ -6,9 +6,9 @@
                 <mat-grid-tile class="tile-content">
                     <mat-form-field>
                         <input matInput 
-                        value="logInEmailAddress" 
+                        value="EmailAddress" 
                         placeholder="Adresse courriel" 
-                        [(ngModel)]="loginEmailAddress"/>
+                        [(ngModel)]="EmailAddress"/>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile class="tile-content">
@@ -21,10 +21,10 @@
                     </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>
-            <button mat-raised-button id="signUp" (click)="this.signUp()">S'inscrire</button>
+            <button mat-raised-button id="signUp" (click)="signUp()">S'inscrire</button>
             <button mat-raised-button id="setupDB" (click)="createDataBase()" mat-button >
                 Initialiser base de données</button>
-            <button mat-raised-button id="confirm" (click)="this.logIn()">Se connecter</button>
+            <button mat-raised-button id="confirm" (click)="this.memberLogIn()">Se connecter</button>
         </div>
     </div>
 </div>

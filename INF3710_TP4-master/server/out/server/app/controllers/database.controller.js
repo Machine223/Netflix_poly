@@ -80,10 +80,28 @@ let DatabaseController = class DatabaseController {
                 console.error(e.stack);
             });
         });
+        router.post('/membres/insert', (req, res, next) => {
+            const membre = {
+                membreID: req.body.membreID,
+                nom: req.body.nom,
+                courriel: req.body.courriel,
+                motDePasse: req.body.motDePasse,
+                adressePostal: req.body.adressePostal,
+                isAdmin: req.body.isAdmin,
+            };
+            console.log(membre);
+            this.databaseService
+                .createMember(membre)
+                .then((result) => {
+                res.json(result.rowCount);
+            })
+                .catch((e) => {
+                console.error(e.stack);
+                res.json(-1);
+            });
+        });
         router.get('/login', (req, res, next) => {
-            // Send the request to the service and send the response
-            console.log('hello from login');
-            console.log(req.query.email, req.query.password, '----------------------');
+            console.log('----------------------------------');
             this.databaseService
                 .login(req.query.email, req.query.password)
                 .then((result) => {
