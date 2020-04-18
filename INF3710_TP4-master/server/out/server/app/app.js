@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -76,7 +75,7 @@ let Application = class Application {
 Application = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.default.DatabaseController)),
-    __metadata("design:paramtypes", [typeof (_a = typeof database_controller_1.DatabaseController !== "undefined" && database_controller_1.DatabaseController) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [database_controller_1.DatabaseController])
 ], Application);
 exports.Application = Application;
 //# sourceMappingURL=app.js.map
