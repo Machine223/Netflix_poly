@@ -1,22 +1,19 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.data = `SET search_path =  schema_films;
+-- DATA insertion
+SET search_path TO schema_films;
 
 INSERT INTO Membre(membreID , nom, courriel, motDePasse, adressePostal, isAdmin)
-VALUES
-(DEFAULT, 'ADMIN', 'admin@admin.com', 'admin123', 'H4A1E1', true),
-(DEFAULT, 'ALEX GIBBS', 'alexander@gmail.com', 'alex1234', 'H4A1E1', false),
-(DEFAULT, 'ISMAEL FABER','ismael@gmail.com', 'ismae345', 'H2L2G2', false),
-(DEFAULT, 'ALEXA REYNOLDS','alexa@gmail.com', 'alexa32',  'H1W1A3', false),
-(DEFAULT, 'LAURA DONOVAN', 'laura@gmail.com', 'laura28', 'H1Y1X6', false),
-(DEFAULT, 'XAVI GIBBS', 'xavi@outlook.com', 'xavi243',  'H2A3M4', false),
-(DEFAULT, 'LEO CHARLSON', 'leo@gmail.com', 'leomama23', 'H4L2H4', false);
+VALUES  (DEFAULT, 'ADMIN', 'admin@admin.com', 'admin123', 'H4A1E1', true),
+        (DEFAULT, 'ALEX GIBBS', 'alexander@gmail.com', 'alex1234', 'H4A1E1', false),
+        (DEFAULT, 'ISMAEL FABER','ismael@gmail.com', 'ismae345', 'H2L2G2', false),
+        (DEFAULT, 'ALEXA REYNOLDS','alexa@gmail.com', 'alexa32',  'H1W1A3', false),
+        (DEFAULT, 'LAURA DONOVAN', 'laura@gmail.com', 'laura28', 'H1Y1X6', false),
+        (DEFAULT, 'XAVI GIBBS', 'xavi@outlook.com', 'xavi243',  'H2A3M4', false),
+        (DEFAULT, 'LEO CHARLSON', 'leo@gmail.com', 'leomama23', 'H4L2H4', false);
 
 INSERT INTO MembreMensuel(membreID, prixAbonnement, dateDebut, dateEcheance)
-VALUES
-(4, 15.00, DATE'2019-04-21', DATE'2020-03-21'),
-(5, 15.00, DATE'2019-04-21', DATE'2020-03-21'),
-(6, 15.00, DATE'2019-04-21', DATE'2020-03-21');
+VALUES  (4, 15.00, DATE'2019-04-21', DATE'2020-03-21'),
+        (5, 15.00, DATE'2019-04-21', DATE'2020-03-21'),
+        (6, 15.00, DATE'2019-04-21', DATE'2020-03-21');
 
 INSERT INTO MembreVue (membreID, nbFilmVue)
 VALUES
@@ -123,6 +120,3 @@ VALUES
 (3,3, 20, 80 ,  DATE'2018-01-01'),
 (3,4, 30, 120,  DATE'2019-01-01'),
 (4,5, 15, 60 ,  DATE'2019-01-01');
-
-;`;
-//# sourceMappingURL=populateDB.js.map

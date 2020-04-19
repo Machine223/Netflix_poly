@@ -3,7 +3,6 @@ export class Film {
   titre: string;
   genre: string;
   dureeTotalMinutes: number;
-  // director: string;
   dateProduction: number;
 
   constructor(filmID: number, titre: string, genre: string, dureeTotalMinutes: number, dateProduction: number) {
@@ -11,7 +10,6 @@ export class Film {
     this.titre = titre;
     this.genre = genre;
     this.dureeTotalMinutes = dureeTotalMinutes;
-  //   this.director = director;
     this.dateProduction = dateProduction;
   }
 }

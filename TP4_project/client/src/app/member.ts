@@ -1,7 +1,4 @@
-export interface EmailAddress {
-    local: string,
-    domain: string;
-}
+
 
 export interface PostalAddress {
     addressNumber: number;
@@ -17,11 +14,30 @@ export interface Date {
     year: number;
 }
 
-export interface creditCard {
-    number: number;
-    titulaire: string;
-    expirationDate: Date;
-    ccv: number;
+// export interface creditCard {
+//     number: number;
+//     titulaire: string;
+//     expirationDate: Date;
+//     ccv: number;
+// }
+
+// export interface PostalAddress {
+//     addressNumber: number;
+//     streetName: string;
+//     appartmentNumber: number | null;
+//     postalCode: string;
+//     city: string;
+// }
+
+export interface Date {
+    day: number;
+    month: number;
+    year: number;
+}
+
+export interface EmailAddress {
+    local: string,
+    domain: string;
 }
 
 export class Membre {

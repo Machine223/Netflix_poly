@@ -1,4 +1,4 @@
-export enum SortType {
+export enum TypeMovie {
     top,
     bottom,
     none
