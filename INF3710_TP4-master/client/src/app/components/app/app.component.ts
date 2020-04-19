@@ -1,16 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { HomepageComponent } from "../homepage/homepage.component";
-// import { AdminComponent } from "../admin/admin.component";
+import { StartingPageComponent } from "../homepage/StartingPage.component";
 import { Routes } from "@angular/router";
-import { FilmssComponent } from "../filmss/filmss.component";
 import { NewFilmComponent } from "../new-film/new-film.component";
 import { UpdateComponentComponent } from "../update-component/update-component.component";
+import { FilmsComponent } from '../films/films.component';
 
 export const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: HomepageComponent },
-  { path: "admin", component: FilmssComponent },
-  // { path: "admin", component: AdminComponent },
+  { path: "home", component: StartingPageComponent },
+  { path: "admin", component: FilmsComponent },
   { path: "new", component: NewFilmComponent },
   { path: "update", component: UpdateComponentComponent }
 ];

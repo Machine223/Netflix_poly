@@ -9,10 +9,10 @@ import { Membre } from "../../Membre";
 
 @Component({
   selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  templateUrl: './StartingPage.component.html',
+  styleUrls: ['./StartingPage.component.scss']
 })
-export class HomepageComponent implements OnInit {
+export class StartingPageComponent implements OnInit {
   public activeMember: Membre | null = null;
   public password: string = "";
   public EmailAddress: string = "";

@@ -6,8 +6,9 @@ BEGIN
 	new.cout = 
 	(
     CASE
-    WHEN (select distinct(adressePostal) from membre natural join ACHATDVD 
-    where membre.membreid = (select membreid from new)) = "H4A1E1" THEN 50
+    WHEN (select distinct(
+    ) from membre natural join ACHATDVD 
+    where membre.membreid = ((select membreid from new) = "H4A1E1") THEN 50
     ELSE 25
 	END
 	);

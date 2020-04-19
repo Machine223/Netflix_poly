@@ -25,14 +25,13 @@ import { ViewMovieModalComponent } from "./components/modals/view-movie-modal/vi
 import { AddMovieModalComponent } from "./components/modals/add-movie-modal/add-movie-modal.component";
 import { AddParticipantModalComponent } from "./components/modals/add-participant-modal/add-participant-modal.component";
 import { SignUpModalComponent } from "./components/modals/sign-up-modal/sign-up-modal.component";
-import { HomepageComponent } from "./components/homepage/homepage.component";
+import { StartingPageComponent } from "./components/homepage/StartingPage.component";
 import { RouterModule } from "@angular/router";
 import { MemberComponent } from "./components/member/member.component";
-import { AdminComponent } from "./components/admin/admin.component";
 import { CommunicationService } from "./components/services/communication-service/communication.service";
 import { MemberService } from "./components/services/member-service/memberService";
 import { MembersGridComponent } from "./components/members-grid/members-grid.component";
-import { FilmssComponent } from "./components/filmss/filmss.component";
+import { FilmsComponent } from "./components/films/films.component";
 import { MatListModule } from "@angular/material/list";
 import { NewFilmComponent } from "./components/new-film/new-film.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -49,11 +48,10 @@ import { UpdateComponentComponent } from './components/update-component/update-c
     AddMovieModalComponent,
     AddParticipantModalComponent,
     SignUpModalComponent,
-    HomepageComponent,
+    StartingPageComponent,
     MemberComponent,
-    AdminComponent,
     MembersGridComponent,
-    FilmssComponent,
+    FilmsComponent,
     NewFilmComponent,
     UpdateComponentComponent
   ],

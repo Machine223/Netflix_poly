@@ -42,10 +42,10 @@ export class NewFilmComponent implements OnInit {
     };
     this.communication.addFilm(film).subscribe(lol => {
       alert("Sauvegardé avec succès!");
-      this.router.navigateByUrl("/films");
+      this.router.navigateByUrl("/admin");
     });
   }
   annuler() {
-    this.router.navigateByUrl("/films");
+    this.router.navigateByUrl("/admin");
   }
 }

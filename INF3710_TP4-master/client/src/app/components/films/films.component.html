@@ -1,52 +1,68 @@
-<p>films works!</p>
-<!-- <app-toolbar></app-toolbar>
-<app-movies-grid></app-movies-grid> -->
 
-
-<div id="bd-button">
-    <button mat-raised-button id="importer-films" (click)="this.getMovies()" class='left-item' mat-button >Importer les films</button>
-</div>
-<!-- <ul>
-    <li *ngFor="let mo of movies;">
-        {{mo}}
-    </li>
-</ul> -->
-
-<!-- <mat-grid-list id = movies *ngFor="let movie of movies;"> -->
-    <mat-grid-list>
-        <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
-            <div class='tile-content'>
-                lol
+  <div id="app">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" >
+            <span id="title"> NETFLIX POLY </span>
+            <!-- <i id="iconSearch" class="material-icons">search</i>  -->
+          </a>
+          <div class="navbar-menu">
+            <div class="navbar-end">
+              <!-- Upload button here -->
             </div>
-        </mat-grid-tile>
-    </mat-grid-list>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+<body id='body'>
+   
+  <div id="bd-button">
+    <div id='listHeader'>
+      <button
+        mat-raised-button
+        id="importer-films"
+        (click)="this.getMovies()"
+        class="left-item"
+        mat-button
+      >
+      <i class="material-icons">view_list</i> Lister les films
+      </button>
+      <button
+        mat-raised-button
+        id="importer-films"
+        (click)="this.navigateNew()"
+        class="left-item"
+        mat-button
+      >
+      <i class="material-icons">add_box</i> Créer nouveau film
+      </button>
+      <button
+        mat-raised-button
+        id="importer-films"
+        (click)="this.reset()"
+        class="left-item"
+        mat-button
+      >
+      <i class="material-icons">cached</i>Réinitialiser la BD
+      </button>
+    </div>
+
+    <ul>
+      <li *ngFor="let mo of movies; let i = index">
+        {{ mo.filmID }} {{ mo.titre }} {{ mo.genre }} {{ mo.dureeTotalMinutes }}
+        {{ mo.dateProduction }}
+        
+        <button style="background-color:rgba(10, 10, 10, 0.698);color:white;" mat-raised-button [attr.data-index]="i">Détails</button>
+        <button style="background-color:rgba(0, 26, 255, 0.698);color:white;" mat-raised-button [attr.data-index]="i">Visionner</button>
+        <button style="background-color:#f44336;color:white;" mat-raised-button (click)="removeMovie(i)" [attr.data-index]="i">Supprimer</button>
+        <button style="background-color:#2E7D32;color:white;" mat-raised-button (click)="updateMovie(i)" [attr.data-index]="i">Modifier</button>     
+      </li>
+    </ul>
+
     
-<!-- </mat-grid-list> -->
+  </div>
+</body>
 
-    <!-- <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
-        <div class='tile-content'>
-            {{movie.genre}}
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
-        <div class='tile-content'>
-            {{movie.dureeTotalMinutes}}
-        </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
-        <div class='tile-content'>
-            {{movie.dateProduction}}
-        </div>
-    </mat-grid-tile> -->
-    <!-- <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
-        <div class='tile-content'>
-            {{movie.director}}
-        </div>
-    </mat-grid-tile> -->
-<!--                 
-    <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
-        <div class='tile-content'>
-            {{movie.dateProduction}}
-        </div>
-    </mat-grid-tile>
+<!-- Source :https://cloudinary.gitbook.io/build-a-mini-netflix-clone-with-vue/header-and-navigation -->

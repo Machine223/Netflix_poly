@@ -52,10 +52,10 @@ export class UpdateComponentComponent implements OnInit {
     };
     this.communication.modifyFilm(film).subscribe(lol => {
       alert("Modifié avec succès");
-      this.router.navigateByUrl("/films");
+      this.router.navigateByUrl("/admin");
     });
   }
   annuler() {
-    this.router.navigateByUrl("/films");
+    this.router.navigateByUrl("/admin");
   }
 }
