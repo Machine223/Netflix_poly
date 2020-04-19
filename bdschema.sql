@@ -1,27 +1,28 @@
--- Membre(membreID, motDePassse, nom, adressePostal)
+-- Membre(membreID, nom,courriel, motDePassse, adressePostal, isAdmin)
 -- PK: membreID
 
--- MembreMensuel(adresseMembre, prixAbonnement, dateDébut, dateEchéance)
--- PK: adresseMembre
--- FK: adresseMembre REFERENCES Membre(membreID)
+-- MembreMensuel(membreID, prixAbonnement, dateDebut, dateEcheance)
+-- PK: membreID
+-- FK: membreID REFERENCES Membre(membreID)
 
--- MembreVue(adresseMembre, film_payperview)
--- PK: adresseMembre
--- FK: adresseMembre REFERENCES Membre(membreID)
+-- MembreVue(membreID, film_payperview)
+-- PK: membreID
+-- FK: membreID REFERENCES Membre(membreID)
 
--- CarteCredit(numéro, titulaire, adresseMembre, dateExpiration, ccv)
--- PK: numéro
--- FK: adresseMembre REFERENCES Membre(membreID) -- discutable (ajouté pas spécifié)
+-- CarteCredit(carteID,membreID, numero, titulaire, dateExpiration, CCV)
+-- PK: (carteID,membreID)
+-- FK: adresseMembre REFERENCES Membre(membreID) 
+-- FK: membreID REFERENCES Membre(membreID) 
 
--- Film(numéro, titre, genre, dateProduction, duréeTotal)
--- PK: numéro
+-- Film(filmID, titre, genre, dateProduction, duréeTotal)
+-- PK: filmID
 
--- DVD(numéro, filmID)
--- PK: numéro
+-- DVD(dvdID , numeroInstance, filmID)
+-- PK: (dvdID,filmID)
 -- FK: filmID REFERENCES Film(filmID)
 
 -- Personne(personneID, nom, age sexe, nationalité)
--- PK: id
+-- PK: personneID
 
 -- Participation(personneID, filmID, typeRole, salaire)
 -- PK: (personneID, filmID, typeRole)
@@ -41,15 +42,15 @@
 -- FK: oscarID REFERENCES Oscar(oscarID)
 -- FK: filmID REFERENCES Film(filmID)
 
--- VisionnementFilm(adresseMembre, numéroFilm, cout, dateVisionnement, duréVisionnement)
--- PK: (adresseMembre, numéroFilm)
--- FK: numéroFilm REFERENCES Film(filmID)
--- FK: adresseMembre REFERENCES Membre(membreID)
+-- VisionnementFilm(membreID, filmID, cout, dateVisionnement, duréVisionnement)
+-- PK: (membreID, filmID)
+-- FK: filmID REFERENCES Film(filmID)
+-- FK: membreID REFERENCES Membre(membreID)
 
--- AchatDVD(adresseMembre, numéroDVD, cout, distance, dateEnvoi)
--- PK: (adresseMembre, numéroDVD)
--- FK: numéroDVD REFERENCES DVD(numéro)
--- FK: adresseMembre REFERENCES Membre(membreID)
+-- AchatDVD(achatID, membreID, dvdID, cout, distance, dateEnvoi)
+-- PK: (achatID)
+-- FK: dvdID REFERENCES DVD(dvdID)
+-- FK: membreID REFERENCES Membre(membreID)
 
 
 -- CREATE DATABASE TP4;
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS Membre(
     membreID SERIAl, 
     nom VARCHAR (20),
     courriel VARCHAR (40),
-    motDePasse VARCHAR(255) NOT NULL, --ENCRYPTED check function or type
+    motDePasse VARCHAR(255) NOT NULL, 
     adressePostal zip_code NOT NULL,
     isAdmin BOOLEAN NOT NULL,
     PRIMARY KEY (membreID)
@@ -185,8 +186,8 @@ CREATE TABLE IF NOT EXISTS VisionnementFilm(
 
 CREATE TABLE IF NOT EXISTS AchatDVD(
     achatID SERIAL,
-    membreID INTEGER,
-    dvdID INTEGER,
+    membreID INTEGER NOT NULL,
+    dvdID INTEGER NOT NULL,
     cout NUMERIC(4, 2) NOT NULL , 
     distance INTEGER,
     dateEnvoi DATE NOT NULL,

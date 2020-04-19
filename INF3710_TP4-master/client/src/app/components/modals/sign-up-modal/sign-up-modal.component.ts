@@ -49,34 +49,20 @@ export class SignUpModalComponent implements OnInit {
 
   checkIfValid(): boolean {
     let isValid: boolean = true;
-    
     isValid = isValid && (this.firstName !== "");
-    
     isValid = isValid && (this.lastName !== "");
-    
     isValid = isValid && (this.city != "");
-    
     isValid = isValid && (this.monthly !== null);
-    
     let regexp1 = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    
     isValid = isValid && regexp1.test(this.emailAddress);
-    
     let regexp2 = new RegExp(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/);
-    
     isValid = isValid && regexp2.test(this.postalCode);
-    
     isValid = isValid && (this.creditNumber.toString() != "");
-    
     console.log(this.creditNumber);
     isValid = isValid && (this.expirationMonth !== null) && (this.expirationMonth >= 1 && this.expirationMonth <= 12);
-    
     isValid = isValid && (this.expirationYear !== null);
-    
     isValid = isValid && (this.ccv !== null) && (this.creditNumber.toString()!= "");
-    
     isValid = isValid && this.password === this.confirmation;
-    
     this.createCurrentMember();
     return isValid;
   }
