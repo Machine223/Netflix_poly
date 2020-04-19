@@ -8,8 +8,7 @@ export class MemberService {
   defaultMember: Membre | null = null;
   private activeMember = new BehaviorSubject(this.defaultMember);
   obsMember = this.activeMember.asObservable();
-  constructor() {
-  }
+  constructor() { }
   setActiveMember(newMember: Membre | null) {
     console.log('setActiveMember');
     this.activeMember.next(newMember);

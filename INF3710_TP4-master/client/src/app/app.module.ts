@@ -12,9 +12,7 @@ import {
   MatSelectModule,
   MatNativeDateModule
 } from "@angular/material";
-import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { MatMenuModule } from "@angular/material/menu";
-import { MoviesGridComponent } from "./components/movies-grid/movies-grid.component";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -38,8 +36,6 @@ import { UpdateComponentComponent } from './components/update-component/update-c
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
-    MoviesGridComponent,
     EditModalComponent,
     ErrorModalComponent,
     ViewMovieModalComponent,
@@ -75,7 +71,6 @@ import { UpdateComponentComponent } from './components/update-component/update-c
   providers: [
     MatDialogModule,
     CommunicationService,
-    MoviesGridComponent,
     MemberService,
     MatDatepickerModule
   ],

@@ -31,7 +31,7 @@ export class FilmsComponent implements OnInit {
     this.communicationService
       .deleteMovie(this.movies[idx].filmID)
       .subscribe((resp: any) => {
-        console.log("111111111");
+        console.log("---------------------");
         this.getMovies();
       });
   }
