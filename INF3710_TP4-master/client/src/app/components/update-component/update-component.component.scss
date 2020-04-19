@@ -1,0 +1,113 @@
+#app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #000;
+    height: 100px;
+}
+.navbar {
+    background-color: transparent;
+    z-index: 2;
+    padding: 30px 0;
+}
+.navbar-item {
+    height: 25px;
+    width: auto;
+}
+
+::selection {
+    color: none;
+    background: none;
+}
+
+#body {
+    background-color: #141414f5;
+}
+
+
+
+#listHeader{
+    overflow: hidden;
+    background-color: rgba(78, 78, 78, 0.308);
+}
+
+#title {
+    padding-left: 50px;
+    color: red;
+    display: block;
+    text-align: left;
+    font-weight: 900;
+    font-size: 150%;
+}
+
+p{
+    color: white;
+    text-align: right;
+    font-size: 35px;
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    font-size: 100%;
+}
+
+#bd-button{
+    width: 92%;
+    height: 60%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    right: 30px;
+    margin: auto;
+    background-color: rgba(128, 128, 128, 0.034);
+}
+
+#importer-films{
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    // margin: 15px;
+    background-color:  rgba(255, 255, 255, 0.849);
+    color: black;
+}
+
+
+#formMovie{
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 90px;
+    bottom: 0;
+    left: 0%;
+    right: 30px;
+    margin: 50px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.055);
+    border-radius: 25px;
+}
+
+mat-label{
+    color: white;
+    padding: 10px;
+}
+mat-icon-button{
+    color: white;
+}
+
+input.ng-invalid {
+    background-color: rgba(221, 221, 221, 0.37);
+    float: center;
+    clear: both;
+}
+input[type=text], select {
+    height: 45px;
+    width: 88%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-flex;
+    border: 3px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+  

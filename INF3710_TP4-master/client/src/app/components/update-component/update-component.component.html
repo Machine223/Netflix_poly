@@ -1,14 +1,52 @@
-<p>Titre: <input [(ngModel)]="titre" /></p>
-<p>Genre: <input [(ngModel)]="genre" /></p>
-<p>Duree: <input [(ngModel)]="duree" /></p>
-<p>
-  Date:
-  <mat-form-field>
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</p>
-<button (click)="saveFilm()">Modifier</button>
-<button (click)="annuler()">Annuler</button>
+<div id="app">
+  <nav
+    class="navbar is-fixed-top"
+    role="navigation"
+    aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <span id="title"> NETFLIX POLY </span>
+          <!-- <i id="iconSearch" class="material-icons">search</i>  -->
+        </a>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <!-- Upload button here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<body id="body">
+  <div id='formMovie'>
+    <p>Ajouter un film:</p>
+    <p>Titre :   <input type="text" [(ngModel)]="titre" required/></p>
+    <p>Genre :   <input type="text" [(ngModel)]="genre" required/></p>
+    <p>Duree :   <input type="text" [(ngModel)]="duree" required/></p>
+    <p>
+      Date:
+      <mat-form-field>
+        <mat-label>Choisir la date </mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"  style="color:white;font-size: 150%;"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+    <button
+      mat-raised-button
+      id="importer-films"
+      (click)="saveFilm()"
+      class="left-item"
+      mat-button
+    > Sauvegarder</button>
+    <button
+      mat-raised-button
+      id="importer-films"
+      (click)="annuler()"
+      class="left-item"
+      mat-button
+    > Annuler</button>
+  </div>
+</body>
