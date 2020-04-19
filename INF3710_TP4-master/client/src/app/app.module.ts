@@ -27,10 +27,8 @@ import { AddParticipantModalComponent } from "./components/modals/add-participan
 import { SignUpModalComponent } from "./components/modals/sign-up-modal/sign-up-modal.component";
 import { StartingPageComponent } from "./components/homepage/StartingPage.component";
 import { RouterModule } from "@angular/router";
-import { MemberComponent } from "./components/member/member.component";
 import { CommunicationService } from "./components/services/communication-service/communication.service";
 import { MemberService } from "./components/services/member-service/memberService";
-import { MembersGridComponent } from "./components/members-grid/members-grid.component";
 import { FilmsComponent } from "./components/films/films.component";
 import { MatListModule } from "@angular/material/list";
 import { NewFilmComponent } from "./components/new-film/new-film.component";
@@ -49,8 +47,6 @@ import { UpdateComponentComponent } from './components/update-component/update-c
     AddParticipantModalComponent,
     SignUpModalComponent,
     StartingPageComponent,
-    MemberComponent,
-    MembersGridComponent,
     FilmsComponent,
     NewFilmComponent,
     UpdateComponentComponent
@@ -81,7 +77,6 @@ import { UpdateComponentComponent } from './components/update-component/update-c
     CommunicationService,
     MoviesGridComponent,
     MemberService,
-    MembersGridComponent,
     MatDatepickerModule
   ],
   bootstrap: [AppComponent],

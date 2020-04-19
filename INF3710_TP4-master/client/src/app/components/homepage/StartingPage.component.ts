@@ -15,7 +15,7 @@ import { Membre } from "../../Membre";
 export class StartingPageComponent implements OnInit {
   public activeMember: Membre | null = null;
   public password: string = "";
-  public EmailAddress: string = "";
+  public emailAddress: string = "";
 
   constructor(public router: Router,
               public errorDialog: MatDialog, 
@@ -34,9 +34,9 @@ export class StartingPageComponent implements OnInit {
     console.log('memberLogIn is called');
     if (this.communicationService.getDBcreated()) {
       let isValid: boolean = false;
-      console.log(this.EmailAddress);
+      console.log(this.emailAddress);
       console.log(this.password);
-      this.communicationService.login(this.EmailAddress, this.password).subscribe((membres: Membre[]) => {
+      this.communicationService.login(this.emailAddress, this.password).subscribe((membres: Membre[]) => {
         console.log('communicationService.login work');  
         console.log(membres);  
         isValid = membres.length > 0 ? true : false;
@@ -67,7 +67,7 @@ export class StartingPageComponent implements OnInit {
         data: "Veuillez initialiser la base de données"
       });
     }
-}
+  }
 
 
   public createDataBase(): void {
