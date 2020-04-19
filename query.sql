@@ -49,7 +49,7 @@ GROUP BY Film.genre, Membre.nom;
 
 -- 4. Trouvez le nombre total de films groupés par réalisateur.
 
-SELECT P.nom, COUNT(F.filmID) as TotalFilmsRealisateur
+SELECT P.nom, COUNT(F.filmID) AS TotalFilmsRealisateur
 FROM Participation R, Personne P, Film F
 WHERE R.personneID = P.personneID AND R.filmID = F.filmID AND R.typeRole = 'réalisateur'
 GROUP BY P.nom;
@@ -107,19 +107,17 @@ HAVING COUNT(VisionnementFilm.filmID)>10;
 
 -- TODO: Faire la date de naissance a place de l'age
 SELECT Personne.nom, Personne.age,
-FROM Personne NATURAL JOIN
-    (
+FROM Personne NATURAL JOIN(
     SELECT Film.filmID
     FROM Film NATURAL JOIN VisionnementFilm
     GROUP BY Film.filmID
     HAVING COUNT(Film.filmID) > (
         SELECT AVG(nombrevisionnements) FROM (
-            SELECT COUNT(Film.filmID) as nombreVisionnements
+            SELECT COUNT(Film.filmID) AS nombreVisionnements
             FROM Film NATURAL JOIN VisionnementFilm
-            GROUP BY Film.filmID
-            ) as FilmCount
+            GROUP BY Film.filmID) AS FilmCount
         )
-    ) as FilmsPopulaires
+) AS FilmsPopulaires
 
 
 -- 9. Trouvez le nom du ou des réalisateurs qui ont réalisé les films qui ont le plus grand nombre
@@ -127,92 +125,90 @@ FROM Personne NATURAL JOIN
 -- films qui ont été nominés aux oscars.
 
 
-select distinct(personne.nom) from personne natural join participation where
-personne.personneid in 
-(
-select personneid from (
+SELECT DISTINCT(personne.nom) FROM personne NATURAL JOIN participation WHERE
+personne.personneid IN (
+	SELECT personneid FROM (
 
-select personneid, count(filmid) as nominations from
-	(
-		select * from participation natural join 
+		SELECT personneid, count(filmid) AS nominations FROM
 			(
-				select distinct(filmid) from nominationoscars
-			) as filmsNomines
-	) as lol
-	group by personneid
-	
-) as nominationCount
-WHERE nominations = (select max(nominations) from
-(
-	select personneid, count(filmid) as nominations from
-	(
-		select * from participation natural join 
+				SELECT * FROM participation NATURAL JOIN 
+					(
+						SELECT distinct(filmid) FROM nominationoscars
+					) AS filmsNomines
+			) AS lol
+			GROUP BY personneid
+			
+		) AS nominationCount
+	WHERE nominations = (SELECT max(nominations) FROM
+		(
+			SELECT personneid, count(filmid) AS nominations FROM
 			(
-				select distinct(filmid) from nominationoscars
-			) as filmsNomines
-	) as lol
-	group by personneid
-) as nominationCount
-	where personneid IN (
-	select personneid from participation 
-	where typerole = 'producteur'
-)
-) 
-	) and typerole = 'producteur'
+				SELECT * FROM participation NATURAL JOIN 
+					(
+						SELECT distinct(filmid) FROM nominationoscars
+					) AS filmsNomines
+			) AS lol
+			GROUP BY personneid
+		) AS nominationCount
+			where personneid IN (
+			SELECT personneid FROM participation 
+			where typerole = 'producteur'
+		)
+	)	
+) and typerole = 'producteur'
 
 
 -- 10. Trouvez le nom des réalisateurs qui ont été le plus souvent nominés aux oscars mais qui
 -- n’ont jamais gagné d’oscar
 
-select distinct(personne.nom) from personne natural join participation where
-personne.personneid in 
+SELECT distinct(personne.nom) FROM personne NATURAL JOIN participation WHERE
+personne.personneid IN 
 (
-select personneid from (
+SELECT personneid FROM (
 
-select personneid, count(filmid) as nominations from
-	(
-		select * from participation natural join 
-			(
-				select distinct(filmid) from nominationoscars
-			) as filmsNomines
-	) as lol
-	group by personneid
-	
-) as nominationCount
-WHERE nominations = (select max(nominations) from
+	SELECT personneid, count(filmid) AS nominations FROM
+		(
+			SELECT * FROM participation NATURAL JOIN 
+				(
+					SELECT distinct(filmid) FROM nominationoscars
+				) AS filmsNomines
+		) AS lol
+		GROUP BY personneid
+		
+	) AS nominationCount
+WHERE nominations = (SELECT max(nominations) FROM
 (
-	select personneid, count(filmid) as nominations from
+	SELECT personneid, count(filmid) AS nominations FROM
 	(
-		select * from participation natural join 
+		SELECT * FROM participation NATURAL JOIN 
 			(
-				select distinct(filmid) from nominationoscars
-			) as filmsNomines
-	) as lol
-	group by personneid
-) as nominationCount
-	where personneid IN (
-	select personneid from participation 
-	where typerole = 'réalisateur'
-)
-) 
-	) and typerole = 'réalisateur'
+				SELECT distinct(filmid) FROM nominationoscars
+			) AS filmsNomines
+	) AS lol
+	GROUP BY personneid
+) AS nominationCount
+	WHERE personneid IN (
+		SELECT personneid FROM participation 
+		WHERE typerole = 'réalisateur'
+	)
+)) and typerole = 'réalisateur'
 
 
 
 
 -- 11. Trouvez les films (titre, année) qui ont gagné le plus d’oscars. Listez également leur
 -- réalisateurs et leurs acteurs
-select titre, dateProduction from film natural join 
+SELECT titre, dateProduction FROM film NATURAL JOIN 
 (
-	select filmid, count(categorie) from GagnantOscars
-	group by filmid
-) as nmbGagne
+	SELECT filmid, count(categorie) FROM GagnantOscars
+	GROUP BY filmid
+) AS nmbGagne
 where nmbGagne.count = 
 (
-select max(countGagne) from (
-	select count(categorie) as countGagne from GagnantOscars
-	group by filmid
-) as subquery
+SELECT max(countGagne) FROM (
+	SELECT count(categorie) AS countGagne FROM GagnantOscars
+	GROUP BY filmid
+) AS subquery
 )
 
 
@@ -221,34 +217,34 @@ select max(countGagne) from (
 -- 12. Quelles paires de femmes québécoises ont le plus souvent travaillé ensemble dans différents
 -- films ?
 
-select nbContacts, p1, p2, pers1.nom as nom1, pers2.nom as nom2 from(
-select COUNT(p1.filmid) as nbContacts, p1.personneid as p1, p2.personneid as p2 from participation as p1 join participation as p2 on p2.filmid = p1.filmid
-where p1.personneid != p2.personneid
-group by(p1.personneid, p2.personneid)
-) as rencontres
-join personne as pers1 on rencontres.p1 = pers1.personneid 
-join personne as pers2 on rencontres.p2 = pers2.personneid
-where pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and pers2.nationalite = 'Quebec'
+SELECT nbContacts, p1, p2, pers1.nom AS nom1, pers2.nom AS nom2 FROM(
+SELECT COUNT(p1.filmid) AS nbContacts, p1.personneid AS p1, p2.personneid AS p2 FROM participation AS p1 JOIN participation AS p2 ON p2.filmid = p1.filmid
+WHERE p1.personneid != p2.personneid
+GROUP BY(p1.personneid, p2.personneid)
+) AS rencontres
+JOIN personne AS pers1 ON rencontres.p1 = pers1.personneid 
+JOIN personne AS pers2 ON rencontres.p2 = pers2.personneid
+WHERE pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and pers2.nationalite = 'Quebec'
 and nbContacts =
 (
-select max (nbcontacts) from 
+SELECT max (nbcontacts) FROM 
 (
-select nbContacts, p1, p2, pers1.nom as nom1, pers2.nom as nom2 from(
-select COUNT(p1.filmid) as nbContacts, p1.personneid as p1, p2.personneid as p2 from participation as p1 join participation as p2 on p2.filmid = p1.filmid
-where p1.personneid != p2.personneid
-group by(p1.personneid, p2.personneid)
-) as rencontres
-join personne as pers1 on rencontres.p1 = pers1.personneid 
-join personne as pers2 on rencontres.p2 = pers2.personneid
-where pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and pers2.nationalite = 'Quebec'
-) as maxContacts
+SELECT nbContacts, p1, p2, pers1.nom AS nom1, pers2.nom AS nom2 FROM(
+SELECT COUNT(p1.filmid) AS nbContacts, p1.personneid AS p1, p2.personneid AS p2 FROM participation AS p1 JOIN participation AS p2 ON p2.filmid = p1.filmid
+WHERE p1.personneid != p2.personneid
+GROUP BY(p1.personneid, p2.personneid)
+) AS rencontres
+JOIN personne AS pers1 ON rencontres.p1 = pers1.personneid 
+JOIN personne AS pers2 ON rencontres.p2 = pers2.personneid
+WHERE pers1.sexe = 'F' and pers2.sexe = 'F' and pers1.nationalite = 'Quebec' and pers2.nationalite = 'Quebec'
+) AS maxContacts
 )
 
 
 -- 13. Comment a évolué la carrière de Woody Allen ? (On veut connaitre tous ses rôles dans un
 -- film (réalisateur, acteur, etc.) du plus ancien au plus récent)
 
-select typerole from personne natural join participation natural join film
+SELECT typerole FROM personne NATURAL JOIN participation NATURAL JOIN film
 where nom = 'Woody Allen'
 order by(dateproduction)
 
