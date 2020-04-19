@@ -54,4 +54,8 @@ export class FilmsComponent implements OnInit {
   navigateNew() {
     this.router.navigateByUrl("/new");
   }
+
+  lol() {
+    alert("la fonctionnalité n'est pas encore implementé");
+  }
 }

@@ -1,25 +1,27 @@
-
-  <div id="app">
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item" >
-            <span id="title"> NETFLIX POLY </span>
-            <!-- <i id="iconSearch" class="material-icons">search</i>  -->
-          </a>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <!-- Upload button here -->
-            </div>
+<div id="app">
+  <nav
+    class="navbar is-fixed-top"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <span id="title"> NETFLIX POLY </span>
+          <!-- <i id="iconSearch" class="material-icons">search</i>  -->
+        </a>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <!-- Upload button here -->
           </div>
         </div>
       </div>
-    </nav>
-  </div>
-<body id='body'>
-   
+    </div>
+  </nav>
+</div>
+<body id="body">
   <div id="bd-button">
-    <div id='listHeader'>
+    <div id="listHeader">
       <button
         mat-raised-button
         id="importer-films"
@@ -27,7 +29,7 @@
         class="left-item"
         mat-button
       >
-      <i class="material-icons">view_list</i> Lister les films
+        <i class="material-icons">view_list</i> Lister les films
       </button>
       <button
         mat-raised-button
@@ -36,7 +38,7 @@
         class="left-item"
         mat-button
       >
-      <i class="material-icons">add_box</i> Créer nouveau film
+        <i class="material-icons">add_box</i> Créer nouveau film
       </button>
       <button
         mat-raised-button
@@ -45,7 +47,7 @@
         class="left-item"
         mat-button
       >
-      <i class="material-icons">cached</i>Réinitialiser la BD
+        <i class="material-icons">cached</i>Réinitialiser la BD
       </button>
     </div>
 
@@ -53,15 +55,41 @@
       <li *ngFor="let mo of movies; let i = index">
         {{ mo.filmID }} {{ mo.titre }} {{ mo.genre }} {{ mo.dureeTotalMinutes }}
         {{ mo.dateProduction }}
-        
-        <button style="background-color:rgba(10, 10, 10, 0.698);color:white;" mat-raised-button [attr.data-index]="i">Détails</button>
-        <button style="background-color:rgba(0, 26, 255, 0.698);color:white;" mat-raised-button [attr.data-index]="i">Visionner</button>
-        <button style="background-color:#f44336;color:white;" mat-raised-button (click)="removeMovie(i)" [attr.data-index]="i">Supprimer</button>
-        <button style="background-color:#2E7D32;color:white;" mat-raised-button (click)="updateMovie(i)" [attr.data-index]="i">Modifier</button>     
+
+        <button
+          style="background-color:rgba(10, 10, 10, 0.698);color:white;"
+          mat-raised-button
+          (click)="lol()"
+          [attr.data-index]="i"
+        >
+          Détails
+        </button>
+        <button
+          style="background-color:rgba(0, 26, 255, 0.698);color:white;"
+          mat-raised-button
+          (click)="lol()"
+          [attr.data-index]="i"
+        >
+          Visionner
+        </button>
+        <button
+          style="background-color:#f44336;color:white;"
+          mat-raised-button
+          (click)="removeMovie(i)"
+          [attr.data-index]="i"
+        >
+          Supprimer
+        </button>
+        <button
+          style="background-color:#2E7D32;color:white;"
+          mat-raised-button
+          (click)="updateMovie(i)"
+          [attr.data-index]="i"
+        >
+          Modifier
+        </button>
       </li>
     </ul>
-
-    
   </div>
 </body>
 
