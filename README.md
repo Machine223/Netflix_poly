@@ -1,5 +1,5 @@
 # Netflix_poly
-INF3710 – Fichiers et Bases de données TP4
+INF3710 – Fichiers et Bases de données TP4 --- GOTO LOGINPAGE feature
 
 INSTALLER LE PROJET :
 Vérifiez que vous avez NodeJs installé avec node –v
