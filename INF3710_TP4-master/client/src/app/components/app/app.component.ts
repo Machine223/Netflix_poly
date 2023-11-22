@@ -6,7 +6,7 @@ import { UpdateComponentComponent } from "../update-component/update-component.c
 import { FilmsComponent } from '../films/films.component';
 
 export const appRoutes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "", redirectTo: "admin", pathMatch: "full" },
   { path: "home", component: StartingPageComponent },
   { path: "admin", component: FilmsComponent },
   { path: "new", component: NewFilmComponent },

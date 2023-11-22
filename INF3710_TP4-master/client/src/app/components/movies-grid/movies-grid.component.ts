@@ -24,7 +24,7 @@ export class MoviesGridComponent implements OnInit {
   //director: Classification = new Classification("Réalisateur", this.SortType.none);
   prodYear: Classification = new Classification("Année de production", this.SortType.none);
   classifications: Classification[] = [this.title, this.genre, this.duration /*,this.director*/, this.prodYear];
-  movies : Film[] = [ {filmID: 1, titre: 'Titanic', genre: "Drame", dureeTotalMinutes: 194, dateProduction: 1997}];
+  movies : Film[] = [ {filmID: 1, titre: 'Titanic', genre: "Drame", dureeTotalMinutes: 194, dateProduction: "1997"}];
 
   activeMember: Membre | null;
 

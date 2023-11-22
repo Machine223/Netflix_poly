@@ -37,7 +37,7 @@ export class NewFilmComponent implements OnInit {
       filmID: -1,
       genre: this.genre,
       titre: this.titre,
-      dateProduction: Date.parse(time),
+      dateProduction: Date.parse(time).toString(),
       dureeTotalMinutes: parseInt(this.duree)
     };
     this.communication.addFilm(film).subscribe(lol => {

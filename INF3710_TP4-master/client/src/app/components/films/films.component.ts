@@ -82,6 +82,11 @@ export class FilmsComponent implements OnInit {
       this.movies = movies;
       this.data.movies = movies;
     });
+    // this.communicationService.getMoviesFromTMDB().subscribe((movies: Film[]) => {
+    //   this.movies = movies;
+    //   this.data.movies = movies;
+    // });
+
   }
 
   removeMovie(idx: number) {

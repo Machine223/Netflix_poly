@@ -47,7 +47,7 @@ export class UpdateComponentComponent implements OnInit {
       filmID: this.data.selectedMovie.filmID,
       genre: this.genre,
       titre: this.titre,
-      dateProduction: Date.parse(time),
+      dateProduction: Date.parse(time).toString(),
       dureeTotalMinutes: parseInt(this.duree)
     };
     this.communication.modifyFilm(film).subscribe(lol => {
