@@ -4,9 +4,9 @@ export class Film {
   genre: string;
   dureeTotalMinutes: number;
   // director: string;
-  dateProduction: number;
+  dateProduction: string;
 
-  constructor(filmID: number, titre: string, genre: string, dureeTotalMinutes: number, dateProduction: number) {
+  constructor(filmID: number, titre: string, genre: string, dureeTotalMinutes: number, dateProduction: string) {
     this.filmID = filmID;
     this.titre = titre;
     this.genre = genre;
