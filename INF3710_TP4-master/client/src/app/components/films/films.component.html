@@ -26,7 +26,7 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-search">
-        <input type="text" placeholder="Search" />
+        <input type="text" size="40" class="form-control" placeholder="Titles, peoples, genres" />
         <a id="iconSearch" class="material-icons"
           ><svg
             width="24"
@@ -45,7 +45,6 @@
               fill="currentColor"
             ></path></svg
         ></a>
-        <button class="search-button">Search</button>
 
         <!-- Upload button here -->
       </div>
@@ -100,9 +99,8 @@
   </div>
   <!-- banner end  -->
 
+   <!-- trending movies  -->
   <div class="contain mt-3 mb-5 p-4">
-
-    <!-- trending movies  -->
     <div class="row">
       <h5 class="text-white">Trending Movies</h5>
       <div class="rowposter mt-3 p-2">
@@ -115,6 +113,22 @@
     </div>
   </div>
     <!-- trending movies end -->
+
+
+     <!-- Research movies  -->
+     <div class="contain mt-3 mb-5 p-4">
+      <h5 class="text-white">Research Movies Result</h5>
+      <div class="row" >
+        <div class="col-xs-12 col-sm-4 col-lg-3" *ngFor="let elem of [1,2,3,4,5,6,7,8]">
+           <dir class="card skeleton" >
+
+           </dir>
+        </div>
+
+      </div>
+    </div>
+
+      <!-- trending movies end -->
 
 
   <!-- <div id="bd-button">
