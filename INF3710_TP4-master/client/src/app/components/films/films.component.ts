@@ -14,6 +14,9 @@ export class FilmsComponent implements OnInit {
   bannerApiData:any = [];
   trendingApiData:any = [];
   moviesApiData:any = [];
+  skeletonSearch:any = [1, 2, 3, 4, 5, 6, 7, 8];
+  skeletonSearchIsLoading: boolean = false;
+  notFoundDataSearch: boolean = false;
 
   constructor(
     public communicationService: CommunicationService,
@@ -41,10 +44,11 @@ export class FilmsComponent implements OnInit {
 
   searchMovieData(searchInput:any){
     console.log('search Key',searchInput);
-
-    this.tmdbApiService.getSearchMovie(searchInput).subscribe((res)=>{
+    this.skeletonSearchIsLoading = true;
+    this.tmdbApiService.getSearchMovie(searchInput).subscribe((res:any)=>{
       console.log(res.results, 'searchmovie##');
       this.moviesApiData = res.results;
+      this.skeletonSearchIsLoading = false;
     })
   }
 
