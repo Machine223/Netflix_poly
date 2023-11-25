@@ -1,0 +1,264 @@
+<div id="app">
+  <nav
+    class="navbar is-fixed-top"
+    role="navigation"
+    aria-label="main navigation Netflix Poly"
+  >
+    <div class="navbar-logo">
+      <!-- <img src="path/to/logo.png" alt="Logo"> -->
+      <a
+        id="title"
+        [routerLink]="['/admin']"
+        routerLinkActive="router-link-active"
+        tabindex="0"
+        style="text-decoration: none;"
+        href="/admin"
+        >NETFLIX POLY</a
+      >
+    </div>
+    <div class="navbar-links">
+      <!-- Add your navigation links here -->
+      <a class="navigation-tab" routerLink="/">Home</a>
+      <a class="navigation-tab" routerLink="/movies">TV Shows</a>
+      <a class="navigation-tab" routerLink="/tv-shows">Movies</a>
+      <a class="navigation-tab" routerLink="/tv-shows">New &amp; Popular</a>
+      <a class="navigation-tab" routerLink="/tv-shows">My List</a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-search">
+        <input
+          type="text"
+          size="40"
+          class="form-control"
+          placeholder="Titles, peoples, genres"
+        />
+        <a id="iconSearch" class="material-icons"
+          ><svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="search-icon ltr-4z3qvp e1svuwfo1"
+            data-name="MagnifyingGlass"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z"
+              fill="currentColor"
+            ></path></svg
+        ></a>
+
+        <!-- Upload button here -->
+      </div>
+    </div>
+  </nav>
+</div>
+<body id="body">
+  <!-- banner start  -->
+  <div class="contain-fluid">
+    <div
+      id="carouselExampleDark"
+      class="carousel carousel-dark slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          class="carousel-item active"
+          data-bs-interval="10000"
+          *ngFor="let b of bannerApiData; let i = index"
+          [ngClass]="{ active: i === 1 }"
+        >
+          <img
+            src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path }}"
+            class="d-block w-100"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h2>{{ b.original_title }}</h2>
+            <p>{{ b.overview }}</p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!-- banner end  -->
+
+  <!-- trending movies  -->
+  <div class="contain p-4">
+    <div class="row">
+      <h5 class="text-white">Trending Movies</h5>
+      <div class="rowposter mt-3 p-2">
+        <ng-container *ngFor="let t of trendingApiData">
+          <img
+            src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}"
+            class="rowimg largeposter"
+            alt="..."
+            [routerLink]="['/admin', t.id]"
+          />
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <!-- trending movies end -->
+
+  <!-- Research movies  -->
+  <div class="contain mb-5 p-4">
+    <h5 class="text-white">Research Movies Result</h5>
+    <div class="row">
+      <div
+        class="col-md-11"
+      >
+        <div class="search-box">
+          <span class="input-group-append">
+            <span class="input-group-text">
+              <input
+              type="text"
+              size="40"
+              class="form-control search-box__input"
+              (keyup)="searchMovieData($event.target.value)"
+              placeholder="Titles, peoples, genres"
+            />
+              <i class="material-icons">search</i>
+            </span>
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row mx-4">
+      <div class="row mx-4" *ngIf="skeletonSearchIsLoading">
+        <div
+        class="col-lg-2 col-lg-3 mt-4 mb-4"
+        *ngFor="let elem of skeletonSearch"
+      >
+        <dir class="card skeleton"></dir>
+        </div>
+      </div>
+
+
+      <div
+        class="col-lg-2 col-lg-3 mt-4 mb-4"
+        *ngFor="let m of moviesApiData"
+      >
+          <div *ngIf="m.poster_path">
+            <img
+              src="https://image.tmdb.org/t/p/original/{{ m.poster_path }}"
+              class="rowimg largeposter"
+              alt="..."
+              [routerLink]="['/admin', m.id]"
+            />
+          </div>
+          <div class="col-lg-9 mt-4 mb-4 mx-auto text-light">
+            <h5>{{ m.original_title }}</h5>
+            <p>{{ m.overview }}</p>
+          </div>
+
+      </div>
+    </div>
+
+    <div
+      *ngIf="notFoundDataSearch"
+      class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-2 col-lg-offset-2"
+    >
+      <h3 class="no-data-found">No data available, please search again</h3>
+    </div>
+  </div>
+
+  <!-- trending movies end -->
+
+  <!-- <div id="bd-button">
+    <div id="listHeader">
+      <button
+        mat-raised-button
+        id="importer-films"
+        (click)="this.getMovies()"
+        class="left-item"
+        mat-button
+      >
+        <i class="material-icons">view_list</i> Lister les films
+      </button>
+      <button
+        mat-raised-button
+        id="importer-films"
+        (click)="this.navigateNew()"
+        class="left-item"
+        mat-button
+      >
+        <i class="material-icons">add_box</i> Créer nouveau film
+      </button>
+      <button
+        mat-raised-button
+        id="importer-films"
+        (click)="this.reset()"
+        class="left-item"
+        mat-button
+      >
+        <i class="material-icons">cached</i>Réinitialiser la BD
+      </button>
+    </div>
+
+    <ul>
+      <li *ngFor="let mo of movies; let i = index">
+        {{ mo.filmID }} {{ mo.titre }} {{ mo.genre }} {{ mo.dureeTotalMinutes }}
+        {{ mo.dateProduction }}
+
+        <button
+          style="background-color:rgba(10, 10, 10, 0.698);color:white;"
+          mat-raised-button
+          (click)="wip()"
+          [attr.data-index]="i"
+        >
+          Détails
+        </button>
+        <button
+          style="background-color:rgba(0, 26, 255, 0.698);color:white;"
+          mat-raised-button
+          (click)="wip()"
+          [attr.data-index]="i"
+        >
+          Visionner
+        </button>
+        <button
+          style="background-color:#f44336;color:white;"
+          mat-raised-button
+          (click)="removeMovie(i)"
+          [attr.data-index]="i"
+        >
+          Supprimer
+        </button>
+        <button
+          style="background-color:#2E7D32;color:white;"
+          mat-raised-button
+          (click)="updateMovie(i)"
+          [attr.data-index]="i"
+        >
+          Modifier
+        </button>
+      </li>
+    </ul>
+  </div> -->
+</body>
+
+<!-- Source :https://cloudinary.gitbook.io/build-a-mini-netflix-clone-with-vue/header-and-navigation -->

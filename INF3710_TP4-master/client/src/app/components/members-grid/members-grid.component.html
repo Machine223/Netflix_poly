@@ -1,0 +1,42 @@
+<div id='main'>
+  <div>
+    <button mat-raised-button id="importer-membres" (click)="this.getMembres()" class='left-item' mat-button >Importer les membres</button>
+  </div>
+  <div id='grid'>
+        <mat-grid-list cols = "25" rowHeight = "30px">
+            <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile' *ngFor="let colonne of colonnes">
+                <div class='tile-content'>
+                    {{ colonne }}
+                </div>
+            </mat-grid-tile>
+            <div *ngFor="let membre of membres">
+                <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                    <div class='tile-content'>
+                        {{membre.ID_membre}}
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                    <div class='tile-content'>
+                        {{ membre.nom }}
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                    <div class='tile-content'>
+                        {{ membre.courriel }}
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                    <div class='tile-content'>
+                        {{membre.ville}}
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan] = "5" [rowspan] = "1" class='tile'>
+                    <div class='tile-content'>
+                        {{membre.isAdmin}}
+                    </div>
+                </mat-grid-tile>
+            </div>
+         </mat-grid-list>
+    </div>
+</div>
+

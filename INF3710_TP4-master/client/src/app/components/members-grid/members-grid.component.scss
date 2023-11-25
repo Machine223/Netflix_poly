@@ -1,0 +1,44 @@
+.tile {
+  border-bottom: solid darkgrey 1px
+}
+
+.tile-content {
+  position: absolute;
+  left: 15px;
+}
+
+mat-icon {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+
+#grid {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 12%;
+  background-color: white;
+  border-left: solid darkgrey 1px;
+  border-right: solid darkgrey 1px;
+  border-top: solid darkgrey 1px;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgrey;
+}
+
+#importer-films {
+position: absolute;
+top: 70px;
+left: 10%;
+}
+
+
+#importer-membres {
+  position: absolute;
+  top: 70px;
+  left: 10%;
+}
