@@ -2,24 +2,106 @@
   <nav
     class="navbar is-fixed-top"
     role="navigation"
-    aria-label="main navigation"
+    aria-label="main navigation Netflix Poly"
   >
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <span id="title"> NETFLIX POLY </span>
-          <!-- <i id="iconSearch" class="material-icons">search</i>  -->
-        </a>
-        <div class="navbar-menu">
-          <div class="navbar-end">
-            <!-- Upload button here -->
-          </div>
-        </div>
+    <div class="navbar-logo">
+      <!-- <img src="path/to/logo.png" alt="Logo"> -->
+      <a
+        id="title"
+        [routerLink]="['/admin']"
+        routerLinkActive="router-link-active"
+        tabindex="0"
+        style="text-decoration: none;"
+        href="/admin"
+        >NETFLIX POLY</a
+      >
+    </div>
+    <div class="navbar-links">
+      <!-- Add your navigation links here -->
+      <a class="navigation-tab" routerLink="/">Home</a>
+      <a class="navigation-tab" routerLink="/movies">TV Shows</a>
+      <a class="navigation-tab" routerLink="/tv-shows">Movies</a>
+      <a class="navigation-tab" routerLink="/tv-shows">New &amp; Popular</a>
+      <a class="navigation-tab" routerLink="/tv-shows">My List</a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-search">
+        <input type="text" placeholder="Search" />
+        <a id="iconSearch" class="material-icons"
+          ><svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="search-icon ltr-4z3qvp e1svuwfo1"
+            data-name="MagnifyingGlass"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z"
+              fill="currentColor"
+            ></path></svg
+        ></a>
+        <button class="search-button">Search</button>
+
+        <!-- Upload button here -->
       </div>
     </div>
   </nav>
 </div>
 <body id="body">
+  <!-- banner start  -->
+  <div class="contain-fluid">
+    <div
+      id="carouselExampleDark"
+      class="carousel carousel-dark slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          class="carousel-item active"
+          data-bs-interval="10000"
+          *ngFor="let b of bannerApiData; let i = index"
+          [ngClass]="{ active: i === 1 }"
+        >
+          <img
+            src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path }}"
+            class="d-block w-100"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h2>{{ b.original_title }}</h2>
+            <p>{{ b.overview }}</p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!-- banner end  -->
+
+
+
   <div id="bd-button">
     <div id="listHeader">
       <button
@@ -59,7 +141,7 @@
         <button
           style="background-color:rgba(10, 10, 10, 0.698);color:white;"
           mat-raised-button
-          (click)="lol()"
+          (click)="wip()"
           [attr.data-index]="i"
         >
           Détails
@@ -67,7 +149,7 @@
         <button
           style="background-color:rgba(0, 26, 255, 0.698);color:white;"
           mat-raised-button
-          (click)="lol()"
+          (click)="wip()"
           [attr.data-index]="i"
         >
           Visionner

@@ -36,6 +36,9 @@ import { MatListModule } from "@angular/material/list";
 import { NewFilmComponent } from "./components/new-film/new-film.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { UpdateComponentComponent } from './components/update-component/update-component.component';
+import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { SearchComponent } from './components/search/search.component';
+import { MovieApiService } from "./components/Services/movie-api/movie-api.service";
 
 @NgModule({
   declarations: [
@@ -53,7 +56,9 @@ import { UpdateComponentComponent } from './components/update-component/update-c
     MembersGridComponent,
     FilmsComponent,
     NewFilmComponent,
-    UpdateComponentComponent
+    UpdateComponentComponent,
+    MovieDetailsComponent,
+    SearchComponent
   ],
   imports: [
     MatListModule,
@@ -82,7 +87,8 @@ import { UpdateComponentComponent } from './components/update-component/update-c
     MoviesGridComponent,
     MemberService,
     MembersGridComponent,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MovieApiService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

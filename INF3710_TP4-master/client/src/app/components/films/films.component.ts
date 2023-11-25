@@ -3,6 +3,7 @@ import { Film } from "../../../../../common/tables/Film";
 import { CommunicationService } from "../services/communication-service/communication.service";
 import { DataService } from "../Services/data.service";
 import { Router } from "@angular/router";
+import { MovieApiService } from "../Services/movie-api/movie-api.service";
 
 @Component({
   selector: "app-films",
@@ -10,23 +11,26 @@ import { Router } from "@angular/router";
   styleUrls: ["./films.component.scss"]
 })
 export class FilmsComponent implements OnInit {
+  bannerApiData:any = [];
+
   constructor(
     public communicationService: CommunicationService,
+    private tmdbApiService: MovieApiService,
     public data: DataService,
     public router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.bannerData();
+  }
 
-//   INSERT INTO Film(titre, genre, dateProduction, dureeTotalMinutes)
-// VALUES
-// ('Jurassic World', 'action', DATE'2015-01-01', 120),
-// ('E.T. the Extra-Terrestrial ', 'action',  DATE'1982-01-01', 132),
-// ('Indiana Jones :Temple of Doom', 'action', DATE'1984-01-01', 140),
-// ('Men in black 3', 'comedie',  DATE'2008-01-01', 132),
-// ('Empire of the Sun', 'action',  DATE'1987-01-01', 153),
-// ('JOKER', 'drame', DATE'2019-01-01', 143),
-// ('Parasite', 'romance', DATE'2019-01-01', 150);
+  bannerData() {
+    this.tmdbApiService.bannerApiData().subscribe((res)=>{
+      // console.table(res)
+      this.bannerApiData = res.results;
+      console.log(this.bannerApiData)
+    })
+  }
 
   movies: Film[] = [{
     filmID: 1,
@@ -77,24 +81,18 @@ export class FilmsComponent implements OnInit {
     dureeTotalMinutes: 120,
     dateProduction: '2015-01-01'
   }];
+
   public getMovies(): void {
     this.communicationService.getMovies().subscribe((movies: Film[]) => {
       this.movies = movies;
       this.data.movies = movies;
     });
-    // this.communicationService.getMoviesFromTMDB().subscribe((movies: Film[]) => {
-    //   this.movies = movies;
-    //   this.data.movies = movies;
-    // });
-
   }
 
   removeMovie(idx: number) {
-    console.log(this.movies[idx].filmID);
     this.communicationService
       .deleteMovie(this.movies[idx].filmID)
       .subscribe((resp: any) => {
-        console.log("111111111");
         this.getMovies();
       });
   }
@@ -118,7 +116,7 @@ export class FilmsComponent implements OnInit {
     this.router.navigateByUrl("/new");
   }
 
-  lol() {
+  wip() {
     alert("la fonctionnalité n'est pas encore implementé");
   }
 }
