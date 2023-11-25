@@ -12,6 +12,7 @@ import { MovieApiService } from "../Services/movie-api/movie-api.service";
 })
 export class FilmsComponent implements OnInit {
   bannerApiData:any = [];
+  trendingApiData:any = [];
 
   constructor(
     public communicationService: CommunicationService,
@@ -22,6 +23,7 @@ export class FilmsComponent implements OnInit {
 
   ngOnInit() {
     this.bannerData();
+    this.trendingData();
   }
 
   bannerData() {
@@ -29,6 +31,13 @@ export class FilmsComponent implements OnInit {
       // console.table(res)
       this.bannerApiData = res.results;
       console.log(this.bannerApiData)
+    })
+  }
+
+  trendingData(){
+    this.tmdbApiService.trendingMovieApiData().subscribe((res)=>{
+      // console.table(res)
+      this.trendingApiData = res.results;
     })
   }
 
