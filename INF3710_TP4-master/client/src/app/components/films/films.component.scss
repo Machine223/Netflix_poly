@@ -1,0 +1,220 @@
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #141414;
+  height: 100px;
+  color: #e5e5e5;
+}
+.navbar {
+  background-color: transparent;
+  z-index: 2;
+  padding: 30px 0;
+}
+.navbar-item {
+  height: 25px;
+  width: auto;
+}
+
+::selection {
+  color: none;
+  background: none;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #141414;
+  padding-right: 4%;
+}
+
+.navbar-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 40px;
+}
+
+.navbar-links {
+  a {
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-search input[type="text"] {
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.navbar-search .search-button {
+  padding: 5px 10px;
+}
+
+#body {
+  background-color: #141414;
+}
+
+// #header{
+//     height: 50px;
+// }
+
+#listHeader {
+  overflow: hidden;
+  background-color: rgba(78, 78, 78, 0.308);
+}
+
+#title {
+  padding-left: 50px;
+  color: red;
+  display: block;
+  text-align: left;
+  font-weight: 1000;
+  font-size: 200%;
+}
+
+#iconSearch {
+  position: relative;
+  background-color: transparent;
+  text-align: right;
+  color: #dddddd;
+  font-size: 20px;
+}
+
+#bd-button {
+  width: 92%;
+  height: 60%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+  margin: auto;
+  background-color: rgba(128, 128, 128, 0.034);
+}
+
+#importer-films {
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // margin: 15px;
+  background-color: rgba(49, 49, 49, 0.424);
+  color: white;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  padding: 5px 10px;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+}
+
+.carousel-inner {
+  height: 700px;
+}
+
+.carousel-inner .carousel-item img {
+  height: 700px;
+  object-fit: cover;
+}
+
+.carousel-caption h2 {
+  color: #e50914;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.carousel-caption p {
+  color: #ffffff;
+}
+
+.contain {
+  background-color: #141414;
+}
+
+.rowposter {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.rowimg {
+  max-height: 100px;
+  object-fit: contain;
+  width: 100%;
+  box-sizing: content-box;
+  transition: transform 450ms;
+  margin-right: 7px;
+}
+
+.rowimg:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.largeposter {
+  max-height: 300px;
+}
+
+.rowposter::-webkit-scrollbar {
+  display: none;
+}
+
+
+.card {
+  width: 200px;
+  box-shadow: 0px 8px 15px 0px black;
+  max-height: 290px;
+  min-height: 290px;
+}
+
+img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: rgb(255, 255, 255)
+  }
+  100% {
+    background-color: rgb(121, 121, 121);
+  }
+}
+.skeleton {
+  animation:  skeleton-loading 1s linear infinite alternate;
+}
+
+
+.search-box {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  &__input{
+    font-family: 'Roboto';
+    height: 55px;
+    font-size: 24px;
+  }
+}
+
+.no-data-found {
+  color: white;
+  font-size: 20px;
+  align-items: center;
+}
+

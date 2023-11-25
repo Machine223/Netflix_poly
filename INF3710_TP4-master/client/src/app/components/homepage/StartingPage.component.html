@@ -1,0 +1,30 @@
+<div id='loginPage'>
+    <div id='login-form'>
+        <span id="title"> Se connecter </span>
+        <div mat-dialog-content>
+            <mat-grid-list cols = "1" rowHeight="30px" class="content">
+                <mat-grid-tile class="tile-content">
+                    <mat-form-field>
+                        <input matInput 
+                        value="EmailAddress" 
+                        placeholder="Adresse courriel" 
+                        [(ngModel)]="EmailAddress"/>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="tile-content">
+                    <mat-form-field>
+                        <input matInput 
+                        value="password" 
+                        type="password" 
+                        placeholder="Mot de passe" 
+                        [(ngModel)]="password"/>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <button mat-raised-button id="signUp" (click)="signUp()">S'inscrire</button>
+            <button mat-raised-button id="setupDB" (click)="createDataBase()" mat-button >
+                Initialiser base de données</button>
+            <button mat-raised-button id="confirm" (click)="this.memberLogIn()">Se connecter</button>
+        </div>
+    </div>
+</div>
