@@ -108,7 +108,7 @@
       <div class="rowposter mt-3 p-2">
         <ng-container *ngFor="let t of trendingApiData">
           <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" class="rowimg largeposter" alt="..."
-            [routerLink]="['/movie',t.id]">
+            [routerLink]="['/admin',t.id]">
         </ng-container>
 
       </div>
