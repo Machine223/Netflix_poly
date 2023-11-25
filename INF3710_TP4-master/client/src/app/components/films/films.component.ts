@@ -13,6 +13,7 @@ import { MovieApiService } from "../Services/movie-api/movie-api.service";
 export class FilmsComponent implements OnInit {
   bannerApiData:any = [];
   trendingApiData:any = [];
+  moviesApiData:any = [];
 
   constructor(
     public communicationService: CommunicationService,
@@ -28,16 +29,22 @@ export class FilmsComponent implements OnInit {
 
   bannerData() {
     this.tmdbApiService.bannerApiData().subscribe((res)=>{
-      // console.table(res)
       this.bannerApiData = res.results;
-      console.log(this.bannerApiData)
     })
   }
 
   trendingData(){
     this.tmdbApiService.trendingMovieApiData().subscribe((res)=>{
-      // console.table(res)
       this.trendingApiData = res.results;
+    })
+  }
+
+  searchMovieData(searchInput:any){
+    console.log('search Key',searchInput);
+
+    this.tmdbApiService.getSearchMovie(searchInput).subscribe((res)=>{
+      console.log(res.results, 'searchmovie##');
+      this.moviesApiData = res.results;
     })
   }
 
